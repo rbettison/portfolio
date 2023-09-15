@@ -1,0 +1,29 @@
+.blog {
+    margin-top: 9rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+}
+
+.card {
+    border: 1px solid black;
+    min-height: 10rem;
+}
+
+.blogTitle {
+    margin-bottom: 2rem;
+}
+
+.article {
+    line-height: 1.5;
+    columns: 4 250px;
+}
+
+.article p {
+    margin-top: 1rem;
+}

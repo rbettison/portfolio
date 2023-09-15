@@ -1,0 +1,43 @@
+.container {
+    background-color: #DADAD9;
+    width: 100%;
+    min-height: 1vh;
+}
+
+.innerContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    margin: 5rem;
+    
+    min-height: 30rem;
+
+    background-color: #CBC3C3;
+    border-radius:30px;
+}
+
+.highlight {
+    color: #AE3028;
+    font-weight: 900;
+ 
+}
+
+.description {
+    padding-left: 4rem;
+    padding-top: 3rem;
+    font-size: xx-large;
+}
+
+.cv {
+    border-radius: 30px;
+    border: none;
+    background-color: #6A54F0;
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 4rem;
+    margin-bottom: 3rem;
+    max-width: 7.5rem;
+    max-height: 3rem;
+    padding: 0.25rem;
+    align-items: center;
+}

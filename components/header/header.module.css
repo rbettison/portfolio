@@ -1,0 +1,45 @@
+.container {
+    width: 100%;
+}
+
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center; 
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: #DADAD9;
+}
+
+.menu {
+    box-sizing: border-box;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    height: 3rem;
+    max-width: 1400px;
+  
+    position: relative;
+}
+
+
+
+.menu li {
+    display: inline;
+}
+
+.menu li:hover{
+    text-decoration: underline;
+}
+
+.left {
+    display: inline;
+    left: 3rem;
+    font-weight: 900;
+}
+

@@ -29,7 +29,8 @@ const Blog = async (props: any) => {
   async function getBlogPosts() {
     try {
       let config = process.env.env === 'dev' ? {cache:"no-store" as string} as object : {};
-      const res = await fetch(process.env.base_url + "/api/blog", config);
+      let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
+      const res = await fetch(url + "/api/blog", config);
       const result = await res.json();
       return result;
     } catch (err) {

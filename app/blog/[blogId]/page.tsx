@@ -4,7 +4,8 @@ import parse from 'html-react-parser';
 
 export default async function Page({ params }: 
   { params: { blogId: string } }) {
-    const postsRequest = await fetch(`${process.env.base_url}/api/blog/${params.blogId}`, {cache: "no-cache"});
+    let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
+    const postsRequest = await fetch(`${url}/api/blog/${params.blogId}`, {cache: "no-cache"});
     const blog = await postsRequest.json();
     console.log('blog: ' + blog);
 

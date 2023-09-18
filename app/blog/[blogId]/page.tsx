@@ -21,7 +21,7 @@ export default async function Page({ params }:
           Robert Bettison
         </p>
         <p>
-        I'm a full-stack software engineer and solution architect who loves working with people to bring ideas to life. 
+        I&apos;m a full-stack software engineer and solution architect who loves working with people to bring ideas to life. 
         </p>
         <button className={styles.more}>
           <Link href='/blog'>

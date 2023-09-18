@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <Experience />
       {/* <Portfolio /> */}
-      <GetInTouch />
+      {/* <GetInTouch /> */}
     </main>
   )
 }

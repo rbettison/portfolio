@@ -1,24 +1,34 @@
 import styles from '../blog.module.css';
+import Link from 'next/link';
+import parse from 'html-react-parser';
 
-export default function Page({ params }: 
+export default async function Page({ params }: 
   { params: { blogId: string } }) {
+    const postsRequest = await fetch(`${process.env.base_url}/api/blog/${params.blogId}`, {cache: "no-cache"});
+    const blog = await postsRequest.json();
+    console.log('blog: ' + blog);
+
     return (
-      <main className={styles.blog}>
-        <h1 className={styles.blogTitle}>{params.blogId}</h1>
-        <h2>13th August 2023</h2>
+      <main className={styles.postMain}>
+        <div className={styles.container}>
+        <h1>{blog.title}</h1>
+        <p className={styles.entryPageDate}>{new Date(blog.created).toLocaleDateString()}</p>
         <div className={styles.article}>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis adipisci ullam aperiam alias porro inventore exercitationem officiis consequatur dolore quos.</p>
-          <p>Fugit error, nisi labore ea iusto voluptatibus aut laudantium unde officia, amet dignissimos id, ut odio. Dolorem exercitationem iure rerum.</p>
-          <p>Nisi rem, voluptas enim delectus provident itaque modi quia, id odit ipsa dolorem, iste quas ea optio natus necessitatibus consequatur.</p>
-          <p>Voluptate magnam incidunt officiis deserunt commodi tempora voluptatum et ducimus facilis nulla eaque, adipisci sed similique accusantium optio consectetur odit.</p>
-          <p>Sequi porro odit qui eveniet cum, placeat quos reiciendis repellendus ut deserunt, quam hic numquam excepturi dignissimos nostrum. Rerum, blanditiis.</p>
-          <p>Nesciunt nihil animi, quo inventore voluptate, vero quisquam eum fuga sint possimus, cupiditate ea odio? Illum, labore fuga. Autem, quo!</p>
-          <p>Cumque exercitationem praesentium saepe repudiandae voluptate, omnis possimus laboriosam ratione ipsa illum eligendi ut a hic fuga ullam, suscipit similique.</p>
-          <p>Molestiae, magnam totam maxime, pariatur, debitis eveniet veniam alias labore impedit dolore nam illum tempore aspernatur aliquam corporis quo animi.</p>
-          <p>Veniam voluptatum debitis porro autem voluptatibus hic, corporis soluta. Perspiciatis veritatis porro sit alias praesentium ipsa iste libero odit eius!</p>
-          <p>A, adipisci? Amet voluptas impedit nisi, reprehenderit minus temporibus, dolores vero, aliquid obcaecati repellendus illum veritatis aperiam assumenda natus ducimus.</p>
-          <p>Maxime voluptas perspiciatis inventore porro repudiandae incidunt amet vel exercitationem cumque ipsum voluptatum consequatur quasi, saepe cupiditate architecto ab debitis?</p>
-          <p>Possimus neque quia quos molestiae debitis delectus ipsam provident. A pariatur iste ea repudiandae aperiam deserunt eligendi consectetur, vel obcaecati.</p>
+          {parse(blog.body)}
+        </div>
+        <div className={styles.bio}>
+        <p>
+          Robert Bettison
+        </p>
+        <p>
+        I'm a full-stack software engineer and solution architect who loves working with people to bring ideas to life. 
+        </p>
+        <button className={styles.more}>
+          <Link href='/blog'>
+          More
+          </Link>
+        </button>
+        </div>
         </div>
       </main>
     )

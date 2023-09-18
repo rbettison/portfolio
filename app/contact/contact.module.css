@@ -1,0 +1,55 @@
+.main {  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 90rem;
+    background-color: #E9F3FB;
+
+}
+
+.container {
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    width: 100%;
+    gap: 3rem;
+}
+
+.innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+.cv {
+    border-radius: 30px;
+    border: none;
+    background-color: #6A54F0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 200;
+    margin-bottom: 3rem;
+    max-width: 7.5rem;
+    max-height: 3rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.strapline {
+    font-size: xx-large;
+    text-align: left;
+}
+
+.highlight {
+    color: #AE3028;
+    font-weight: 900;
+ 
+}
+
+.contactDetails span {
+    text-decoration: underline;
+}

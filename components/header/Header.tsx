@@ -9,7 +9,7 @@ export default function Header() {
  
         <ul className={styles.menu}>
             <li>
-                <Link href='/#about'>Home</Link>
+                <Link href='/'>Home</Link>
             </li>
             {/* <li>
                 <Link href='/#experience'>Experience</Link>

@@ -6,18 +6,32 @@
 }
 
 .form label {
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .form button {
-    font-weight: bold;
-    padding: 1rem;
+    
+        border-radius: 30px;
+        border: none;
+        background-color: #6A54F0;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 200;
+        margin-bottom: 3rem;
+        max-width: 7.5rem;
+        max-height: 3rem;
+        padding: 1.25rem;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 5rem;
 }
 
 .socials {
@@ -26,4 +40,11 @@
     justify-content: center;
     gap: 1rem;
     margin-top: 3rem;
+}
+
+.container h1 {
+    color: #AE3028;
+    font-weight: 900;
+    font-size: 4em;
+    margin-bottom: 2rem;
 }

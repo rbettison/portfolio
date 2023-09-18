@@ -7,6 +7,7 @@ export default async function contact(req, res) {
     let client = await connectToDatabase();
     return client.collection('blogposts')
         .find().sort({author: 1}).forEach(book=> {
+            console.log('book.body:' + book.body);
             books.push(book);
             console.log('here');
             })

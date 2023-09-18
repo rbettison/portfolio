@@ -1,4 +1,5 @@
 import styles from './hero.module.css';
+import Link from 'next/link';
 
 export default function Hero() {
     return (
@@ -11,7 +12,7 @@ export default function Hero() {
                         loves</span>  working with people 
                     to bring ideas to life.</p>
                 <img />
-                <button className={styles.cv}>My CV</button>
+                <button className={styles.cv}><Link href="/RobertBettisonCV.pdf" target='_blank'>My CV</Link></button>
             </div>
         </div>
     )

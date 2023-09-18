@@ -1,6 +1,6 @@
 .container {
     background-color: #DADAD9;
-    width: 100%;
+    max-width: 90rem;
     min-height: 1vh;
 }
 
@@ -12,6 +12,7 @@
     
     min-height: 30rem;
 
+    max-width: 90rem;
     background-color: #CBC3C3;
     border-radius:30px;
 }
@@ -33,11 +34,15 @@
     border: none;
     background-color: #6A54F0;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1rem;
+    font-weight: 200;
     margin-left: 4rem;
     margin-bottom: 3rem;
     max-width: 7.5rem;
     max-height: 3rem;
-    padding: 0.25rem;
+    padding: 1.25rem;
+    align-self: end;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }

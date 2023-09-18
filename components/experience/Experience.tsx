@@ -7,12 +7,12 @@ export default function Experience() {
             <h1>Companies I've worked with...</h1>
             
             <div className={styles.clientsContainer}>
-            <img src="/clients/jlr.png" alt="JLR" />
-            <img src="/clients/gla.png" alt="GLA" />
-            <img src="/clients/peel.png" alt="Peel" />
-            <img src="/clients/serco.png" alt="Serco" />
-            <img src="/clients/tods.png" alt="TODs" />
-            <img src="/clients/woodside.png" alt="Woodside" />
+            <img src="/clients/jlr.svg" alt="JLR" />
+            <img src="/clients/gla.svg" alt="GLA" />
+            <img src="/clients/peel.svg" alt="Peel" />
+            <img src="/clients/serco.svg" alt="Serco" />
+            <img src="/clients/tods.svg" alt="TODs" />
+            <img src="/clients/woodside.svg" alt="Woodside" />
             </div>
             </div>
 

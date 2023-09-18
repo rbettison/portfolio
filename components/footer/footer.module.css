@@ -1,19 +1,46 @@
+
+
+.container {
+    background-color: #F5F5F5;
+    width: 90rem;
+    min-height: 1vh;
+    display: flex;
+    flex-direction: row;
+}
+
 .socials {
     display: flex;
+    flex-direction: column;
     max-height: 5rem;
     width: 100%;
-    justify-content: flex-end;
+    align-items: flex-end;
     gap: 1rem;
-    position: fixed;
-    bottom: 3rem;
-    right: 3rem;
+    margin-top: 5rem;
+    margin-right: 5rem;
+   
+}
+
+.socials :nth-child(3) {
+    margin-bottom: 5em;
 }
 
 .socials a {
-    width: 2rem;
+    width: 5rem;
     height: auto;
 }
 
 .socials img {
     width: 100%;
+}
+
+.name {
+    font-weight: 900;
+}
+
+.email {
+    text-decoration: underline;
+}
+
+.mobile {
+    text-decoration: underline;
 }

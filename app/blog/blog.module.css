@@ -1,29 +1,121 @@
-.blog {
+/* .blog {
     margin-top: 9rem;
     padding-left: 3rem;
     padding-right: 3rem;
+} */
+
+.main {  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* min-height: 410vh; */
+    max-width: 90rem;
+    justify-self: center;
+    background-color: #CBC3C3;
+    min-height: 80vh;
+}
+
+.postMain {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* min-height: 410vh; */
+    width: 90rem;
+    background-color: #E9F3FB;
+    min-height: 80vh;
 }
 
 .container {
+    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.postContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
     gap: 1em;
 }
 
 .card {
-    border: 1px solid black;
     min-height: 10rem;
+    height: 100%;
+    border-radius: 30px;
+    background-color: #E9F3FB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
 }
 
 .blogTitle {
-    margin-bottom: 2rem;
+    align-self: flex-end;
+    margin-bottom: 3rem;
 }
 
 .article {
     line-height: 1.5;
     columns: 4 250px;
+    margin-bottom: 3rem;
 }
 
 .article p {
     margin-top: 1rem;
+}
+
+.article p:first-child {
+    margin-top: 0px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.entryPageDate {
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.mainBlogPageDate {
+    font-style:italic;
+    align-self: end;
+    justify-self: end;
+    
+}
+
+.more {
+    border-radius: 30px;
+    border: none;
+    background-color: #6A54F0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 200;
+    margin-bottom: 3rem;
+    max-width: 7.5rem;
+    max-height: 3rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 15rem;
+    padding-right: 15rem;
+    padding-top: 5rem;
+    gap: 1rem;
+    border-top: 1px black solid;
+}
+
+.bio p:first-child {
+    font-size: 3em;
+}
+
+.bio p:nth-child(2) {
+    font-weight: 900;
+
 }

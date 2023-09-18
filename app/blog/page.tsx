@@ -9,7 +9,7 @@ const Blog = async (props: any) => {
         <div className={styles.container}>
           <h1 className={styles.blogTitle}>Blog.</h1>
           <div className={styles.postContainer}>
-              {posts.map((entry) => {
+              {posts.map((entry: {_id: string, title: string, description: string, created: Date}) => {
                   return (
                       <Link href={`/blog/${entry._id}`} key={entry._id}>
                       <div className={styles.card}>
@@ -28,7 +28,7 @@ const Blog = async (props: any) => {
 
   async function getBlogPosts() {
     try {
-      let config = process.env.env === 'dev' ? {cache: "no-store"} : {};
+      let config = process.env.env === 'dev' ? {cache:"no-store" as string} as object : {};
       const res = await fetch(process.env.base_url + "/api/blog", config);
       const result = await res.json();
       return result;

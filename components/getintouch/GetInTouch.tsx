@@ -38,7 +38,7 @@ export default function GetInTouch() {
                     <label>Email address</label>
                     <input name="email" required></input>
                     <label>Message</label>
-                    <textarea name="message" rows="10" cols="40" required></textarea>
+                    <textarea name="message" rows={10} cols={40} required></textarea>
                     <button type="submit">Send</button>
                 </form>
                 

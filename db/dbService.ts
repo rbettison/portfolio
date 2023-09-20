@@ -4,8 +4,13 @@ import BlogPost from "./model/blogpost";
 
 export async function getOne(id: string) {
     console.log('getting blog post');
-    await connectToDatabase();
-    const blog = await BlogPost.findById(id);
+    let blog;
+    try {
+        await connectToDatabase();
+        blog = await BlogPost.findById(id);
+    } catch (err) {
+        console.log(err);
+    }
 
     return blog;
 }
@@ -13,8 +18,13 @@ export async function getOne(id: string) {
 export async function getAll() {
     console.log('getting all blog posts...');
 
-    await connectToDatabase();
-    const blogs = await BlogPost.find();
+    let blogs;
+    try {
+        await connectToDatabase();
+        blogs = await BlogPost.find();
+    } catch (err) {
+        console.log(err);
+    }
 
     return blogs;
 }

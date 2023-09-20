@@ -5,7 +5,7 @@ export default async function connectToDatabase() {
     console.log('connecting to db');
    try {
     await mongoose
-    .connect(uri);
+    .connect(uri + '/portfolio');
    } catch(err) {
     console.log('Error connecting to db: ' + err);
    }

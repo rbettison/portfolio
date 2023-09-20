@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import styles from './getintouch.module.css';
 
 export default function GetInTouch() {

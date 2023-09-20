@@ -1,21 +1,20 @@
 import styles from '../blog.module.css';
 import Link from 'next/link';
 import parse from 'html-react-parser';
+import { getOne } from '@/db/dbService';
 
 export default async function Page({ params }: 
   { params: { blogId: string } }) {
     let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
-    const postsRequest = await fetch(`${url}/api/blog/${params.blogId}`, {cache: "no-cache"});
-    const blog = await postsRequest.json();
-    console.log('blog: ' + blog);
+    let blog = await getOne(params.blogId);
 
     return (
       <main className={styles.postMain}>
         <div className={styles.container}>
-        <h1>{blog.title}</h1>
-        <p className={styles.entryPageDate}>{new Date(blog.created).toLocaleDateString()}</p>
+        <h1>{blog?.title}</h1>
+        <p className={styles.entryPageDate}>{new Date(blog?.created).toLocaleDateString()}</p>
         <div className={styles.article}>
-          {parse(blog.body)}
+          {parse(blog?.body)}
         </div>
         <div className={styles.bio}>
         <p>

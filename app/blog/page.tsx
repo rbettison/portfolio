@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './blog.module.css';
+import {getAll}  from '../../db/dbService';
 
 const Blog = async (props: any) => {
     const posts = await getBlogPosts();
@@ -9,7 +10,7 @@ const Blog = async (props: any) => {
         <div className={styles.container}>
           <h1 className={styles.blogTitle}>Blog.</h1>
           <div className={styles.postContainer}>
-              {posts.map((entry: {_id: string, title: string, description: string, created: Date}) => {
+              {posts?.map((entry: any) => {
                   return (
                       <Link href={`/blog/${entry._id}`} key={entry._id}>
                       <div className={styles.card}>
@@ -28,11 +29,12 @@ const Blog = async (props: any) => {
 
   async function getBlogPosts() {
     try {
-      let config = process.env.env === 'dev' ? {cache:"no-store" as string} as object : {};
-      let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
-      const res = await fetch(url + "/api/blog", config);
-      const result = await res.json();
-      return result;
+      return await getAll();
+      // let config = process.env.env === 'dev' ? {cache:"no-store" as string} as object : {};
+      // let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
+      // const res = await fetch(url + "/blog/posts", config);
+      // const result = await res.json();
+      // return result;
     } catch (err) {
       console.log(err);
     }

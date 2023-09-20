@@ -1,9 +1,12 @@
-import mongoose, {Model} from "mongoose";
+import mongoose from "mongoose";
 
 const BlogPostSchema = new mongoose.Schema({
     title: String,
     body: String,
-    created: Date
+    created: Date,
+    author: String,
+    tags: [],
+    description: String
 })
 
 const BlogPost = mongoose.models.BlogPost ||

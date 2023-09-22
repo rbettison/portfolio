@@ -119,7 +119,11 @@
     }
 
     .innerContainer {
-      margin: 2rem;
+      margin: 1rem;
+    }
+
+    .description {
+      padding: 1rem;
     }
   }
 

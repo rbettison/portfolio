@@ -6,7 +6,6 @@ const Blog = async (props: any) => {
     const posts = await getBlogPosts();
     console.log('posts: ' + posts);
     return (
-      <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.blogTitle}>Blog.</h1>
           <div className={styles.postContainer}>
@@ -23,7 +22,6 @@ const Blog = async (props: any) => {
               })}
           </div>
         </div>
-      </main>
     )
   }
 

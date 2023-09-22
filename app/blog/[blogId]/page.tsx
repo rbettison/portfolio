@@ -1,4 +1,4 @@
-import styles from '../blog.module.css';
+import styles from './blogPost.module.css';
 import Link from 'next/link';
 import parse from 'html-react-parser';
 import { getOne } from '@/db/dbService';
@@ -9,7 +9,6 @@ export default async function Page({ params }:
     let blog = await getOne(params.blogId);
 
     return (
-      <main className={styles.postMain}>
         <div className={styles.container}>
         <h1>{blog?.title}</h1>
         <p className={styles.entryPageDate}>{new Date(blog?.created).toLocaleDateString()}</p>
@@ -30,6 +29,5 @@ export default async function Page({ params }:
         </button>
         </div>
         </div>
-      </main>
     )
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 const Contact = (props: any) => {
 
     return (
-      <main className={styles.main}>
+      // <main className={styles.main}>
         <div className={styles.container}>
             <div className={styles.innerContainer}>
         <h1>Contact.</h1>
@@ -19,7 +19,7 @@ const Contact = (props: any) => {
         <img alt="Me"/>
 
         </div>
-      </main>
+      // </main>
     )
   }
 

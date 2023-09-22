@@ -1,26 +1,11 @@
-.main {  
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 90rem;
-    background-color: #E9F3FB;
-
-}
-
 .container {
-    padding: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    
-    width: 100%;
-    gap: 3rem;
+    background-color: #E9F3FB;
 }
 
 .innerContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 3rem;
+    
 }
 
 .cv {
@@ -41,7 +26,6 @@
 
 .strapline {
     font-size: xx-large;
-    text-align: left;
 }
 
 .highlight {
@@ -53,3 +37,91 @@
 .contactDetails span {
     text-decoration: underline;
 }
+
+@media (min-width: 1536px) {
+    .container {
+      width: 1536px;
+      padding: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    }
+
+    .innerContainer {
+        align-items: flex-start;
+    gap: 3rem;
+    }
+
+    .strapline {
+        text-align: left;
+    }
+  }
+
+  /* 2xl */
+  @media (max-width: 1536px) {
+    .container {
+      max-width: 1280px;
+      padding: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    }
+
+    .innerContainer {
+        align-items: flex-start;
+        gap: 3rem;
+    }
+
+    .strapline {
+        text-align: left;
+    }
+  }
+  
+  /* xl */
+  @media (max-width: 1280px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  /* lg */
+  @media (max-width: 1024px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  /* md */
+  @media (max-width: 768px) {
+    .container {
+      max-width: 640px;
+      grid-template-columns: 1fr;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .innerContainer {
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .strapline {
+        text-align: center;
+    }
+  }
+  
+  /* sm */
+  @media (max-width: 640px) {
+    .container {
+      max-width: 475px;
+    }
+  }
+  
+  /* xs */
+  @media (max-width: 475px) {
+    .container {
+      width: 100%;
+      padding: 3rem;
+    }
+  }

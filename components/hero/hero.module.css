@@ -1,18 +1,129 @@
 .container {
+    width: 1536px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #DADAD9;
-    max-width: 90rem;
-    min-height: 1vh;
 }
+  
+
+  /* 2xl */
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+
+    .description {
+      padding: 3rem;
+      font-size: xx-large;
+  }
+    .innerContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 5rem;
+    }
+
+    .cv {
+      align-self: end;
+      margin-left: 3rem;
+    }
+  }
+  /* 2xl */
+  @media (max-width: 1536px) {
+    .container {
+      max-width: 1280px;
+    }
+
+    .description {
+      padding: 3rem;
+      font-size: xx-large;
+  }
+    .innerContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 5rem;
+    }
+
+    .cv {
+      align-self: end;
+      margin-left: 3rem;
+    }
+  }
+  
+  /* xl */
+  @media (max-width: 1280px) {
+    .container {
+      max-width: 1024px;
+    }
+
+    .description {
+      padding: 3rem;
+      font-size: x-large;
+    }
+
+    .innerContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cv {
+      align-self: end;
+      margin-left: 3rem;
+    }
+  }
+  
+  /* lg */
+  @media (max-width: 1024px) {
+    .container {
+      max-width: 768px;
+    }
+    .innerContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cv {
+      align-self: center;
+      margin-left: 0;
+    }
+  }
+  
+  /* md */
+  @media (max-width: 768px) {
+    .container {
+      max-width: 640px;
+    }
+
+    .innerContainer {
+      margin: 4rem;
+    }
+
+    
+  }
+  
+  /* sm */
+  @media (max-width: 640px) {
+    .container {
+      max-width: 475px;
+    }
+
+    .innerContainer {
+      margin: 3rem;
+    }
+  }
+  
+  /* xs */
+  @media (max-width: 475px) {
+    .container {
+      width: 100%;
+    }
+
+    .innerContainer {
+      margin: 2rem;
+    }
+  }
 
 .innerContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    margin: 5rem;
-    
-    min-height: 30rem;
-
-    max-width: 90rem;
     background-color: #CBC3C3;
     border-radius:30px;
 }
@@ -23,12 +134,6 @@
  
 }
 
-.description {
-    padding-left: 4rem;
-    padding-top: 3rem;
-    font-size: xx-large;
-}
-
 .cv {
     border-radius: 30px;
     border: none;
@@ -36,12 +141,11 @@
     color: #fff;
     font-size: 1rem;
     font-weight: 200;
-    margin-left: 4rem;
+    margin-top: 3rem;
     margin-bottom: 3rem;
     max-width: 7.5rem;
     max-height: 3rem;
     padding: 1.25rem;
-    align-self: end;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,11 +6,12 @@ import Portfolio from '@/components/portfolio/Portfolio'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    // <main className={styles.main}>
+    <>
       <Hero />
       <Experience />
-      {/* <Portfolio /> */}
-      {/* <GetInTouch /> */}
-    </main>
+    
+      </>
+    // </main>
   )
 }

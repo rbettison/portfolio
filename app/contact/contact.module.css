@@ -1,5 +1,5 @@
 .container {
-    background-color: #E9F3FB;
+    background-color: var(--body-bg-colour);
 }
 
 .innerContainer {
@@ -11,8 +11,8 @@
 .cv {
     border-radius: 30px;
     border: none;
-    background-color: #6A54F0;
-    color: #fff;
+    background-color: var(--button-colour);
+    color: var(--button-text);
     font-size: 1rem;
     font-weight: 200;
     margin-bottom: 3rem;
@@ -29,7 +29,7 @@
 }
 
 .highlight {
-    color: #AE3028;
+    color: var(--highlight-text);
     font-weight: 900;
  
 }

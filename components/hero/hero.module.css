@@ -2,7 +2,7 @@
     width: 1536px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #DADAD9;
+    background-image: var(--hero-bg-colour);
 }
   
 
@@ -128,12 +128,12 @@
   }
 
 .innerContainer {
-    background-color: #CBC3C3;
+    background-color: var(--hero-fg-colour);
     border-radius:30px;
 }
 
 .highlight {
-    color: #AE3028;
+    color: var(--highlight-text);
     font-weight: 900;
  
 }
@@ -141,8 +141,8 @@
 .cv {
     border-radius: 30px;
     border: none;
-    background-color: #6A54F0;
-    color: #fff;
+    background-color: var(--button-colour);
+    color: var(--button-text);
     font-size: 1rem;
     font-weight: 200;
     margin-top: 3rem;

@@ -1,14 +1,22 @@
 "use client";
 import styles from './header.module.css';
 import Link from 'next/link';
-import { MouseEvent } from 'react';
+import { MouseEvent, useContext } from 'react';
+import { ThemeContext } from '@/contexts/ThemeContext';
+import Switch from '@mui/material/Switch';
 
 
 export default function Header() {
+
+    const { toggleTheme } = useContext(ThemeContext);
+
     return (
       <div className={styles.container}>
         <div className={styles.menu}> 
-        <div className={styles.left}>Robert Bettison</div>
+        <div className={styles.left}>
+          <Switch onChange={toggleTheme}></Switch>
+          Robert Bettison
+        </div>
  
         <ul className={styles.nav} id="navbar">
             <li>

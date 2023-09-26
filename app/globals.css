@@ -21,12 +21,46 @@ body {
 html {scroll-behavior: smooth;}
 
 body {
-  color: rgb(var(35, 35, 35));
-  background: rgb(232, 228, 201);
+  color: var(--main-text-colour);
+  background: var(--background);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+:root #dark {
+  --header-bg-colour: #3c096c;
+  --hero-bg-colour: linear-gradient(#3c096c, #5a189a);
+  --hero-fg-colour: #5a189a;
+  --highlight-text: #ff9e00;
+  --button-colour: #9d4edd;
+  --body-bg-colour: #5a189a;
+  --footer-bg-colour: linear-gradient(#5a189a, #3c096c);
+  --button-text: #ff9e00;
+  --blog-profile-border: #ff9e00;
+
+  --main-text-colour: #ff6d00;
+  --background: #240046; 
+  transition: all .50s ease;
+
+}
+
+:root #light {
+  --header-bg-colour: rgb(226, 226, 226);
+  --hero-bg-colour: linear-gradient( #e2e2e2, #b5b8bc);
+  --hero-fg-colour: #dadada;
+  --highlight-text: #a052ff;
+  --button-colour: #343a40;
+  --body-bg-colour: #b5b8bc;
+  --footer-bg-colour: linear-gradient( #b5b8bc, rgb(226, 226, 226));
+  --button-text: #ced4da;
+  --blog-profile-border: f8f9fa;
+
+  --main-text-colour: #3c096c;
+  --background: #ffffff;
+  transition: all .50s ease;
+
 }
 

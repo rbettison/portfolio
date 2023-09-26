@@ -81,7 +81,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    background-color: #CBC3C3;
+    background-color: var(--body-bg-colour);
 }
 
 
@@ -95,11 +95,12 @@
     min-height: 10rem;
     height: 100%;
     border-radius: 30px;
-    background-color: #E9F3FB;
+    background-color: var(--hero-fg-colour);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1em;
+    border: 1px solid var(--main-text-colour);
 }
 
 

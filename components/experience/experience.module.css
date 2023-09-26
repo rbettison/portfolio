@@ -2,7 +2,7 @@
     width: 1536px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #E9F3FB;
+    background-color: var(--body-bg-colour);
     display: flex;
     flex-direction: column;
     padding-top: 3rem;

@@ -2,13 +2,12 @@
 import styles from './header.module.css';
 import Link from 'next/link';
 import { MouseEvent, useContext } from 'react';
-import { ThemeContext } from '@/contexts/ThemeContext';
+import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
 import Switch from '@mui/material/Switch';
-
 
 export default function Header() {
 
-    const { toggleTheme } = useContext(ThemeContext);
+    const { toggleTheme } = useContext(ThemeContext) as ThemeContextType;
 
     return (
       <div className={styles.container}>

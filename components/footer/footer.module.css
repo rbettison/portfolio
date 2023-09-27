@@ -5,6 +5,7 @@
     background-color: var(--footer-bg-colour);
     background-image: var(--footer-bg-colour);
     display: flex;
+    padding-bottom: 2rem;
     
 }
 

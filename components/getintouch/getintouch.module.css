@@ -4,6 +4,13 @@
     gap: 1rem;
 }
 
+.form input {
+    width: 100%;
+ }
+.form textarea {
+    width: 100%;
+}
+
 .form label {
     font-weight: 900;
 }
@@ -104,4 +111,16 @@
   /* xs */
   @media (max-width: 475px) {
     
+  }
+
+  .feedback {
+    /* display: flex; */
+    /* flex-direction: column; */
+    margin-bottom: 2rem;
+    /* visibility: collapse; */
+    
+  }
+
+  .feedback span {
+    text-decoration: underline;
   }

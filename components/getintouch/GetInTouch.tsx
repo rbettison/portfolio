@@ -46,7 +46,7 @@ export default function GetInTouch() {
             <div id="getintouch" className={styles.container}>
                 <div hidden id="feedback" className={styles.feedback}>
                     <h1>Success!</h1>
-                    <h2>Thanks for reaching out, I'll be in contact as soon as possible.</h2>
+                    <h2>Thanks for reaching out, I&apos;ll be in contact as soon as possible.</h2>
                     <p>In the meantime, check out my <Link href="/blog"><span>blog</span></Link>.</p>
                 </div>
                 <div>

@@ -130,6 +130,7 @@
 .innerContainer {
     background-color: var(--hero-fg-colour);
     border-radius:30px;
+    border: 1px solid var(--main-text-colour)
 }
 
 .highlight {

@@ -159,11 +159,12 @@
       justify-self: center;
       width: 300px;
       height: auto;
-      background-color: #DADAD9;
+      background-color: var(--header-bg-colour);
       display:flex;
       flex-direction: column;
       justify-content: flex-start;
       border-radius: 10px;
+      border: 1px solid var(--main-text-colour);
       /* transition: all .50s ease; */
       padding: 1rem;
       font-size: 1.5rem;

@@ -1,4 +1,5 @@
 "use client";
+import '../../app/globals.css'
 import styles from './header.module.css';
 import Link from 'next/link';
 import { MouseEvent, useContext } from 'react';
@@ -11,13 +12,13 @@ export default function Header() {
 
     return (
       <div className={styles.container}>
-        <div className={styles.menu}> 
+        <div className={styles.menu} id="navbar"> 
         <div className={styles.left}>
           <Switch onChange={toggleTheme}></Switch>
           Robert Bettison
         </div>
- 
-        <ul className={styles.nav} id="navbar">
+      
+        <ul className={styles.nav}>
             <li>
                 <Link href='/' onClick={(e) => closeMenu(e)}>Home</Link>
             </li>
@@ -37,10 +38,12 @@ export default function Header() {
     )
 
     function toggleMenu(event: MouseEvent) {
-        document.getElementById("navbar")?.classList.toggle('open');
+      console.log('toggle menu');
+      console.log(document.getElementById("navbar"));
+        document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('open');
     }
 
     function closeMenu(event: MouseEvent) {
-      document.getElementById("navbar")?.classList.remove('open');
+      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('open');
     }
   }

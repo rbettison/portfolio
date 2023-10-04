@@ -41,8 +41,12 @@ a {
   --button-text: #ff9e00;
   --blog-profile-border: #ff9e00;
 
+
+
   --main-text-colour: #ff6d00;
   --background: #240046; 
+
+  --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%);
   transition: all .50s ease;
 
 }
@@ -60,6 +64,8 @@ a {
 
   --main-text-colour: #3c096c;
   --background: #e9e0e0;
+
+  --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
   transition: all .50s ease;
 
 }

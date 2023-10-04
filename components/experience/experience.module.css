@@ -21,9 +21,13 @@
 
   .clientsContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: center;
     gap: 2rem;
+  }
+
+  .clientsContainer img {
+    height: 7rem;
   }
 }
   
@@ -40,9 +44,13 @@
 
     .clientsContainer {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       justify-content: center;
       gap: 2rem;
+    }
+
+    .clientsContainer img {
+      height: 6rem;
     }
   }
   
@@ -59,7 +67,7 @@
 
     .clientsContainer {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       justify-content: center;
       gap: 2rem;
     }
@@ -134,9 +142,10 @@
 
 .clientsContainer img {
     width: auto;
-    height: auto;
     justify-self: center;
     align-self: center;
+    filter: var(--black-img-filter);
+
 } 
 
 .container {

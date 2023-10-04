@@ -6,13 +6,21 @@
 
 .form input {
     width: 100%;
+    font-size: large;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
  }
 .form textarea {
     width: 100%;
+    font: inherit;
+    font-size: large;
 }
 
 .form label {
     font-weight: 900;
+    font-size: large;
+
 }
 
 .form button {
@@ -124,3 +132,5 @@
   .feedback span {
     text-decoration: underline;
   }
+
+

@@ -158,18 +158,21 @@
     
     .nav {
       position:absolute;
-      top: -1000px;
+      top: -200px;
+      left:0;
+      right:0;
       margin:auto;
-      justify-self: center;
+
+
       width: 300px;
       height: auto;
       background-color: var(--header-bg-colour);
       display:flex;
       flex-direction: column;
-      justify-content: flex-start;
+      /* justify-content: flex-start; */
       border-radius: 10px;
       border: 1px solid var(--main-text-colour);
-      /* transition: all .50s ease; */
+      transition: all .25s ease;
       padding: 1rem;
       font-size: 1.5rem;
     }

@@ -22,6 +22,7 @@
     "mongodb": "^6.0.0",
     "mongoose": "^7.5.2",
     "next": "13.4.19",
+    "node-html-parser": "^6.1.10",
     "nodemailer": "^6.9.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

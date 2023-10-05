@@ -1,7 +1,8 @@
 import styles from './blogPost.module.css';
 import Link from 'next/link';
-import parse from 'html-react-parser';
+import { parse } from 'node-html-parser';
 import { getOne } from '@/db/dbService';
+
 
 export default async function Page({ params }: 
   { params: { blogId: string } }) {
@@ -12,8 +13,7 @@ export default async function Page({ params }:
         <div className={styles.container}>
         <h1>{blog?.title}</h1>
         <p className={styles.entryPageDate}>{new Date(blog?.created).toLocaleDateString()}</p>
-        <div className={styles.article}>
-          {parse(blog?.body)}
+        <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blog?.body).toString()}}>
         </div>
         <div className={styles.bio}>
         <p>

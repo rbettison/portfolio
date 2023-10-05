@@ -21,13 +21,14 @@
 
   .clientsContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     gap: 2rem;
   }
 
   .clientsContainer img {
     height: 7rem;
+    max-width: 10rem;
   }
 }
   
@@ -44,13 +45,14 @@
 
     .clientsContainer {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
       justify-content: center;
       gap: 2rem;
     }
 
     .clientsContainer img {
       height: 6rem;
+      max-width: 10rem;
     }
   }
   

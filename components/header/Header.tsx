@@ -14,7 +14,6 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.menu} id="navbar"> 
         <div className={styles.left}>
-          <Switch onChange={toggleTheme}></Switch>
           Robert Bettison
         </div>
       
@@ -27,6 +26,9 @@ export default function Header() {
             </li>
             <li>
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>Blog</Link>
+            </li>
+            <li>
+              <Switch onChange={toggleTheme}></Switch>
             </li>
         </ul>
 

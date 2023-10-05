@@ -74,6 +74,11 @@
         max-width: 475px;
         padding: 2rem;
       }
+
+      .bio {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
       
     }
 
@@ -104,6 +109,11 @@
 
 .article p {
     margin-top: 1rem;
+}
+
+.article code {
+  background-color: var(--button-colour);
+  color: var(--button-text);
 }
 
 .article p:first-child {

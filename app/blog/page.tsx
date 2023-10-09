@@ -1,42 +1,41 @@
-import Link from 'next/link';
+
 import styles from './blog.module.css';
 import {getAll}  from '../../db/dbService';
+import Posts from '@/components/blog/Posts';
 
 const Blog = async (props: any) => {
     const posts = await getBlogPosts();
-    console.log('posts: ' + posts);
+
+    const tags = ['all', 'ai', 'technology', 'sports', 'React', 'NextJS', 'travel'];
     return (
+      <>
         <div className={styles.container}>
           <h1 className={styles.blogTitle}>Blog.</h1>
-          <div className={styles.postContainer}>
-              {posts?.map((entry: any) => {
-                  return (
-                      <Link href={`/blog/${entry._id}`} key={entry._id}>
-                      <div className={styles.card}>
-                          <h2>{entry.title}</h2>
-                          <h3>{entry.description}</h3>
-                          <h4 className={styles.mainBlogPageDate}>{new Date(entry.created).toLocaleDateString()}</h4>
-                      </div>
-                      </Link>
-                  )
-              })}
-          </div>
+            <Posts tags={tags} posts={posts ? posts : []}/>  
         </div>
+        </>
     )
   }
 
   async function getBlogPosts() {
     try {
-      return await getAll();
-      // let config = process.env.env === 'dev' ? {cache:"no-store" as string} as object : {};
-      // let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
-      // const res = await fetch(url + "/blog/posts", config);
-      // const result = await res.json();
-      // return result;
+      let posts = await getAll();
+      return posts?.map((post) => {
+        console.log('pre: ' + post.toString());
+        post['_id'] = post._id.toString();
+        console.log('post._id.toString(): ' + post._id.toString());
+        console.log('post: ' + post.toString());
+
+        return post;
+      })
     } catch (err) {
       console.log(err);
     }
     
+  }
+
+  function handleChipClick() {
+    console.log('Handling Chip Click');
   }
 
   export default Blog;

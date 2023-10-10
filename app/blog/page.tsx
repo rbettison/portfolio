@@ -11,7 +11,7 @@ const Blog = async (props: any) => {
       <>
         <div className={styles.container}>
           <h1 className={styles.blogTitle}>Blog.</h1>
-            <Posts tags={tags} posts={posts ? posts : []}/>  
+            <Posts posts={posts ? posts : []}/>  
         </div>
         </>
     )

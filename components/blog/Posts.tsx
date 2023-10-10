@@ -4,7 +4,7 @@ import styles from './posts.module.css';
 import {Chip} from '@mui/material';
 import { useState } from 'react';
 
-export default function Posts(props: {tags: string[], posts: any[] }) {
+export default function Posts(props: {posts: any[] }) {
     const allPosts = props.posts;
     const allTags = new Set<string>([]);
     allPosts.forEach((post) => {

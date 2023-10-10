@@ -4,14 +4,16 @@ import styles from './posts.module.css';
 import {Chip} from '@mui/material';
 import { useState } from 'react';
 
-export const runtime = 'nodejs'
-
 export default function Posts(props: {tags: string[], posts: any[] }) {
-    // const resp = await fetch(process.env.base_url + "/api/blog");
     const allPosts = props.posts;
-    const allTags = new Set(props.tags);
+    const allTags = new Set<string>([]);
+    allPosts.forEach((post) => {
+        post.tags.forEach((tag: string) => {
+            allTags.add(tag);
+        })
+    })
     const [posts, setPosts] = useState(props.posts);
-    const [selectedChips, setSelectedChips] = useState<Set<string>>(allTags);
+    const [selectedChips, setSelectedChips] = useState<Set<string>>(new Set([]));
 
     const toggleFilter = (event: any) => {
         if(event.target.innerText === 'all') {
@@ -31,26 +33,18 @@ export default function Posts(props: {tags: string[], posts: any[] }) {
 
             if(selectedChips.size === allTags.size - 1) selectedChips.add('all');
         }
-            
-
 
         let postsFiltered = allPosts.filter((post) => {
             return post.tags.some((x: string) => selectedChips.has(x))
         })
 
         setPosts(postsFiltered);
-        console.log("Selected tags:");
-        selectedChips.forEach((entry) => {
-            console.log('entry: ' + entry);
-        })
     }
 
-    let counter = 1;
-    let tagData  = props.tags.map((tag) => {
+    let tagData  = Array.from(allTags).map((tag, index) => {
         return {
-            id: counter++,
+            id: index,
             tagName: tag,
-            selected: false
         }
     })
     
@@ -58,11 +52,11 @@ export default function Posts(props: {tags: string[], posts: any[] }) {
     return (
     <>
         <div className={styles.tagContainer}>
-        {tagData.map((entry: {tagName: string, selected: boolean, id: number}) => 
+        {tagData.map((entry: {tagName: string, id: number}) => 
                                 <Chip key={entry.id} 
                                         label={entry.tagName} 
                                         variant={selectedChips.has(entry.tagName) ? "filled" : "outlined"}
-                                         
+                                        clickable={true}
                                         onClick={toggleFilter}/>)}
         </div>
         <div className={styles.postContainer}>

@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function Posts(props: {posts: any[] }) {
     const allPosts = props.posts;
-    const allTags = new Set<string>([]);
+    const allTags = new Set<string>(['all']);
     allPosts.forEach((post) => {
         post.tags.forEach((tag: string) => {
             allTags.add(tag);

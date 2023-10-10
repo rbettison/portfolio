@@ -33,7 +33,7 @@ a {
 :root #dark {
   --header-bg-colour: #3c096c;
   --hero-bg-colour: linear-gradient(#3c096c, #5a189a);
-  --hero-fg-colour: #5a189a;
+  --hero-fg-colour: #4a1382;
   --highlight-text: #ff9e00;
   --button-colour: #9d4edd;
   --body-bg-colour: #5a189a;
@@ -45,6 +45,7 @@ a {
 
   --main-text-colour: #ff6d00;
   --background: #240046; 
+  --mui-chip-filled: #7f3ac4;
 
   --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%);
   transition: all .50s ease;
@@ -65,9 +66,27 @@ a {
 
   --main-text-colour: #3c096c;
   --background: #e9e0e0;
+  --mui-chip-filled: #dadada;
 
   --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
   transition: all .50s ease;
+
+}
+
+:root {
+  .MuiChip-root {
+    border: 1px solid var(--main-text-colour);
+    color: var(--main-text-colour);
+  }
+
+  .MuiChip-filled {
+    background-color: var(--mui-chip-filled);
+  }
+
+  .MuiChip-outlined {
+    background-color: var(--body-bg-colour);
+  }
+
 
 }
 

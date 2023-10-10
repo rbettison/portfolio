@@ -71,7 +71,7 @@ export default function Posts(props: {posts: any[] }) {
                         <div className={styles.blogTags}>
                             {entry.tags.map((tag: string) => {
                                 return(
-                                    <Chip key={tag} label={tag} size='small'></Chip>
+                                    <Chip key={tag} label={tag} size='small' variant={selectedChips.has(tag) ? "filled" : "outlined"}></Chip>
                                 );
                             })}
                         </div>

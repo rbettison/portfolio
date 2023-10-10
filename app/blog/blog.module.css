@@ -61,6 +61,15 @@
     }
     }
 
+      /* xs */
+  @media (max-width: 475px) {
+    .container {
+      width: 100%;
+    }
+
+    
+  }
+
 .container {
     display: flex;
     flex-direction: column;

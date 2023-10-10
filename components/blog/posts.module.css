@@ -85,7 +85,11 @@
       
       .postContainer {
         grid-template-columns: 1fr;
-    }
+      }
+
+      .tagContainer {
+        flex-wrap: wrap;
+      }
 
    
     }

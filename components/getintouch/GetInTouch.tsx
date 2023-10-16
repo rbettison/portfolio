@@ -43,28 +43,31 @@ export default function GetInTouch() {
     }
 
     return (
-            <div id="getintouch" className={styles.container}>
-                <div hidden id="feedback" className={styles.feedback}>
-                    <h1>Success!</h1>
-                    <h2>Thanks for reaching out, I&apos;ll be in contact as soon as possible.</h2>
-                    <p>In the meantime, check out my <Link href="/blog"><span>blog</span></Link>.</p>
+        <div className="h-screen w-full grid grid-cols-5 grid-rows-5" id="getintouch">
+
+            <div className="row-start-2 col-start-2 col-span-3" >
+                <div hidden id="feedback">
+                    <h1 className="text-3xl font-bold mb-4">Success!</h1>
+                    <h2 className="text-md mb-4">Thanks for reaching out, I&apos;ll be in contact as soon as possible.</h2>
+                    <p>In the meantime, check out my <Link href="/blog"><span className="underline hover:text-highlighttext">blog</span></Link>.</p>
                 </div>
                 <div>
-                    <h1 className='formInformation'>Get in touch.</h1>
                     <form onSubmit={handleSubmit} className={styles.form}>
-                        <label className='formInformation'>Name</label>
+                        <label className='formInformation'>name</label>
                         <input name="name" required className='formInformation'></input>
-                        <label className='formInformation'>Email address</label>
+                        <label className='formInformation'>email address</label>
                         <input name="email" required className='formInformation'></input>
-                        <label className='formInformation'>Message</label>
+                        <label className='formInformation'>message</label>
                         <textarea name="message" rows={10} cols={40} required className='formInformation'></textarea>
-                        <button type="submit" id="submitButton">
+                        <button type="submit" id="submitButton" className={`text-xl font-bold ${progress === '' ? 'cursor-pointer' : ''}`}>{progress === '' ? <span>send</span> : progress === 'complete' ? <span></span> : <span>sending</span>}</button>
+                        {/* <button type="submit" id="submitButton">
                             {progress === '' ? <span>Send</span> : 
                             progress === 'complete' ? <CheckIcon /> : <CircularProgress /> } 
-                        </button>
+                        </button> */}
                     </form>
                 </div>
                 
+            </div>
             </div>
     )
   }

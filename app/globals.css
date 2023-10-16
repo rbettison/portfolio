@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#experience img {
+  filter: var(--black-img-filter);
+} 
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,11 +19,6 @@
 body {
   /* max-width: 100vw; */
   overflow-x: hidden;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 html {scroll-behavior: smooth;}
@@ -47,7 +50,7 @@ a {
   --background: #240046; 
   --mui-chip-filled: #7f3ac4;
 
-  --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%);
+  /* --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%); */
   transition: all .50s ease;
 
 }
@@ -68,12 +71,32 @@ a {
   --background: #e9e0e0;
   --mui-chip-filled: #dadada;
 
-  --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
+  /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
   transition: all .50s ease;
 
 }
 
 :root {
+
+  --black-img-filter: invert(100%);
+
+  --header-bg-colour: rgb(226, 226, 226);
+  --hero-bg-colour: linear-gradient( #e2e2e2, #b5b8bc);
+  --hero-fg-colour: #dadada;
+  --highlight-text: #3c096c;
+  --button-colour: #343a40;
+  --body-bg-colour: #b5b8bc;
+  --footer-bg-colour: linear-gradient( #b5b8bc, rgb(226, 226, 226));
+  --button-text: #ced4da;
+  --blog-profile-border: f8f9fa;
+  --blog-profile-border: #3c096c;
+
+  --main-text-colour: #3c096c;
+  --background: #e9e0e0;
+  --mui-chip-filled: #dadada;
+
+  /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
+  transition: all .50s ease;
   .MuiChip-root {
     border: 1px solid var(--main-text-colour);
     color: var(--main-text-colour);

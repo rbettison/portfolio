@@ -17,29 +17,28 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 //   description: 'Welcome to Rob Bettison\'s Portfolio',
 // }
 
-const userTheme = localStorage.getItem('theme') || 'light';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setTheme] = useState(userTheme);
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme)
-  }, [theme])
+  const [theme, setTheme] = useState('');
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light"? "dark" :"light"));
   }
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
+    <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
       <html lang="en">
-        <body className={plusJakartaSans.className} id={theme}>
+        <body className="font-main text-white bg-primarybg flex flex-col items-center" id={theme}>
+          <div className="grid grid-cols-12 grid-rows-2 mt-8 w-full">
           <Header></Header>
+          <div className="col-start-4 col-span-5 pl-4 pr-4">
             {children}
-            <Footer></Footer>
+            </div>
+            {/* <Footer></Footer> */}
+            </div>
           </body>
       </html>
     </ThemeContext.Provider>

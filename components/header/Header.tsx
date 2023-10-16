@@ -2,13 +2,26 @@
 import '../../app/globals.css'
 import styles from './header.module.css';
 import Link from 'next/link';
-import { MouseEvent, useContext } from 'react';
+import { MouseEvent, useContext, useEffect } from 'react';
 import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
 import Switch from '@mui/material/Switch';
 
 export default function Header() {
 
-    const { toggleTheme } = useContext(ThemeContext) as ThemeContextType;
+    const { toggleTheme, setTheme, theme } = useContext(ThemeContext) as ThemeContextType;
+
+    useEffect(() => {
+      const userTheme = localStorage.getItem('theme');
+      if(userTheme != null && userTheme != "") {
+        setTheme(userTheme);
+        localStorage.setItem('theme', theme);
+      }
+    }, [])
+
+    useEffect(() => {
+      localStorage.setItem('theme', theme);
+      console.log('setting the theme in local storage: ' + theme);
+    }, [theme])
 
     return (
       <div className={styles.container}>
@@ -28,7 +41,7 @@ export default function Header() {
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>Blog</Link>
             </li>
             <li>
-              <Switch onChange={toggleTheme}></Switch>
+              <Switch onChange={toggleTheme} centerRipple={true} checked={theme === "light" ? false : true}></Switch>
             </li>
         </ul>
 

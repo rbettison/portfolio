@@ -74,6 +74,25 @@ a {
 }
 
 :root {
+
+
+  --header-bg-colour: rgb(226, 226, 226);
+  --hero-bg-colour: linear-gradient( #e2e2e2, #b5b8bc);
+  --hero-fg-colour: #dadada;
+  --highlight-text: #3c096c;
+  --button-colour: #343a40;
+  --body-bg-colour: #b5b8bc;
+  --footer-bg-colour: linear-gradient( #b5b8bc, rgb(226, 226, 226));
+  --button-text: #ced4da;
+  --blog-profile-border: f8f9fa;
+  --blog-profile-border: #3c096c;
+
+  --main-text-colour: #3c096c;
+  --background: #e9e0e0;
+  --mui-chip-filled: #dadada;
+
+  --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
+  transition: all .50s ease;
   .MuiChip-root {
     border: 1px solid var(--main-text-colour);
     color: var(--main-text-colour);

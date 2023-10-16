@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {ThemeContext} from '../contexts/ThemeContext';
  
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -17,12 +17,18 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 //   description: 'Welcome to Rob Bettison\'s Portfolio',
 // }
 
+const userTheme = localStorage.getItem('theme') || 'light';
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(userTheme);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light"? "dark" :"light"));

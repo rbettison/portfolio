@@ -14,7 +14,7 @@ module.exports = {
         main: ['Helvetica Neue', 'Roboto']
       },
       colors: {
-        primarybg: '#240046',
+        darkbg: '#240046',
         highlighttext: '#ff6d00'
       },
       gridTemplateRows: {

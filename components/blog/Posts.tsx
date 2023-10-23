@@ -55,7 +55,7 @@ export default function Posts(props: {posts: any[] }) {
         <div className="flex flex-row gap-4">
         {tagData.map((entry: {tagName: string, id: number}) => 
                                 <p key={entry.id} 
-                                    className={`text-md font-bold ${selectedChips.has(entry.tagName) ? 'text-highlighttext' : 'text-white'} cursor-pointer`}
+                                    className={`text-md font-bold ${selectedChips.has(entry.tagName) ? 'text-highlighttext' : ''} cursor-pointer`}
                                     onClick={toggleFilter}
                                     >
                                     
@@ -67,7 +67,7 @@ export default function Posts(props: {posts: any[] }) {
         {posts?.map((entry: any) => {
                 return (
                     <Link href={`/blog/${entry._id}`} key={entry._id}>
-                    <div className="flex flex-col pb-12 pt-4 box-border border-b border-white hover:border-highlighttext w-full min-w-full">
+                    <div className={styles.posts}>
                         <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
                         <h3 className="text-md mb-4">{entry.description}</h3>
                         <h4 className="text-sm">{new Date(entry.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</h4>
@@ -75,7 +75,7 @@ export default function Posts(props: {posts: any[] }) {
                             {entry.tags.map((tag: string) => {
                                 return(
                                     <p key={tag} 
-                                        className={`text-sm font-bold ${selectedChips.has(tag) ? 'text-highlighttext' : 'text-white'}`}>
+                                        className={`text-sm font-bold ${selectedChips.has(tag) ? 'text-highlighttext' : ''}`}>
                                         {tag}
                                     </p>
                                 );

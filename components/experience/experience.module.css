@@ -146,7 +146,7 @@
     width: auto;
     justify-self: center;
     align-self: center;
-    filter: var(--black-img-filter);
+    filter: var(--img-filter);
 
 } 
 

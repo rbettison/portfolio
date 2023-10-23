@@ -9,6 +9,8 @@
 
 .article h2 {
   margin-top: 1rem;
+  font-size: larger;
+  font-weight: 600;
 }
 
 .article code {
@@ -32,4 +34,10 @@
 .entryPageDate {
     font-style: italic;
     margin-bottom: 2rem;
+}
+
+.border {
+  box-sizing: border-box;
+  border-top: 1px solid;
+  padding-top: 8rem;
 }

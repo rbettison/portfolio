@@ -7,7 +7,7 @@ const Contact = (props: any) => {
     return (
             <>
             <div className="h-screen w-full grid grid-cols-5 grid-rows-5">
-            <p className="row-start-2 col-start-2 col-span-3 text-4xl">I&apos;m a friendly and approachable human and always on the lookout for collabs and projects.</p>
+            <p className="row-start-2 col-start-2 col-span-3 text-4xl">I&apos;m friendly and approachable and always on the lookout for collabs and projects.</p>
             <p className="row-start-3 col-start-2 text-3xl underline">bettison.rob1@gmail.com</p>
             <Link href="/contact/#getintouch" className="row-start-4 col-start-2 col-span-3 text-4xl flex flex-col items-center text-center gap-8 hover:stroke-highlighttext hover:text-highlighttext">
             <h1>Get in touch.</h1>

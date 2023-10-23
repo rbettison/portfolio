@@ -48,7 +48,7 @@ export default function Header() {
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
             </li>
             <li className='cursor-pointer'>
-              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <p>dark</p> : <p className="text-highlighttext">light</p>}</p>
+              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <p>light</p> : <p className="text-highlighttext">dark</p>}</p>
             </li>
         </ul>
 

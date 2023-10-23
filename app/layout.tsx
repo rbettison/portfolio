@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
       <html lang="en">
-        <body className="font-main text-white bg-primarybg flex flex-col items-center" id={theme}>
+        <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
           <div className="grid grid-cols-12 grid-rows-2 mt-8 w-full">
           <Header></Header>
           <div className="col-start-4 col-span-5 pl-4 pr-4">

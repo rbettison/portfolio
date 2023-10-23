@@ -59,7 +59,7 @@ export default function GetInTouch() {
                         <input name="email" required className='formInformation'></input>
                         <label className='formInformation'>message</label>
                         <textarea name="message" rows={10} cols={40} required className='formInformation'></textarea>
-                        <button type="submit" id="submitButton" className={`text-xl font-bold ${progress === '' ? 'cursor-pointer' : ''}`}>{progress === '' ? <span>send</span> : progress === 'complete' ? <span></span> : <span>sending</span>}</button>
+                        <button type="submit" id="submitButton" className={`text-xl font-bold hover:text-highlighttext ${progress === '' ? 'cursor-pointer' : ''}`}>{progress === '' ? <span>send</span> : progress === 'complete' ? <span></span> : <span>sending</span>}</button>
                         {/* <button type="submit" id="submitButton">
                             {progress === '' ? <span>Send</span> : 
                             progress === 'complete' ? <CheckIcon /> : <CircularProgress /> } 

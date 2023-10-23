@@ -11,7 +11,7 @@ export default async function Page({ params }:
 
     return (
         <div className="flex flex-col gap-8 mt-16 relative">
-            <Link href="/blog" className="absolute -left-12 top-4">
+            <Link href="/blog" className="absolute -left-12 top-4 hover:text-highlighttext">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
                   className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -26,7 +26,7 @@ export default async function Page({ params }:
         </div>
 
 
-        <div className="box-border border-t border-white p-8">
+        <div className={styles.border}>
         <p className='font-bold text-lg'>
           @robbettison
         </p>

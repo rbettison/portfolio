@@ -6,7 +6,7 @@ export default function NotFound() {
         <main className={styles.container}>
             <h1>There was a problem.</h1>
             <p>We couldn&apos;t find that blog post.</p>
-            <p>Go back to <Link href="/blog"><span>all blogs</span></Link>.</p>
+            <p>Go back to <Link href="/blog"><span className="hover:text-highlighttext">all blogs</span></Link>.</p>
         </main>
     );
 }

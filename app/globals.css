@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 #experience img {
-  filter: var(--black-img-filter);
+  filter: var(--img-filter);
 } 
 
 * {
@@ -50,8 +50,9 @@ a {
   --background: #240046; 
   --mui-chip-filled: #7f3ac4;
 
+  --img-filter: invert(100%);
+
   /* --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%); */
-  transition: all .50s ease;
 
 }
 
@@ -71,14 +72,15 @@ a {
   --background: #e9e0e0;
   --mui-chip-filled: #dadada;
 
+  --img-filter: invert(6%) sepia(58%) saturate(6250%) hue-rotate(272deg) brightness(92%) contrast(116%);
+
+
   /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
-  transition: all .50s ease;
 
 }
 
 :root {
 
-  --black-img-filter: invert(100%);
 
   --header-bg-colour: rgb(226, 226, 226);
   --hero-bg-colour: linear-gradient( #e2e2e2, #b5b8bc);
@@ -96,7 +98,6 @@ a {
   --mui-chip-filled: #dadada;
 
   /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
-  transition: all .50s ease;
   .MuiChip-root {
     border: 1px solid var(--main-text-colour);
     color: var(--main-text-colour);

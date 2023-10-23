@@ -28,9 +28,11 @@ export default function Header() {
         <div className="col-span-2 md:text-right md:fixed md:left-16 p-4" id="navbar"> 
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center'>
+        <Link href="/">
         <div className="text-4xl font-bold">
           @robbettison
         </div>
+        </Link>
         <div className={styles.burger}>
           <img src="/menu-line.svg" className={styles.menuIcon} onClick={(e) => toggleMenu(e)}/>
         </div>

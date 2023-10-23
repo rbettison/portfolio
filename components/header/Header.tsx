@@ -25,13 +25,18 @@ export default function Header() {
 
     return (
 
-        <div className="col-span-2 text-right fixed left-16" id="navbar"> 
-        <div className="flex flex-col gap-16">
+        <div className="col-span-2 md:text-right md:fixed md:left-16 p-4" id="navbar"> 
+        <div className="flex flex-col md:gap-16 gap-4">
+        <div className='flex flex-row justify-between items-center'>
         <div className="text-4xl font-bold">
           @robbettison
         </div>
+        <div className={styles.burger}>
+          <img src="/menu-line.svg" className={styles.menuIcon} onClick={(e) => toggleMenu(e)}/>
+        </div>
+        </div>
       
-        <ul className="flex flex-col gap-4 text-md font-bold">
+        <ul className="flex flex-col gap-4 text-md font-bold text-right md:text-left" id="navbar">
             <li className="hover:text-highlighttext">
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
             </li>
@@ -48,13 +53,9 @@ export default function Header() {
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
             </li>
             <li className='cursor-pointer'>
-              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <p>light</p> : <p className="text-highlighttext">dark</p>}</p>
+              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
             </li>
         </ul>
-
-        <div className={styles.burger}>
-          <img src="/menu-line.svg" className={styles.menuIcon} onClick={(e) => toggleMenu(e)}/>
-        </div>
         </div>
       </div>
 
@@ -63,10 +64,10 @@ export default function Header() {
     function toggleMenu(event: MouseEvent) {
       console.log('toggle menu');
       console.log(document.getElementById("navbar"));
-        document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('open');
+        document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('hidden');
     }
 
     function closeMenu(event: MouseEvent) {
-      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('open');
+      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('hidden');
     }
   }

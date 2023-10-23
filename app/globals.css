@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#experience img {
+  filter: var(--img-filter);
+} 
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,11 +19,6 @@
 body {
   /* max-width: 100vw; */
   overflow-x: hidden;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 html {scroll-behavior: smooth;}
@@ -47,8 +50,9 @@ a {
   --background: #240046; 
   --mui-chip-filled: #7f3ac4;
 
-  --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%);
-  transition: all .50s ease;
+  --img-filter: invert(100%);
+
+  /* --black-img-filter: invert(35%) sepia(70%) saturate(591%) hue-rotate(344deg) brightness(100%) contrast(93%); */
 
 }
 
@@ -68,8 +72,10 @@ a {
   --background: #e9e0e0;
   --mui-chip-filled: #dadada;
 
-  --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
-  transition: all .50s ease;
+  --img-filter: invert(6%) sepia(58%) saturate(6250%) hue-rotate(272deg) brightness(92%) contrast(116%);
+
+
+  /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
 
 }
 
@@ -91,8 +97,7 @@ a {
   --background: #e9e0e0;
   --mui-chip-filled: #dadada;
 
-  --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%);
-  transition: all .50s ease;
+  /* --black-img-filter: invert(15%) sepia(48%) saturate(2794%) hue-rotate(254deg) brightness(89%) contrast(121%); */
   .MuiChip-root {
     border: 1px solid var(--main-text-colour);
     color: var(--main-text-colour);

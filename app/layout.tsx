@@ -31,10 +31,14 @@ export default function RootLayout({
   return (
     <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
       <html lang="en">
-        <body className={plusJakartaSans.className} id={theme}>
+        <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
+          <div className="md:grid grid-cols-12 grid-rows-2 sm:mt-8 w-full flex flex-col">
           <Header></Header>
+          <div className="col-start-4 col-span-5 pl-4 pr-4">
             {children}
-            <Footer></Footer>
+            </div>
+            {/* <Footer></Footer> */}
+            </div>
           </body>
       </html>
     </ThemeContext.Provider>

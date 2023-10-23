@@ -24,41 +24,50 @@ export default function Header() {
     }, [theme])
 
     return (
-      <div className={styles.container}>
-        <div className={styles.menu} id="navbar"> 
-        <div className={styles.left}>
-          Robert Bettison
-        </div>
-      
-        <ul className={styles.nav}>
-            <li>
-                <Link href='/' onClick={(e) => closeMenu(e)}>Home</Link>
-            </li>
-            <li>
-                <Link href='/contact' onClick={(e) => closeMenu(e)}>Contact</Link>
-            </li>
-            <li>
-                <Link href='/blog' onClick={(e) => closeMenu(e)}>Blog</Link>
-            </li>
-            <li>
-              <Switch onChange={toggleTheme} centerRipple={true} checked={theme === "light" ? false : true}></Switch>
-            </li>
-        </ul>
 
+        <div className="col-span-2 md:text-right md:fixed md:left-16 p-4" id="navbar"> 
+        <div className="flex flex-col md:gap-16 gap-4">
+        <div className='flex flex-row justify-between items-center'>
+        <div className="text-4xl font-bold">
+          @robbettison
+        </div>
         <div className={styles.burger}>
           <img src="/menu-line.svg" className={styles.menuIcon} onClick={(e) => toggleMenu(e)}/>
         </div>
+        </div>
+      
+        <ul className="flex flex-col gap-4 text-md font-bold text-right md:text-left" id="navbar">
+            <li className="hover:text-highlighttext">
+                <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
+            </li>
+            <li className="hover:text-highlighttext">
+                <Link href='/contact' onClick={(e) => closeMenu(e)}>contact</Link>
+            </li>
+            <li className="hover:text-highlighttext">
+                <Link href='/services' onClick={(e) => closeMenu(e)}>services (coming soon)</Link>
+            </li>
+            <li className="hover:text-highlighttext">
+                <Link href='/portfolio' onClick={(e) => closeMenu(e)}>portfolio (coming soon)</Link>
+            </li>
+            <li className="hover:text-highlighttext">
+                <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
+            </li>
+            <li className='cursor-pointer'>
+              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
+            </li>
+        </ul>
+        </div>
       </div>
-      </div>
+
     )
 
     function toggleMenu(event: MouseEvent) {
       console.log('toggle menu');
       console.log(document.getElementById("navbar"));
-        document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('open');
+        document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('hidden');
     }
 
     function closeMenu(event: MouseEvent) {
-      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('open');
+      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('hidden');
     }
   }

@@ -5,7 +5,7 @@
 }
 
 .burger {
-  filter: var(--black-img-filter);
+  filter: var(--img-filter);
 }
 
 .menu {

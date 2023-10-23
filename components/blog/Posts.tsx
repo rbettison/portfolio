@@ -51,27 +51,33 @@ export default function Posts(props: {posts: any[] }) {
 
     return (
     <>
-        <div className={styles.tagContainer}>
+        <div className="p-4 flex flex-col gap-8 mt-8 min-w-full items-start justify-start">
+        <div className="flex flex-row gap-4">
         {tagData.map((entry: {tagName: string, id: number}) => 
-                                <Chip key={entry.id} 
-                                        label={entry.tagName} 
-                                        variant={selectedChips.has(entry.tagName) ? "filled" : "outlined"}
-                                        clickable={true}
-                                        onClick={toggleFilter}/>)}
+                                <p key={entry.id} 
+                                    className={`text-md font-bold ${selectedChips.has(entry.tagName) ? 'text-highlighttext' : ''} cursor-pointer`}
+                                    onClick={toggleFilter}
+                                    >
+                                    
+                                    {entry.tagName}
+                                </p>)}
         </div>
-        <div className={styles.postContainer}>
+        <div className="min-w-full">
 
         {posts?.map((entry: any) => {
                 return (
                     <Link href={`/blog/${entry._id}`} key={entry._id}>
-                    <div className={styles.card}>
-                        <h2>{entry.title}</h2>
-                        <h3>{entry.description}</h3>
-                        <h4 className={styles.mainBlogPageDate}>{new Date(entry.created).toLocaleDateString()}</h4>
-                        <div className={styles.blogTags}>
+                    <div className={styles.posts}>
+                        <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
+                        <h3 className="text-md mb-4">{entry.description}</h3>
+                        <h4 className="text-sm">{new Date(entry.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</h4>
+                        <div className="flex flex-row gap-4">
                             {entry.tags.map((tag: string) => {
                                 return(
-                                    <Chip key={tag} label={tag} size='small' variant={selectedChips.has(tag) ? "filled" : "outlined"}></Chip>
+                                    <p key={tag} 
+                                        className={`text-sm font-bold ${selectedChips.has(tag) ? 'text-highlighttext' : ''}`}>
+                                        {tag}
+                                    </p>
                                 );
                             })}
                         </div>
@@ -80,6 +86,7 @@ export default function Posts(props: {posts: any[] }) {
                 )
             })
         }
+        </div>
         </div>
     </>
     )

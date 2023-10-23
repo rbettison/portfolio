@@ -43,9 +43,9 @@ export default function GetInTouch() {
     }
 
     return (
-        <div className="h-screen w-full grid grid-cols-5 grid-rows-5" id="getintouch">
+        <div className="h-screen w-full md:grid grid-cols-5 grid-rows-5 mt-8 p-8" id="getintouch">
 
-            <div className="row-start-2 col-start-2 col-span-3" >
+            <div className="md:row-start-2 col-start-2 col-span-3" >
                 <div hidden id="feedback">
                     <h1 className="text-3xl font-bold mb-4">Success!</h1>
                     <h2 className="text-md mb-4">Thanks for reaching out, I&apos;ll be in contact as soon as possible.</h2>

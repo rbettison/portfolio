@@ -36,7 +36,7 @@ export default function Header() {
         </div>
         </div>
       
-        <ul className="flex flex-col gap-4 text-md font-bold text-right md:text-left" id="navbar">
+        <ul className={`md:flex flex-col gap-4 text-md font-bold text-right md:text-left hidden fixed md:left-auto md:top-auto md:static right-4 top-12 ${theme === "light" ? "bg-gray-300" : "bg-purple-700"} md:bg-inherit`} id="navbar">
             <li className="hover:text-highlighttext">
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
             </li>
@@ -68,6 +68,6 @@ export default function Header() {
     }
 
     function closeMenu(event: MouseEvent) {
-      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.remove('hidden');
+      document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('hidden');
     }
   }

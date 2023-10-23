@@ -2,17 +2,20 @@ import Link from 'next/link';
 
 export default function Experience() {
     return (
-        <div id="experience" className=" min-h-screen grid grid-cols-25 grid-rows-9 place-content-center">
-            <h1 className="row-start-3 col-start-5 col-span-15 text-4xl self-top">
-                I&apos;ve spent time working with these companies on various projects:
-            </h1>
-            <Link href="/" className="row-start-2 col-start-13 self-top">
+        <div id="experience" className="h-screen md:grid md:gapy-0 grid-cols-25 grid-rows-9 place-content-center flex flex-col gap-4 items-center">
+
+            <Link href="/#navbar" className="row-start-2 col-start-13 self-top">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                     viewBox="0 0 24 24" strokeWidth="1.5" 
                     stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
                 </svg>
             </Link>
+
+            <h1 className="row-start-3 col-start-5 col-span-15 text-4xl self-top mt-4 mb-4 md:mt-0 md:mb-0">
+                I&apos;ve spent time working with these companies on various projects:
+            </h1>
+            
 
 
             

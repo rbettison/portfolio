@@ -52,7 +52,7 @@ export default function Posts(props: {posts: any[] }) {
     return (
     <>
         <div className="p-4 flex flex-col gap-8 mt-8 min-w-full items-start justify-start">
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 flex-wrap">
         {tagData.map((entry: {tagName: string, id: number}) => 
                                 <p key={entry.id} 
                                     className={`text-md font-bold ${selectedChips.has(entry.tagName) ? 'text-highlighttext' : ''} cursor-pointer`}

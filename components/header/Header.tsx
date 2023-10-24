@@ -46,7 +46,7 @@ export default function Header() {
                 <Link href='/contact' onClick={(e) => closeMenu(e)}>contact</Link>
             </li>
             <li className="hover:text-highlighttext">
-                <Link href='/services' onClick={(e) => closeMenu(e)}>services (coming soon)</Link>
+                <Link href='/services' onClick={(e) => closeMenu(e)}>services</Link>
             </li>
             <li className="hover:text-highlighttext">
                 <Link href='/portfolio' onClick={(e) => closeMenu(e)}>portfolio (coming soon)</Link>

@@ -9,9 +9,8 @@ export default function Hero() {
                     engineer and 
                     solution architect.
                     Check my <span className="underline hover:text-highlighttext">
-                        <Link href="/RobertBettisonCV.pdf" target='_blank'>credentials.
-                        </Link>
-                    </span>
+                        <Link href="/RobertBettisonCV.pdf" target='_blank'>credentials</Link>
+                    </span>.
                 </p>
                 <Link href="/#experience" className="md:col-start-3 md:row-start-3 place-self-center row-start-2 col-start-2">
                     <svg xmlns="http://www.w3.org/2000/svg" 

@@ -8,7 +8,7 @@ export default function Services() {
                 <p className="md:absolute md:-left-16 md:top-0">1</p>
                 <p>website builds</p>
             </div>
-            <p className="row-start-3 col-start-2 col-span-3 text-lg mb-16 md:mb-0">Solidly built and sumptuously designed websites. My background in technology consulting drives me to gain an understanding of the why behind your need for a website to deliver something bespoke.</p>
+            <p className="row-start-3 col-start-2 col-span-3 text-lg mb-16 md:mb-0">Solidly built and sumptuously designed websites. My background in technology consulting drives me to gain an understanding of the why behind your need for a website to deliver something bespoke to the hilt.</p>
             <Link href="/services/#techConsulting" className="col-start-3 row-start-4 place-self-center">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 

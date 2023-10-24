@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { parse } from 'node-html-parser';
-import { getOne } from '@/db/dbService';
+import { getBlogByUrl, getOne } from '@/db/dbService';
 import styles from './blogPost.module.css';
 
 
 export default async function Page({ params }: 
-  { params: { blogId: string } }) {
+  { params: { blogUrl: string } }) {
     let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
-    let blog = await getOne(params.blogId);
+    let blog = await getBlogByUrl(params.blogUrl);
 
     return (
         <div className="flex flex-col gap-8 mt-16 relative">

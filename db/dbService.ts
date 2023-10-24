@@ -18,6 +18,20 @@ export async function getOne(id: string) {
     return blog;
 }
 
+export async function getBlogByUrl(url: string) {
+    let blog;
+    try {
+        await connectToDatabase();
+        blog = await BlogPost.findOne({url : url});
+        if(blog === null) return notFound();
+    } catch (err) {
+        console.log(err);
+        return notFound();
+    }
+
+    return blog;
+}
+
 export async function getAll() {
     console.log('getting all blog posts...');
 

@@ -66,7 +66,7 @@ export default function Posts(props: {posts: any[] }) {
 
         {posts?.map((entry: any) => {
                 return (
-                    <Link href={`/blog/${entry._id}`} key={entry._id}>
+                    <Link href={`/blog/${entry.url}`} key={entry._id}>
                     <div className={styles.posts}>
                         <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
                         <h3 className="text-md mb-4">{entry.description}</h3>

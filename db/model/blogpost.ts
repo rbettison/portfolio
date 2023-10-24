@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BlogPostSchema = new mongoose.Schema({
     title: String,
+    url: String,
     body: String,
     created: Date,
     author: String,

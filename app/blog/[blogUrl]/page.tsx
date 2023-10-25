@@ -60,7 +60,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     description: blog.description,
     metadataBase: new URL(baseUrlString),
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       site: "@robbettison"
     },
     openGraph: {

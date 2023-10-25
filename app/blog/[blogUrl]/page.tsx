@@ -49,7 +49,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   return {
     title: blog.title,
     description: blog.description,
-    metadataBase: new URL('https://9eda-90-170-151-20.ngrok.io'),
+    metadataBase: process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL),
     twitter: {
       card: "summary",
       site: "@robbettison"
@@ -57,8 +57,8 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     openGraph: {
       title: blog.title,
       description: blog.title,
-      url: new URL('https://9eda-90-170-151-20.ngrok.io'),
-      images: new URL('https://9eda-90-170-151-20.ngrok.io/socials/github.png'),
+      url: process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL),
+      images: new URL('/socials/github.png'),
       locale: "en_GB",
       siteName: "robbettison",
       type: "website"

@@ -50,7 +50,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   console.log('process.env.base_url: ' + process.env.BASE_URL);
 
   const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
-  const imageUrlString = baseUrlString + "/socials/github.png";
+  const imageUrlString = baseUrlString + "/blogPreview.png";
 
   console.log('baseUrlString: ' + baseUrlString);
   console.log('baseImageString: ' + imageUrlString);

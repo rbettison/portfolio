@@ -47,19 +47,32 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   let blog = await getBlogByUrl(params.blogUrl);
 
   return {
-    metadataBase: new URL('https://2079-90-170-151-20.ngrok.io/'),
+    title: blog.title,
+    description: blog.description,
+    metadataBase: new URL('https://9eda-90-170-151-20.ngrok.io'),
     twitter: {
       card: "summary",
-      site: "@robbettison",
-      siteId: "",
-      creator: "@robbettison",
-      creatorId: "",
+      site: "@robbettison"
+    },
+    openGraph: {
       title: blog.title,
-      description: blog.description,
-      images: []
+      description: blog.title,
+      url: new URL('https://9eda-90-170-151-20.ngrok.io'),
+      images: new URL('https://9eda-90-170-151-20.ngrok.io/socials/github.png'),
+      locale: "en_GB",
+      siteName: "robbettison",
+      type: "website"
     }
   }
 }
+
+
+// siteId: "",
+//       creator: "@robbettison",
+//       creatorId: "",
+//       title: blog.title,
+//       description: blog.description,
+//       images: []
 
 export default Page;
  

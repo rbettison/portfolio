@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { parse } from 'node-html-parser';
-import { getBlogByUrl, getOne } from '@/db/dbService';
+import { getBlogByUrl } from '@/db/dbService';
 import styles from './blogPost.module.css';
+import { Metadata, ResolvingMetadata } from 'next';
 
+type Props = { params: { blogUrl: string } }
 
-export default async function Page({ params }: 
-  { params: { blogUrl: string } }) {
+const Page = async({ params }: Props) => {
     let url = process.env.env === 'dev' ? process.env.base_url : 'https://' + process.env.VERCEL_URL;
     let blog = await getBlogByUrl(params.blogUrl);
 
@@ -39,3 +40,27 @@ export default async function Page({ params }:
         </div>
     )
 }
+
+export async function generateMetadata({params}: Props) : Promise<Metadata> {
+  console.log('over here sir')
+
+  let blog = await getBlogByUrl(params.blogUrl);
+
+  return {
+    metadataBase: new URL('https://2079-90-170-151-20.ngrok.io/'),
+    twitter: {
+      card: "summary",
+      site: "@robbettison",
+      siteId: "",
+      creator: "@robbettison",
+      creatorId: "",
+      title: blog.title,
+      description: blog.description,
+      images: []
+    }
+  }
+}
+
+export default Page;
+ 
+

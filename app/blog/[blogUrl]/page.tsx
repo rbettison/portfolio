@@ -46,10 +46,19 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
 
   let blog = await getBlogByUrl(params.blogUrl);
 
+  console.log('process.env.env :'  + process.env.env);
+  console.log('process.env.base_url: ' + process.env.BASE_URL);
+
+  const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
+  const imageUrlString = baseUrlString + "/socials/github.png";
+
+  console.log('baseUrlString: ' + baseUrlString);
+  console.log('baseImageString: ' + imageUrlString);
+
   return {
     title: blog.title,
     description: blog.description,
-    metadataBase: process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL),
+    metadataBase: new URL(baseUrlString),
     twitter: {
       card: "summary",
       site: "@robbettison"
@@ -57,8 +66,8 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     openGraph: {
       title: blog.title,
       description: blog.title,
-      url: process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL),
-      images: new URL(process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL) + '/socials/github.png'),
+      url: new URL(baseUrlString),
+      images: new URL(imageUrlString),
       locale: "en_GB",
       siteName: "robbettison",
       type: "website"

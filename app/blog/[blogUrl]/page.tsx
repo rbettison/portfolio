@@ -75,14 +75,6 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   }
 }
 
-
-// siteId: "",
-//       creator: "@robbettison",
-//       creatorId: "",
-//       title: blog.title,
-//       description: blog.description,
-//       images: []
-
 export default Page;
  
 

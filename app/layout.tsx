@@ -1,46 +1,50 @@
-"use client";
 import './globals.css'
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
-import Header from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
-import { useEffect, useState } from 'react';
-import {ThemeContext} from '../contexts/ThemeContext';
- 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  weight: '400',
-  subsets: ['latin'],
-})
+import ClientThemeWrapper from './ClientThemeWrapper';
 
-// export const metadata: Metadata = {
-//   title: 'Rob Bettison',
-//   description: 'Welcome to Rob Bettison\'s Portfolio',
-// }
+type Props = {
+  children: React.ReactNode
+}
 
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
-  const [theme, setTheme] = useState('');
-
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light"? "dark" :"light"));
-  }
+}: Props) {
+  
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
-      <html lang="en">
-        <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
-          <div className="md:grid grid-cols-12 grid-rows-2 sm:pt-8 w-full flex flex-col h-screen">
-          <Header></Header>
-          <div className="col-start-4 col-span-5 pl-4 pr-4">
-            {children}
-            </div>
-            {/* <Footer></Footer> */}
-            </div>
-          </body>
-      </html>
-    </ThemeContext.Provider>
+
+    <ClientThemeWrapper>{children}</ClientThemeWrapper>
+    
   )
+}
+
+export async function generateMetadata({children}: Props) : Promise<Metadata> {
+
+  console.log('process.env.env :'  + process.env.env);
+  console.log('process.env.base_url: ' + process.env.BASE_URL);
+
+  const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
+  const imageUrlString = baseUrlString + "/sitePreview.png";
+
+  console.log('baseUrlString: ' + baseUrlString);
+  console.log('baseImageString: ' + imageUrlString);
+
+  return {
+    title: "robbettison",
+    description: "Software engineer based in Madrid.",
+    metadataBase: new URL(baseUrlString),
+    twitter: {
+      card: "summary_large_image",
+      site: "@robbettison"
+    },
+    openGraph: {
+      title: "robbettison",
+      description: "Software engineer based in Madrid.",
+      url: new URL(baseUrlString),
+      images: new URL(imageUrlString),
+      locale: "en_GB",
+      siteName: "robbettison",
+      type: "website"
+    }
+  }
 }

@@ -58,7 +58,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
       title: blog.title,
       description: blog.title,
       url: process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL),
-      images: new URL('/socials/github.png'),
+      images: new URL(process.env.env === "dev" ? new URL(process.env.BASE_URL) : new URL('https://' + process.env.VERCEL_URL) + '/socials/github.png'),
       locale: "en_GB",
       siteName: "robbettison",
       type: "website"

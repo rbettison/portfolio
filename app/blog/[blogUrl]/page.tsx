@@ -61,6 +61,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     metadataBase: new URL(baseUrlString),
     twitter: {
       site: "@robbettison",
+      creator:"@robbettison",
       title: blog.title,
       description: blog.description
     },

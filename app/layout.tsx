@@ -36,6 +36,7 @@ export async function generateMetadata({children}: Props) : Promise<Metadata> {
     twitter: {
       site: "@robbettison",
       title: "robbettison",
+      creator:"@robbettison",
       description: "Software engineer based in Madrid."
     },
     openGraph: {

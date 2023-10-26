@@ -61,11 +61,13 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     metadataBase: new URL(baseUrlString),
     twitter: {
       card: "summary_large_image",
-      site: "robbettison"
+      site: "@robbettison",
+      title: blog.title,
+      description: blog.description
     },
     openGraph: {
       title: blog.title,
-      description: blog.title,
+      description: blog.description,
       url: new URL(baseUrlString),
       images: new URL(imageUrlString),
       locale: "en_GB",

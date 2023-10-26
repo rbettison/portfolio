@@ -4,10 +4,6 @@
     margin-right: auto;
 }
 
-.burger {
-  filter: var(--img-filter);
-}
-
 .menu {
   box-sizing: border-box;
   display: grid;
@@ -237,7 +233,8 @@
 }
 
 .burger {
-  
+  filter: var(--img-filter);
+  z-index: 400;
   width: 2rem;
   display: flex;
   justify-content: center;

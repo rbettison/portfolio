@@ -40,7 +40,9 @@ export default function Header() {
         </div>
         </div>
       
-        <ul className={`md:flex flex-col gap-4 text-md font-bold text-right md:text-left hidden fixed md:left-auto md:top-auto md:static right-4 top-12 p-4 md:p-0 z-40 ${theme === "light" ? "bg-gray-300" : "bg-purple-700"} md:bg-inherit`} id="navbar">
+        <ul className={`md:flex flex-col gap-4 text-md font-bold text-right md:text-left hidden 
+                        fixed md:left-auto md:top-auto md:static left-1/3 top-0 w-2/3 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 
+                        ${theme === "light" ? "bg-gray-300" : "bg-purple-700"} md:bg-inherit pt-24 md:pt-0`} id="navbar">
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'border-l-4 border-current pl-2':""}`}>
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
             </li>

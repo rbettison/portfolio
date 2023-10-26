@@ -35,16 +35,17 @@ export async function generateMetadata({children}: Props) : Promise<Metadata> {
     metadataBase: new URL(baseUrlString),
     twitter: {
       site: "@robbettison",
-      title: "robbettison",
+      card: "summary_large_image",
+      title: "robbettison: portfolio site",
       creator:"@robbettison",
       description: "Software engineer based in Madrid."
     },
     openGraph: {
-      title: "robbettison",
+      title: "robbettison: portfolio site",
       description: "Software engineer based in Madrid.",
       url: new URL(baseUrlString),
       locale: "en_GB",
-      siteName: "@robbettison",
+      siteName: "robbettison",
       type: "website"
     }
   }

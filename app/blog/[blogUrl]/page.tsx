@@ -62,6 +62,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
     twitter: {
       site: "@robbettison",
       creator:"@robbettison",
+      card: "summary_large_image",
       title: blog.title,
       description: blog.description
     },

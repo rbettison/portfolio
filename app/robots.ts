@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
             [
                 {
                     userAgent: "Twitterbot",
-                    allow: "/" 
+                    disallow: "" 
                 }
             ]
     }

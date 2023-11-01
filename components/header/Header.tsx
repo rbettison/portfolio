@@ -5,10 +5,16 @@ import Link from 'next/link';
 import { MouseEvent, useContext, useEffect, useState } from 'react';
 import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 
 export default function Header() {
 
     const { toggleTheme, setTheme, theme } = useContext(ThemeContext) as ThemeContextType;
+
+    const {data: session} = useSession()
+
+    console.log('session: ' + session);
 
     useEffect(() => {
       const userTheme = localStorage.getItem('theme');
@@ -60,6 +66,16 @@ export default function Header() {
             </li>
             <li className='cursor-pointer'>
               <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
+            </li>
+            <li>
+                {
+                  session ? <>
+                              <p>Hi, {session.user?.name}</p>
+                              <button onClick={() => signOut()} className="hover:text-highlighttext">sign out</button>
+                            </> 
+                          :
+                            <button onClick={() => signIn()} className="hover:text-highlighttext">log in</button>
+                }
             </li>
         </ul>
         </div>

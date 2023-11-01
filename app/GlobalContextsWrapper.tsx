@@ -2,8 +2,9 @@
 import Header from '@/components/header/Header';
 import { useState } from 'react';
 import {ThemeContext} from '../contexts/ThemeContext';
+import AuthProvider from '@/contexts/AuthProvider';
 
-export default function ClientThemeWrapper({
+export default function GlobalContextsWrapper({
     children,
   }: {
     children: React.ReactNode
@@ -17,6 +18,7 @@ export default function ClientThemeWrapper({
 
     return (
 
+        <AuthProvider>
         <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
         <html lang="en">
             <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
@@ -29,6 +31,7 @@ export default function ClientThemeWrapper({
             </body>
         </html>
         </ThemeContext.Provider>
+        </AuthProvider>
     )
 
 }

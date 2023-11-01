@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import ClientThemeWrapper from './ClientThemeWrapper';
+import ClientThemeWrapper from './GlobalContextsWrapper';
+import GlobalContextsWrapper from './GlobalContextsWrapper';
 
 type Props = {
   children: React.ReactNode
@@ -13,7 +14,9 @@ export default function RootLayout({
   
   return (
 
-    <ClientThemeWrapper>{children}</ClientThemeWrapper>
+    <GlobalContextsWrapper>
+      {children}
+    </GlobalContextsWrapper>
     
   )
 }

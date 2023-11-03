@@ -23,14 +23,9 @@ export default function RootLayout({
 
 export async function generateMetadata({children}: Props) : Promise<Metadata> {
 
-  console.log('process.env.env :'  + process.env.env);
-  console.log('process.env.base_url: ' + process.env.BASE_URL);
 
   const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
-  const imageUrlString = baseUrlString + "/sitePreview.png";
 
-  console.log('baseUrlString: ' + baseUrlString);
-  console.log('baseImageString: ' + imageUrlString);
 
   return {
     title: "robbettison",

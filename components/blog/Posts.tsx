@@ -1,10 +1,13 @@
 "use client";
 import Link from 'next/link';
 import styles from './posts.module.css';
-import {Chip} from '@mui/material';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function Posts(props: {posts: any[] }) {
+
+    const {data: session} = useSession();
+
     const allPosts = props.posts;
     const allTags = new Set<string>(['all']);
     allPosts.forEach((post) => {
@@ -47,10 +50,10 @@ export default function Posts(props: {posts: any[] }) {
             tagName: tag,
         }
     })
-    
 
     return (
     <>
+        {session ? <Link href="/blog/new" className="font-bold text-highlighttext">new blog</Link> : <></>}
         <div className="p-4 flex flex-col gap-8 mt-8 min-w-full items-start justify-start">
         <div className="flex flex-row gap-4 flex-wrap">
         {tagData.map((entry: {tagName: string, id: number}) => 
@@ -66,7 +69,8 @@ export default function Posts(props: {posts: any[] }) {
 
         {posts?.map((entry: any) => {
                 return (
-                    <Link href={`/blog/${entry.url}`} key={entry._id}>
+                    <div key={entry._id}>
+                    <Link href={`/blog/${entry.url}`} >
                     <div className={styles.posts}>
                         <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
                         <h3 className="text-md mb-4">{entry.description}</h3>
@@ -83,6 +87,7 @@ export default function Posts(props: {posts: any[] }) {
                         </div>
                     </div>
                     </Link>
+                    </div>
                 )
             })
         }

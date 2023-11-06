@@ -71,6 +71,7 @@ export default function Header() {
                 {
                   session ? <>
                               <p>Hi, {session.user?.name}</p>
+                              {session.user.image ? <img src={session.user.image} /> : <></>}
                               <button onClick={() => signOut()} className="hover:text-highlighttext">sign out</button>
                             </> 
                           :

@@ -1,12 +1,11 @@
 import Link from "next/link";
-import styles from "./not-found.module.css";
 
 export default function NotFound() {
     return (
-        <main className={styles.container}>
-            <h1>There was a problem.</h1>
-            <p>We couldn&apos;t find that blog post.</p>
-            <p>Go back to <Link href="/blog"><span className="hover:text-highlighttext">all blogs</span></Link>.</p>
-        </main>
+        <div className="container flex flex-col sm:p-32 p-12 items-center">
+            <h1 className="text-2xl">Oops...</h1>
+            <p className="text-md">We couldn&apos;t find that blog post.</p>
+            <p className="text-xl">Go back to <Link href="/blog"><span className="hover:text-highlighttext underline">all blogs</span></Link> to find what you&apos;re looking for.</p>
+        </div>
     );
 }

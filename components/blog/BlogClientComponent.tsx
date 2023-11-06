@@ -14,8 +14,8 @@ export default function BlogClientComponent({blog , children} : {blog : string, 
 
     return (
         <>
-        {session && !editing ? <><button onClick={toggleEdit}>Edit</button> {children} </> :
-            (session && editing ? 
+        {session && session.user.role ==="admin" && !editing ? <><button onClick={toggleEdit}>Edit</button> {children} </> :
+            (session && session.user.role ==="admin" && editing ? 
             
             <>
             <button onClick={toggleEdit}>Stop Edit</button>  

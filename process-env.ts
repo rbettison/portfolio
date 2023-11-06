@@ -5,7 +5,9 @@ declare global {
         VERCEL_URL: string,
         NEXTAUTH_SECRET: string,
         admin_user: string,
-        admin_pass: string
+        admin_pass: string,
+        TWITTER_CLIENT_SECRET: string,
+        TWITTER_CLIENT_ID: string
       }
     }
   }

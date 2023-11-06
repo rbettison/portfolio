@@ -8,6 +8,8 @@ export default function Posts(props: {posts: any[] }) {
 
     const {data: session} = useSession();
 
+    console.log('user session: ' + JSON.stringify(session));
+
     const allPosts = props.posts;
     const allTags = new Set<string>(['all']);
     allPosts.forEach((post) => {
@@ -53,7 +55,7 @@ export default function Posts(props: {posts: any[] }) {
 
     return (
     <>
-        {session ? <Link href="/blog/new" className="font-bold text-highlighttext">new blog</Link> : <></>}
+        {session && session.user.role ==="admin" ? <Link href="/blog/new" className="font-bold text-highlighttext">new blog</Link> : <></>}
         <div className="p-4 flex flex-col gap-8 mt-8 min-w-full items-start justify-start">
         <div className="flex flex-row gap-4 flex-wrap">
         {tagData.map((entry: {tagName: string, id: number}) => 

@@ -1,6 +1,7 @@
 "use client"
 
 import BlogForm from "@/components/blog/BlogForm";
+import PostProvider from "@/contexts/PostProvider";
 
 export default function NewBlog() {
 
@@ -8,7 +9,9 @@ export default function NewBlog() {
 
         <>
             <p>New Blog</p>
-            <BlogForm blog={""}/>
+            <PostProvider>
+                <BlogForm/>
+            </PostProvider>
         </>
 
     )

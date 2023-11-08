@@ -2,12 +2,15 @@
 import { notFound } from "next/navigation";
 import connectToDatabase from "./clientConnection";
 import BlogPost, { BlogPostType } from "./model/blogpost";
+import Comment from "./model/comment";
+import { ObjectId } from "mongodb";
 
 
 export async function createOrUpdate(blog : BlogPostType) {
 
     console.log('creating blog: ' + JSON.stringify(blog))
     let createdBlog;
+    if(blog._id == "") blog._id = new ObjectId().toString();
     try {
         await connectToDatabase();
         createdBlog = await BlogPost.create(blog);
@@ -69,14 +72,12 @@ export async function getBlogByUrl(url: string) {
     let blog;
     try {
         await connectToDatabase();
-        blog = await BlogPost.findOne({url : url});
+        blog = await BlogPost.findOne({url : url}).populate({path: 'comments', model: Comment}).lean<BlogPostType>();
         if(blog === null) return notFound();
     } catch (err) {
         console.log(err);
         return notFound();
     }
-
-    blog['_id'] = blog._id.toString();
 
     return blog;
 }
@@ -87,14 +88,11 @@ export async function getAll() {
     let blogs;
     try {
         await connectToDatabase();
+        // without .lean() we face stack overflow errors - lean populates with plain JSON objects rather than mongoose objects
         blogs = await BlogPost.find();
     } catch (err) {
         console.log(err);
     }
-
-    blogs?.forEach((blog) => {
-        blog['_id'] = blog._id.toString();
-    })
 
     return blogs;
 }

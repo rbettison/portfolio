@@ -1,4 +1,4 @@
-import { getBlogByUrl } from '@/db/dbService';
+import { getBlogByUrl } from '../../../server/db/dbService';
 import { Metadata } from 'next';
 import BlogServerComponent from '@/components/blog/BlogServerComponent';
 import BlogClientComponent from '@/components/blog/BlogClientComponent';
@@ -7,17 +7,12 @@ type Props = { params: { blogUrl: string } }
 
 const Page = async({ params }: Props) => {
     let blog = await getBlogByUrl(params.blogUrl);
+    console.log('blog: ' + blog);
 
     return (
-
-
-      <BlogClientComponent blog={JSON.stringify(blog)}>
+      <BlogClientComponent>
         <BlogServerComponent blog={JSON.stringify(blog)}/>
-
-
       </BlogClientComponent>
-
-        
     )
 }
 

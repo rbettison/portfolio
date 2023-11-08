@@ -1,6 +1,5 @@
 import styles from './blogPost.module.css';
 import { parse } from 'node-html-parser';
-import { BlogPostType } from "@/db/model/blogpost";
 import Link from "next/link";
 
 export default function BlogServerComponent({blog} : {blog: string}) {
@@ -16,8 +15,9 @@ export default function BlogServerComponent({blog} : {blog: string}) {
             </Link>
 
         <div>
-          <h1 className="text-3xl font-bold">{blogJson?.title}</h1>
-          <p className="text-sm">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
+          <h1 className="text-4xl font-bold">{blogJson?.title}</h1>
+          <p className="text-md">Authored by {blogJson?.author}</p>
+          <p className="text-xs">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
         </div>
         <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blogJson?.body).toString()}}>
         </div>

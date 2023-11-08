@@ -1,5 +1,5 @@
 
-import {getAll}  from '../../db/dbService';
+import {getAll}  from '../../server/db/dbService';
 import Posts from '@/components/blog/Posts';
 import { Metadata } from 'next';
 

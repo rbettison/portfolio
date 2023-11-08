@@ -1,16 +1,26 @@
-import { NextResponse } from "next/server";
-import {createOrUpdate, deleteBlog} from "../../../db/dbService";
+import { NextRequest, NextResponse } from "next/server";
+import {createOrUpdate, deleteBlog, getBlogByUrl} from "../../../server/db/dbService";
 import {OPTIONS} from "../options";
 import { getServerSession } from "next-auth/next";
+import { NextApiResponse } from "next";
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async (req: NextRequest, res: NextApiResponse) => {
 
     if(!await isAuthorised()) {
         return NextResponse.json({error: "forbidden"}, {status: 403})
     }
 
-    console.log("GET REQ")
-    return res;
+    console.log("GETting single blog: ");
+    let blog;
+    
+    if(req.nextUrl.searchParams.has("url") && req.nextUrl.searchParams.get("url")!=null) {
+        let url = req.nextUrl.searchParams.get("url");
+        url!= null ? blog = await getBlogByUrl(url) : "";
+        console.log("here comes the blog: " + blog);
+        return NextResponse.json(blog, {status: 200})
+    }
+
+    return NextResponse.json({}, {status: 404});
 }
 
 export const POST = async (req: Request) => {
@@ -19,7 +29,6 @@ export const POST = async (req: Request) => {
         return NextResponse.json({error: "forbidden"}, {status: 403})
     }
 
-    console.log("POST REQ")
     let body = await req.json();
 
     console.log('body: ' + body);

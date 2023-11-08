@@ -1,5 +1,7 @@
 "use client"
 
+import { usePost } from "@/contexts/PostProvider";
+import { BlogPostType } from "@/server/db/model/blogpost";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -14,33 +16,13 @@ type Blog = {
     url: string
 }
 
-
-export default function BlogForm({blog} : {blog: string} ) {
+// {blog} : {blog: string}
+export default function BlogForm() {
     const router = useRouter();
-    console.log('blog prop: ' + blog);
-    let blogJson = blog != "" ? JSON.parse(blog) : {
-        title: "",
-        description: "",
-        author: "",
-        body: "",
-        created: "",
-        tags: [],
-        url: ""
-    };
-
-    const[blogData, setBlogData] = 
-        useState<Blog>({
-            _id: blogJson._id,
-            title: blogJson.title,
-            description: blogJson.description,
-            author: blogJson.author,
-            body: blogJson.body,
-            created: blogJson.created,
-            tags: blogJson.tags,
-            url: blogJson.url
-        })
-    
     const [loading, setLoading] = useState(false);
+
+    const { blog, setBlog } = usePost();
+    
 
     async function submit(event: React.SyntheticEvent<HTMLFormElement>) {
         setLoading(true);
@@ -48,18 +30,21 @@ export default function BlogForm({blog} : {blog: string} ) {
 
         let createdBlog = await fetch("/api/blog", {
             method: 'POST',
-            body: JSON.stringify(blogData)
+            body: JSON.stringify(blog)
         })
 
         setLoading(false);
-        setBlogData({
+        setBlog({
+            _id:"",
             title: "",
             description: "",
             author: "",
             body: "",
             created: "",
             tags: [],
-            url: ""
+            url: "",
+            comments: [],
+            likes: []
         })
         let jsonBlog = await createdBlog.json();
 
@@ -83,15 +68,15 @@ export default function BlogForm({blog} : {blog: string} ) {
 
     function handle(event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
 
-        const newData = {...blogData};
+        const newData = {...blog};
         if(event.target.id === 'tags') {
             let array : string[] = event.target.value.split(",");
             newData[event.target.id] = array;
         } else {
             newData[event.target.id] = event.target.value; 
         }
-        setBlogData(newData);
-        console.log(JSON.stringify(blogData));
+        setBlog(newData);
+        console.log(JSON.stringify(blog));
     }
 
     return (
@@ -102,7 +87,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                 title
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="title" value={blogData.title} 
+                <input className="text-darkbg w-full" onChange={handle} id="title" value={blog.title} 
                     type="text"  name="title" />
             </div>
 
@@ -110,7 +95,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                 description
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="description" value={blogData.description} 
+                <input className="text-darkbg w-full" onChange={handle} id="description" value={blog.description} 
                     type="text" name="description" />
             </div>
 
@@ -118,7 +103,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                 author
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="author" value={blogData.author} 
+                <input className="text-darkbg w-full" onChange={handle} id="author" value={blog.author} 
                     type="text" name="author" />
             </div>
         
@@ -127,7 +112,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                 body
                 </div>
-                <textarea className="text-darkbg w-full h-48" onChange={handle} id="body" value={blogData.body} 
+                <textarea className="text-darkbg w-full h-48" onChange={handle} id="body" value={blog.body} 
                     name="body" />
             </div>
 
@@ -135,7 +120,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                     created
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="created" value={blogData.created} 
+                <input className="text-darkbg w-full" onChange={handle} id="created" value={blog.created} 
                     type="text" name="created" />
             </div>
 
@@ -144,7 +129,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                     tags
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="tags" value={blogData.tags} 
+                <input className="text-darkbg w-full" onChange={handle} id="tags" value={blog.tags} 
                     type="text" name="tags" />
             </div>
 
@@ -152,7 +137,7 @@ export default function BlogForm({blog} : {blog: string} ) {
                 <div className="font-bold">
                     url
                 </div>
-                <input className="text-darkbg w-full" onChange={handle} id="url" value={blogData.url} 
+                <input className="text-darkbg w-full" onChange={handle} id="url" value={blog.url} 
                     type="text" name="url" />
             </div>
 

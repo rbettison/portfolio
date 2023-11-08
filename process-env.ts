@@ -7,7 +7,8 @@ declare global {
         admin_user: string,
         admin_pass: string,
         TWITTER_CLIENT_SECRET: string,
-        TWITTER_CLIENT_ID: string
+        TWITTER_CLIENT_ID: string,
+        MONGODB_URI: string
       }
     }
   }

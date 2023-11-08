@@ -5,6 +5,7 @@ const uri = process.env.MONGODB_URI;
 export default async function connectToDatabase() {
     console.log('connecting to db');
    try {
+    console.log('uri: ' + uri);
     await mongoose
     .connect(uri + '/portfolio?retryWrites=true&w=majority');
    } catch(err) {

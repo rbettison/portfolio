@@ -1,6 +1,6 @@
 'server only'
 import { notFound } from "next/navigation";
-import connectToDatabase from "../clientConnection";
+import connectToDatabase from "../mongooseClientConnection";
 import User, { UserType } from "../model/user";
 
 export async function createOrUpdate(user : UserType) {

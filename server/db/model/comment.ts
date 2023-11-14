@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 import { ObjectId } from "mongodb";
+import { UserType } from "./user";
 
 const CommentSchema = new mongoose.Schema({
-    _id: Schema.Types.ObjectId,
     message: String,
     createdAt: {type: Date, default: Date.now()},
     updatedAt: Date,
@@ -21,6 +21,10 @@ const CommentSchema = new mongoose.Schema({
     children: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
+    }],
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref:'Like'
     }]
 })
 
@@ -30,14 +34,17 @@ const Comment = mongoose.models.Comment ||
     mongoose.model("Comment", CommentSchema);
 
 export type CommentType = {
-    _id: ObjectId,
-    message: String,
+    _id: string,
+    message: string,
     createdAt: Date,
     updatedAt: Date,
-    user: ObjectId,
+    user: UserType,
     post: ObjectId,
     parent: ObjectId,
-    children: ObjectId[]
+    children: ObjectId[],
+    likes: ObjectId[],
+    likeCount: number,
+    likedByMe: boolean
 }
 
 export default Comment;

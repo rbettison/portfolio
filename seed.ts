@@ -1,5 +1,5 @@
-// File to populate some test data
-import connectToDatabase from "./server/db/clientConnection";
+// // File to populate some test data
+import connectToDatabase from "./server/db/mongooseClientConnection";
 import BlogPost from "./server/db/model/blogpost";
 import User from "./server/db/model/user";
 import Comment from "./server/db/model/comment";
@@ -10,9 +10,10 @@ async function seed() {
     console.log('Seeding database');
     await connectToDatabase();
     console.log('Clearing up data');
-    await BlogPost.deleteMany();
     await User.deleteMany();
     await Comment.deleteMany();
+    await BlogPost.deleteMany();
+    await Like.deleteMany();
 
     const blog1 = await BlogPost.create({
         "body": "<p>Artificial Intelligence is defined as ‘the development of computer systems able to perform tasks normally requiring human intelligence’ and was first theorised by Alan Turing before and then after his work at Bletchley Park during the second World War. Although Turing lacked the computing power to turn his theory into reality, in 1945, he predicted that computers would one day ‘play very good chess’. 52 years later in 1997, the world champion Garry Kasparov was beaten by the chess computer Deep Blue. 25 years on and advances in computer technology and access to massive datasets have expanded AI’s abilities exponentially.</p> <p>Enter OpenAI and their product ChatGPT. With the arrival of ChatGPT, anyone with an internet connection can harness AI’s power. A tool which software engineers, blog writers and students alike are using to guide, inspire and in some cases, complete their work in its entirety (In fact, this blog author must admit ChatGPT helped with the article title). It seems like an innocent, if lazy, shortcut that we would be silly not to take advantage of. However, if ChatGPT can help to complete the work of a software engineer, how far away are software engineers from becoming redundant?</p> <p>There’s no denying that even since its recent inception ChatGPT has developed at an extraordinary rate. Elon Musk (whose interviews we take with a pinch of salt) warned against the rate of rapid development and says he wanted to create his own ‘safe’ version of ChatGPT. This may be part of the reason why OpenAI owner Sam Altman has gone public asking for regulation on AI. Going to government to ask to be regulated paints ChatGPT as the solution, not the problem. Altman has work to do to persuade a sceptical public that OpenAI is on its side in the fight against an army of robots intent on conquering Earth and farming humans in pods- like something out of a well-known 2000s science fiction movie. Facebook for example has struggled with reputational damage as regulation has been enforced after-the-fact on issues such as hate speech, fake news and the safety of minors. Public enquiries follow scandals in which government officials have questioned whether Facebook really is doing all it can to safeguard against these things happening on its platform. This has spilled out into a general distrust of all the players in ‘big tech’ and OpenAI (and other companies hoping to break into the AI market) will do well to learn from the mistakes of innovating tech companies that have gone before them.</p> <p>There are reasons why it is in the interest of the rest of us for AI to be regulated too. For all the good AI has the potential of doing, in the wrong hands it has an equal potential to cause catastrophe. President Putin has said of AI ‘… whoever becomes leader in this sphere will become the ruler of the world’ and while we’d all like to believe Putin has his thoughts on an AI-technology to help boost the productivity of Russia’s workforce – I wouldn’t bet on it. Having a globally recognised authority on what qualifies as acceptable AI use could avoid a second cold war situation as an AI-arms race develops between the worlds’ superpowers.</p> <p>But less of the doom and gloom. There are plenty of reasons to feel optimistic about a future with AI. There are huge potentials in healthcare, where AI could spot causal patterns hidden in vast swathes of data unnoticed before by humans and suggest personalised health treatment for patients. The other huge battleground in which AI can help us come out triumphant is climate change. Again, AI has the potential to inform more effective environmental policies and sustainable practices through the analysis of vast amounts of data. A tight rope lies ahead that we can only traverse with innovation from scientists and entrepreneurs and guided regulation from government. The key lies in regulation that encourages innovation while keeping us safe from those that would weaponize AI’s powers.</p>",
@@ -56,9 +57,26 @@ async function seed() {
 
     const comment2 = await Comment.create({
         "message": "I completely disagree with this comment!",
-        "user": user1._id,
+        "user": user2._id,
         "post": blog1._id,
         "parent": comment1._id
+    })
+
+    const comment3 = await Comment.create({
+        "message": "Please remove the hate from this platform, admin!",
+        "user": user1._id,
+        "post": blog1._id,
+        "parent": comment2._id
+    })
+
+    const comment4 = await Comment.create({
+        "message": "This is a separate comment!",
+        "user": user2._id,
+        "post": blog1._id,
+    })
+
+    await Comment.updateOne({_id: comment2._id}, {
+        "children": [comment3._id]
     })
 
     await Comment.updateOne({_id: comment1._id}, {
@@ -67,7 +85,7 @@ async function seed() {
 
     await BlogPost.updateOne({_id: blog1._id}, 
         {
-            "comments": [comment1._id, comment2._id]
+            "comments": [comment1._id, comment2._id, comment3._id, comment4._id]
         }
     );
 
@@ -79,10 +97,39 @@ async function seed() {
         "comments": [comment2._id]
     })
 
+    let like1 = await Like.create({
+        "user": user1,
+        "comment": comment1
+    })
 
+    let like2 = await Like.create({
+        "user": user2,
+        "comment": comment1
+    })
+
+    await Comment.updateOne({_id: comment1._id}, {
+        "likes": [like1._id, like2._id]
+    })
+
+    let like3 = await Like.create({
+        "user": user2,
+        "comment": comment4
+    })
+
+    await Comment.updateOne({_id: comment4._id}, {
+        "likes": [like3._id]
+    })
+
+    let like4 = await Like.create({
+        "user": user1,
+        "comment": comment3
+    })
+
+    await Comment.updateOne({_id: comment3._id}, {
+        "likes": [like4._id]
+    })
 
     console.log('Finished seeding database');
-    return;
 }
 
 seed();

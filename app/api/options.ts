@@ -2,12 +2,21 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import TwitterProvider from 'next-auth/providers/twitter';
 import { TwitterProfile } from "next-auth/providers/twitter";
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import clientPromise from "@/server/db/adapterClientConnection";
 
 export const OPTIONS: NextAuthOptions = {
+    adapter: MongoDBAdapter(clientPromise, {
+        collections: {
+            Users: 'users'
+        },
+        databaseName: 'portfolio'
+    }),
     debug: true,
     providers: [
         TwitterProvider({
             profile(profile: TwitterProfile) {
+                console.log('Twitter Profile: ' + JSON.stringify(profile))
                 return {
                     ...profile, 
                     role: "user",
@@ -56,6 +65,7 @@ export const OPTIONS: NextAuthOptions = {
             if(user) {
                 token.role = user.role;
                 token.name = user.name;
+                token.id = user.id;
             }
             return token;
         },
@@ -64,6 +74,7 @@ export const OPTIONS: NextAuthOptions = {
             if(session.user) {
                 session.user.role = token.role;
                 session.user.name = token.name;
+                session.user.id = token.id;
             }
             return session;
         }

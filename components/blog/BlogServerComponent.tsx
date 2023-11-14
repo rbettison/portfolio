@@ -6,7 +6,7 @@ export default function BlogServerComponent({blog} : {blog: string}) {
     let blogJson = JSON.parse(blog);
     return (
       <>
-        <div className="flex flex-col gap-8 mt-16 relative">
+        <div className="flex flex-col gap-8 mt-16 relative mb-16 border-b border-currentTextColor">
             <Link href="/blog" className="absolute md:-left-12 left-1 -top-12 md:top-4 hover:text-highlighttext">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
                   className="w-6 h-6">
@@ -23,7 +23,7 @@ export default function BlogServerComponent({blog} : {blog: string}) {
         </div>
 
 
-        <div className={styles.border}>
+        <div>
         <p className='font-bold text-lg'>
           @robbettison
         </p>

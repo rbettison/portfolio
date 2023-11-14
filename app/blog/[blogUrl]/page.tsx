@@ -2,6 +2,7 @@ import { getBlogByUrl } from '../../../server/db/dbService';
 import { Metadata } from 'next';
 import BlogServerComponent from '@/components/blog/BlogServerComponent';
 import BlogClientComponent from '@/components/blog/BlogClientComponent';
+import BlogComments from '@/components/blog/BlogComments';
 
 type Props = { params: { blogUrl: string } }
 
@@ -12,6 +13,7 @@ const Page = async({ params }: Props) => {
     return (
       <BlogClientComponent>
         <BlogServerComponent blog={JSON.stringify(blog)}/>
+        <BlogComments />
       </BlogClientComponent>
     )
 }

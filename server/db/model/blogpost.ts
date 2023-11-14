@@ -1,8 +1,8 @@
-import { ObjectId } from "mongodb";
-import mongoose, { Schema } from "mongoose";
+
+import mongoose from "mongoose";
+import { CommentType } from "./comment";
 
 const BlogPostSchema = new mongoose.Schema({
-    _id: Schema.Types.ObjectId,
     title: String,
     url: String,
     body: String,
@@ -11,11 +11,11 @@ const BlogPostSchema = new mongoose.Schema({
     tags: [],
     description: String,
     comments: [{
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: mongoose.models.Comment
     }],
     likes: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref:'Like'
     }]
 })
@@ -32,7 +32,7 @@ export type BlogPostType = {
   author: string,
   tags: string[],
   description: string,
-  comments: string[],
+  comments: CommentType[],
   likes: string[]
 }
 

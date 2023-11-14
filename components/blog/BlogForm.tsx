@@ -1,7 +1,6 @@
 "use client"
 
 import { usePost } from "@/contexts/PostProvider";
-import { BlogPostType } from "@/server/db/model/blogpost";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

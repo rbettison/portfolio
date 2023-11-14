@@ -22,6 +22,6 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ['/blog/new', "/api/blog"]
+    matcher: ['/blog/new']
 }
 

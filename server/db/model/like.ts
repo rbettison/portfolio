@@ -18,8 +18,8 @@ const Like = mongoose.models.Like ||
 
 export type LikeType = {
     _id: ObjectId,
-    user: ObjectId,
-    comment: ObjectId
+    user: String,
+    comment: String
 }
 
 export default Like;

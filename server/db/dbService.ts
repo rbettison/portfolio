@@ -1,9 +1,13 @@
 'server only'
 import { notFound } from "next/navigation";
-import connectToDatabase from "./clientConnection";
+import connectToDatabase from "./mongooseClientConnection";
 import BlogPost, { BlogPostType } from "./model/blogpost";
-import Comment from "./model/comment";
+import Comment, { CommentType } from "./model/comment";
+import User from "./model/user";
 import { ObjectId } from "mongodb";
+import Like from "./model/like";
+import { getServerSession } from "next-auth/next";
+import { OPTIONS } from "@/app/api/options";
 
 
 export async function createOrUpdate(blog : BlogPostType) {
@@ -70,9 +74,34 @@ export async function getOne(id: string) {
 
 export async function getBlogByUrl(url: string) {
     let blog;
+    console.log('getting blog by URL')
     try {
+        const session = await getServerSession(OPTIONS);
+        let userId = session?.user.id.toString();
         await connectToDatabase();
-        blog = await BlogPost.findOne({url : url}).populate({path: 'comments', model: Comment}).lean<BlogPostType>();
+        blog = await BlogPost.findOne({url : url})
+            .populate({path: 'comments', model: Comment, 
+                        populate: { path: 'user', model: User}}).lean<BlogPostType>().then(async (blog) => {
+                            const likes = await Like.find({
+                                comment: {
+                                    $in: blog?.comments.map(comment => comment._id.toString())
+                                },
+                                user: userId})
+                            console.log('likes found: ' + likes);
+                            console.log('blog: ' + JSON.stringify(blog));
+                            return {
+                                ...blog,
+                                comments: blog?.comments.map((comment:CommentType) => {
+                                    const { ...commentFields } = comment;
+                                    return {
+                                        ...commentFields,
+                                        likedByMe: likes?.find(like => like.commentId === comment._id),
+                                        likeCount: comment.likes.length
+                                    }
+                                })
+                            }
+                        });
+        console.log('blog found by URL: ' + JSON.stringify(blog));
         if(blog === null) return notFound();
     } catch (err) {
         console.log(err);

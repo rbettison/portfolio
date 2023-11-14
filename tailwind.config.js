@@ -15,7 +15,8 @@ module.exports = {
       },
       colors: {
         darkbg: '#240046',
-        highlighttext: '#ff6d00'
+        highlighttext: '#ff6d00',
+        currentTextColor: 'var(--main-text-colour)'
       },
       gridTemplateRows: {
         '9': 'repeat(9, minmax(0, 1fr))'

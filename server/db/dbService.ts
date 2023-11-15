@@ -84,14 +84,14 @@ export async function getBlogByUrl(url: string) {
                         populate: { path: 'user', model: User}}).lean<BlogPostType>().then(async (blog) => {
                             const likes = await Like.find({
                                 comment: {
-                                    $in: blog?.comments.map(comment => comment._id.toString())
+                                    $in: blog?.comments?.map(comment => comment._id.toString())
                                 },
                                 user: userId})
                             console.log('likes found: ' + likes);
                             console.log('blog: ' + JSON.stringify(blog));
                             return {
                                 ...blog,
-                                comments: blog?.comments.map((comment:CommentType) => {
+                                comments: blog?.comments?.map((comment:CommentType) => {
                                     const { ...commentFields } = comment;
                                     return {
                                         ...commentFields,

@@ -20,7 +20,7 @@ export default function CommentForm({loading, error, onSubmit, autoFocus = false
                 autoFocus={autoFocus}
                 value={message} 
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-4/5"/>
+                className="w-4/5 text-darkbg"/>
             <button type="submit"
                 className="p-4 border border-currentTextColor">{loading? "Loading" : "Post"}</button>
             <div>{error}</div>

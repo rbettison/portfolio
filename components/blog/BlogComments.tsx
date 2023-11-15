@@ -6,7 +6,6 @@ import CommentForm from "../comments/CommentForm";
 import { useAsyncFn } from "@/hooks/useAsync";
 import { createComment } from "@/services/comment";
 import { signIn, useSession } from "next-auth/react";
-import Link from "next/link";
 
 export default function BlogComments() {
     const {blog, rootComments, createLocalComment} = usePost();

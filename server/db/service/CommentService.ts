@@ -18,9 +18,15 @@ export async function create(comment : CommentType) {
 
         // updating blog with new comment id
         let blog = await BlogPost.findById(createdComment.post.toString());
-        blog['comments'] = [...blog['comments'], createdComment['_id'].toString()];
 
-        blog = await BlogPost.findOneAndUpdate(blog);
+        console.log('blog to update comments: ' + blog);
+
+        if(blog['comments'] === null || blog['comments'] === undefined) {
+            blog['comments'] = [createdComment['_id'].toString()];
+        } else {
+            blog['comments'] = [...blog['comments'], createdComment['_id'].toString()];
+        }
+        blog.save();
 
         console.log('bog updated');
     } catch (err) {

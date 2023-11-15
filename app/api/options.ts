@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import TwitterProvider from 'next-auth/providers/twitter';
 import { TwitterProfile } from "next-auth/providers/twitter";
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "@/server/db/adapterClientConnection";
 
 export const OPTIONS: NextAuthOptions = {

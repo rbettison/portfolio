@@ -95,7 +95,12 @@ export async function getBlogByUrl(url: string) {
                                     const { ...commentFields } = comment;
                                     return {
                                         ...commentFields,
-                                        likedByMe: likes?.find(like => like.commentId === comment._id),
+                                        likedByMe: likes?.find(like => {
+                                            console.log('like.commentId: ' + like.comment);
+                                            console.log('comment._id: ' + comment._id);
+                                            console.log(like.comment.toString() === comment._id.toString())
+                                            return like.comment.toString() === comment._id.toString()}
+                                        ),
                                         likeCount: comment.likes.length
                                     }
                                 })

@@ -34,6 +34,7 @@ const Comment = mongoose.models.Comment ||
     mongoose.model("Comment", CommentSchema);
 
 export type CommentType = {
+    [index: string]: string | Date | UserType | ObjectId | ObjectId[] | number | boolean,
     _id: string,
     message: string,
     createdAt: Date,

@@ -41,7 +41,11 @@ let emptyPost: BlogPostType = {
 export default function PostProvider({ children } : {
     children: React.ReactNode
 }) {
-    const { blogUrl } = useParams();
+    let params = useParams();
+    let blogUrl: any = undefined;
+    if(params != null) {
+        blogUrl = params.blogUrl;
+    }
 
     const [comments, setComments] = useState<CommentType[]>([]);
 

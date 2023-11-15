@@ -24,6 +24,7 @@ const BlogPost = mongoose.models.BlogPost ||
   mongoose.model("BlogPost", BlogPostSchema);
 
 export type BlogPostType = {
+  [index: string]: string | string[] | CommentType[],
   _id: string,
   title: string, 
   url: string, 

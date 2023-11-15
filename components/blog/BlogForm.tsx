@@ -55,7 +55,7 @@ export default function BlogForm() {
     async function deleteBlog() {
         let deleteResp = await fetch("/api/blog", {
             method: 'DELETE',
-            body: JSON.stringify({"_id": blogData._id})
+            body: JSON.stringify({"_id": blog._id})
         });
         console.log("Blog deleted... " + deleteResp)
 

@@ -47,7 +47,8 @@ export const OPTIONS: NextAuthOptions = {
                 // this is where you would usually 
                 // retrieve user data from database to verify user
                 const user = {
-                                id: "1", name: process.env.admin_user, 
+                                id: process.env.admin_id, 
+                                name: process.env.admin_user, 
                                 role: "admin", image: ""
                             };
 

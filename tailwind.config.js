@@ -18,6 +18,10 @@ module.exports = {
         highlighttext: '#ff6d00',
         currentTextColor: 'var(--main-text-colour)'
       },
+      backgroundImage: {
+        'twitter-image-black': "url('/x-logo/logo-black.png')",
+        'twitter-image-white': "url('/x-logo/logo-white.png')"
+      },
       gridTemplateRows: {
         '9': 'repeat(9, minmax(0, 1fr))'
       },

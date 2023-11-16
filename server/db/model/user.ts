@@ -20,9 +20,10 @@ const User = mongoose.models.User ||
 export type UserType = {
     _id: ObjectId,
     name: String,
-    image: String,
+    image: string,
     comments: ObjectId[],
-    likes: ObjectId[]
+    likes: ObjectId[],
+    data: { username: string }
 }
 
 export default User;

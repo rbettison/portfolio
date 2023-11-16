@@ -2,11 +2,12 @@ import { CommentType } from "@/server/db/model/comment";
 import { IconBtn } from "./IconBtn";
 import { usePost } from "@/contexts/PostProvider";
 import CommentList from "./CommentList";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CommentForm from "./CommentForm";
 import { useAsyncFn } from "@/hooks/useAsync";
 import { createComment, deleteComment, toggleCommentLike, updateComment } from "@/services/comment";
 import { useSession } from "next-auth/react";
+import { ThemeContext, ThemeContextType } from "@/contexts/ThemeContext";
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
@@ -27,6 +28,7 @@ export default function Comment({comment} : {comment: CommentType}) {
     const toggleCommentLikeFn = useAsyncFn(toggleCommentLike, []);
     const session = useSession();
     const currentUserId = session.data?.user.id;
+    const { theme } = useContext(ThemeContext) as ThemeContextType;
 
     async function onCommentReply(message: string) : Promise<any> {
         await createCommentFn.execute({postId: blog._id, message: message, parent: comment._id}).then((comment) => {
@@ -57,7 +59,20 @@ export default function Comment({comment} : {comment: CommentType}) {
     return (
         <>
             <div className="min-w-full border border-solid border-currentTextColor p-4 mr-0 rounded mt-2">
+                <div className="flex flex-row gap-4 items-center">
+                {comment.user?.image && <img src={comment.user.image}/>}
+                <div className="flex flex-col">
                 <div className="font-bold">{comment.user.name}</div>
+                {comment.user?.data?.username && 
+                    <div className="flex flex-row items-center gap-0.5">
+                        {theme == "dark" ? <div className="w-2.5 h-2.5 bg-cover bg-twitter-image-white">
+                        </div> : <div className="w-2.5 h-2.5 bg-cover bg-twitter-image-black">
+                        </div>} 
+                        @{comment.user.data.username}
+                    </div> 
+                }
+                </div>
+                </div>
                 {isEditing ? 
                     <CommentForm initialValue={comment.message} 
                         onSubmit={onCommentUpdate} 

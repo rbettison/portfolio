@@ -3,6 +3,7 @@ import Header from '@/components/header/Header';
 import { useState } from 'react';
 import {ThemeContext} from '../contexts/ThemeContext';
 import AuthProvider from '@/contexts/AuthProvider';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function GlobalContextsWrapper({
     children,
@@ -28,6 +29,7 @@ export default function GlobalContextsWrapper({
                 {children}
                 </div>
                 </div>
+                <Analytics />
             </body>
         </html>
         </ThemeContext.Provider>

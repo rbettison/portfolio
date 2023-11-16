@@ -1,6 +1,5 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import ClientThemeWrapper from './GlobalContextsWrapper';
 import GlobalContextsWrapper from './GlobalContextsWrapper';
 
 type Props = {

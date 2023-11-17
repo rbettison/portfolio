@@ -7,6 +7,7 @@ import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { signIn, signOut } from 'next-auth/react';
+import Trail from '../animation/Trail';
 
 export default function Header() {
 
@@ -49,35 +50,37 @@ export default function Header() {
         <ul className={`md:flex flex-col gap-4 text-md font-bold text-right md:text-left hidden 
                         fixed md:left-auto md:top-auto md:static left-1/3 top-0 w-2/3 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 
                         ${theme === "light" ? "bg-gray-300" : "bg-purple-700"} md:bg-inherit pt-24 md:pt-0`} id="navbar">
-            <li className={`hover:text-highlighttext ${pathname === '/' ? 'border-l-4 border-current pl-2':""}`}>
+                          <Trail open={true}>
+            <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'border-l-4 border-current pl-2':""}`}>
+            <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/contact' onClick={(e) => closeMenu(e)}>contact</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname === '/services' ? 'border-l-4 border-current pl-2':""}`}>
+            <li className={`hover:text-highlighttext ${pathname === '/services' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/services' onClick={(e) => closeMenu(e)}>services</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'border-l-4 border-current pl-2':""}`}>
+            <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/portfolio' onClick={(e) => closeMenu(e)}>portfolio (coming soon)</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'border-l-4 border-current pl-2':""}`}>
+            <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
             </li>
             <li className='cursor-pointer'>
               <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
             </li>
-            <li>
+            <li className='relative'>
                 {
                   session ? <>
                               <p>Hi, {session.user?.name}</p>
-                              {session.user.image ? <img src={session.user.image} /> : <></>}
+                              {session.user.image ? <img className="absolute sm:left-20 right-20" src={session.user.image} /> : <></>}
                               <button onClick={() => signOut()} className="hover:text-highlighttext">sign out</button>
                             </> 
                           :
                             <button onClick={() => signIn()} className="hover:text-highlighttext">log in</button>
                 }
             </li>
+            </Trail>
         </ul>
         </div>
       </div>

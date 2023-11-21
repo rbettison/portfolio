@@ -25,6 +25,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
   const imageUrlString = blog.images != undefined ? blog.images[0] : baseUrlString + "/blogPreview.png";
 
+  console.log('imageUrlString: ' + imageUrlString)
   return {
     title: blog.title,
     description: blog.description,
@@ -34,7 +35,8 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
       creator:"@robbettison",
       card: "summary_large_image",
       title: blog.title,
-      description: blog.description
+      description: blog.description,
+      images:[imageUrlString]
     },
     openGraph: {
       title: blog.title,

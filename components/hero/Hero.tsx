@@ -1,6 +1,12 @@
+'use client';
+import { animated, useSpring } from '@react-spring/web';
 import Link from 'next/link';
+import ButtonBouncePrompt from '../animation/ButtonBouncePrompt';
 
 export default function Hero() {
+
+    
+
     return (
 
             <div className="h-screen grid md:grid-cols-5 md:grid-rows-5 grid-cols-3 grid-rows-2">
@@ -12,6 +18,7 @@ export default function Hero() {
                         <Link href="/RobertBettisonCV.pdf" target='_blank'>credentials</Link>
                     </span>.
                 </p>
+                <ButtonBouncePrompt className='md:col-start-3 md:row-start-3 place-self-center row-start-2 col-start-2'>
                 <Link href="/#experience" className="md:col-start-3 md:row-start-3 place-self-center row-start-2 col-start-2">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
@@ -19,6 +26,8 @@ export default function Hero() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
                     </svg>
                 </Link>
+                </ButtonBouncePrompt>
+
                 {/* <img alt='Me'/> */}
             </div>
 

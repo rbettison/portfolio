@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 export default function Posts(props: {posts: any[] }) {
 
     const {data: session} = useSession();
+    console.log('IN POSTS')
 
     console.log('user session: ' + JSON.stringify(session));
 

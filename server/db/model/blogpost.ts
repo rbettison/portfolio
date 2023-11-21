@@ -17,7 +17,8 @@ const BlogPostSchema = new mongoose.Schema({
     likes: [{
         type: mongoose.Schema.ObjectId,
         ref:'Like'
-    }]
+    }],
+    images: []
 })
 
 const BlogPost = mongoose.models.BlogPost ||
@@ -34,7 +35,8 @@ export type BlogPostType = {
   tags: string[],
   description: string,
   comments: CommentType[],
-  likes: string[]
+  likes: string[],
+  images: string[]
 }
 
 export default BlogPost;

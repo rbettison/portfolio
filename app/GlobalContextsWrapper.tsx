@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {ThemeContext} from '../contexts/ThemeContext';
 import AuthProvider from '@/contexts/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
+import { EdgeStoreProvider } from '@/contexts/EdgeStore';
 
 export default function GlobalContextsWrapper({
     children,
@@ -21,6 +22,7 @@ export default function GlobalContextsWrapper({
 
         <AuthProvider>
         <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
+        <EdgeStoreProvider>
         <html lang="en">
             <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
             <div className="md:grid grid-cols-12 grid-rows-2 sm:pt-8 w-full flex flex-col h-screen">
@@ -32,6 +34,7 @@ export default function GlobalContextsWrapper({
                 <Analytics />
             </body>
         </html>
+        </EdgeStoreProvider>
         </ThemeContext.Provider>
         </AuthProvider>
     )

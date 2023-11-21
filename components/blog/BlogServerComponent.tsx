@@ -19,6 +19,9 @@ export default function BlogServerComponent({blog} : {blog: string}) {
           <p className="text-md">Authored by {blogJson?.author}</p>
           <p className="text-xs">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
         </div>
+
+        {blogJson.images.length > 0 && blogJson.images.map((img:  string) => <img key={img} src={img} />)}
+
         <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blogJson?.body).toString()}}>
         </div>
 

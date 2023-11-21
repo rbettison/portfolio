@@ -35,7 +35,8 @@ let emptyPost: BlogPostType = {
     tags: [],
     description: "",
     comments: [],
-    likes: []
+    likes: [],
+    images: []
 }
 
 export default function PostProvider({ children } : {
@@ -59,7 +60,8 @@ export default function PostProvider({ children } : {
         tags: [],
         description: "",
         comments: [],
-        likes: []
+        likes: [],
+        images: []
     })
 
     useEffect(() => {

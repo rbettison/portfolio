@@ -3,29 +3,42 @@
 import { usePost } from "@/contexts/PostProvider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-type Blog = {
-    [key: string]: number | string | string[],
-    title: string,
-    description: string,
-    author: string,
-    body: string,
-    created: string,
-    tags: string[],
-    url: string
-}
+import { FileState, MultiFileDropzone } from "./MultiFile";
+import { useEdgeStore } from "@/contexts/EdgeStore";
 
 // {blog} : {blog: string}
 export default function BlogForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-
+    const [fileStates, setFileStates] = useState<FileState[]>([]);
+    const [images, setImages] = useState<{url: string}[]>([]);
+    
+    const { edgestore } = useEdgeStore();
     const { blog, setBlog } = usePost();
+
+
+
+    
+
+    function updateFileProgress(key: string, progress: FileState['progress']) {
+        setFileStates((fileStates) => {
+        const newFileStates = structuredClone(fileStates);
+        const fileState = newFileStates.find(
+            (fileState) => fileState.key === key,
+        );
+        if (fileState) {
+            fileState.progress = progress;
+        }
+        return newFileStates;
+        });
+    }
     
 
     async function submit(event: React.SyntheticEvent<HTMLFormElement>) {
         setLoading(true);
         event.preventDefault();
+
+        console.log('creating blog: ' + JSON.stringify(blog));
 
         let createdBlog = await fetch("/api/blog", {
             method: 'POST',
@@ -43,7 +56,8 @@ export default function BlogForm() {
             tags: [],
             url: "",
             comments: [],
-            likes: []
+            likes: [],
+            images: []
         })
         let jsonBlog = await createdBlog.json();
 
@@ -139,6 +153,49 @@ export default function BlogForm() {
                 <input className="text-darkbg w-full" onChange={handle} id="url" value={blog.url} 
                     type="text" name="url" />
             </div>
+
+
+            <MultiFileDropzone
+                value={fileStates}
+                onChange={(files) => {
+                setFileStates(files);
+                }}
+                onFilesAdded={async (addedFiles) => {
+                setFileStates([...fileStates, ...addedFiles]);
+                await Promise.all(
+                    addedFiles.map(async (addedFileState) => {
+                    try {
+                        const res = await edgestore.publicFiles.upload({
+                        file: addedFileState.file,
+                        onProgressChange: async (progress) => {
+                            updateFileProgress(addedFileState.key, progress);
+                            if (progress === 100) {
+                            // wait 1 second to set it to complete
+                            // so that the user can see the progress bar at 100%
+                            await new Promise((resolve) => setTimeout(resolve, 1000));
+                            updateFileProgress(addedFileState.key, 'COMPLETE');
+                            }
+                        },
+                        })
+                        return res;
+                    } catch (err) {
+                        updateFileProgress(addedFileState.key, 'ERROR');
+                    }
+                    }),
+                ).then((images) => {
+
+                    let newData = blog;
+                    let imageUrls = images.map((img) => {
+                        return img?.url === undefined ? "" : img.url;
+                    });
+                    if(imageUrls.length > 0) {
+                        newData['images'] = [...blog.images, ...imageUrls]
+                    }
+                    setBlog(newData);
+
+                });
+                }}
+            />
 
 
             {loading? <p>Submitting</p> : <button type="submit">Submit</button>}

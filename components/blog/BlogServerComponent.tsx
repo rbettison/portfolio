@@ -1,6 +1,7 @@
 import styles from './blogPost.module.css';
 import { parse } from 'node-html-parser';
 import Link from "next/link";
+import Carousel from '../animation/Carousel';
 
 export default function BlogServerComponent({blog} : {blog: string}) {
     let blogJson = JSON.parse(blog);
@@ -20,7 +21,7 @@ export default function BlogServerComponent({blog} : {blog: string}) {
           <p className="text-xs">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
         </div>
 
-        {blogJson.images.length > 0 && blogJson.images.map((img:  string) => <img key={img} src={img} />)}
+        {blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
 
         <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blogJson?.body).toString()}}>
         </div>

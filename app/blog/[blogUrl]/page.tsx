@@ -23,7 +23,7 @@ export async function generateMetadata({params}: Props) : Promise<Metadata> {
   let blog = await getBlogByUrl(params.blogUrl);
 
   const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
-  const imageUrlString = baseUrlString + "/blogPreview.png";
+  const imageUrlString = blog.images != undefined ? blog.images[0] : baseUrlString + "/blogPreview.png";
 
   return {
     title: blog.title,

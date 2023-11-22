@@ -21,7 +21,7 @@ export default function BlogServerComponent({blog} : {blog: string}) {
           <p className="text-xs">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
         </div>
 
-        {blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
+        {blogJson.images != undefined && blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
 
         <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blogJson?.body).toString()}}>
         </div>

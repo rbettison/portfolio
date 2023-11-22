@@ -107,7 +107,7 @@ export async function getBlogByUrl(url: string) {
                             }
                         });
         console.log('blog found by URL: ' + JSON.stringify(blog));
-        if(blog === null) return notFound();
+        if(blog === null || blog._id === undefined) return notFound();
     } catch (err) {
         console.log(err);
         return notFound();

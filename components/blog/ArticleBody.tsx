@@ -2,6 +2,7 @@
 
 import { usePost } from "@/contexts/PostProvider";
 import { MDXRemote } from "next-mdx-remote";
+import LoadingSpinner from "../loading/LoadingSpinner";
 
 export default function ArticleBody() {
 
@@ -9,7 +10,7 @@ export default function ArticleBody() {
 
     return (
         <>
-            {blogHtml && <MDXRemote {...blogHtml} />}
+            {blogHtml === undefined ? <LoadingSpinner /> : <MDXRemote {...blogHtml} />}
         </>
     )
 }

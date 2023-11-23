@@ -1,7 +1,5 @@
 'use client'
 import styles from './getintouch.module.css';
-import CircularProgress from '@mui/material/CircularProgress';
-import CheckIcon from '@mui/icons-material/Check';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 
@@ -17,19 +15,19 @@ export default function GetInTouch() {
             email: String(event.target.email.value),
             message: String(event.target.message.value)
         }
-        // const response = await fetch("/api/contact", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        // if(response.ok) {
-        //     console.log("Message sent successfully.");
-        // }
-        // if(!response.ok) {
-        //     console.log("Error sending message!");
-        // }
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        if(response.ok) {
+            console.log("Message sent successfully.");
+        }
+        if(!response.ok) {
+            console.log("Error sending message!");
+        }
         console.log(data);
         timerRef.current = window.setTimeout(() => {
             setProgress('complete');

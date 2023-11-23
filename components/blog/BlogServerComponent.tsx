@@ -1,16 +1,12 @@
-'use client'
 import styles from './blogPost.module.css';
 import Link from "next/link";
 import Carousel from '../animation/Carousel';
-import { MDXRemote } from 'next-mdx-remote';
-import { usePost } from '@/contexts/PostProvider';
+import ArticleBody from './ArticleBody';
 
 
-export default function BlogServerComponent() {
-
-    const {blog, blogHtml} = usePost();
-
-    let blogJson = blog;
+export default function BlogServerComponent({blog} : {blog: string}) {
+  let blogJson = JSON.parse(blog);
+    
     
 
     return (
@@ -30,7 +26,7 @@ export default function BlogServerComponent() {
         </div>
         {blogJson.images != undefined && blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
         <div className={styles.article}>
-          {blogHtml && <MDXRemote {...blogHtml} />}
+          <ArticleBody />
         </div>
 
 

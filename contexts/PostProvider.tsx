@@ -1,8 +1,12 @@
 "use client"
 import { BlogPostType } from "@/server/db/model/blogpost";
 import { CommentType } from "@/server/db/model/comment";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 import { useParams } from "next/navigation";
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useMemo, useState } from "react";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypePrism from "rehype-prism-plus";
 
 type PostContextType = {
     blog: BlogPostType,
@@ -13,6 +17,7 @@ type PostContextType = {
     updateLocalComment: (id: string, message: string) => void;
     deleteLocalComment: (id: string) => void;
     toggleLocalCommentLike: (id: string, addLike: boolean) => void;
+    blogHtml: MDXRemoteSerializeResult<unknown, unknown> | undefined;
 }
 
 let PostContext = createContext<PostContextType | null>(null);
@@ -49,6 +54,7 @@ export default function PostProvider({ children } : {
     }
 
     const [comments, setComments] = useState<CommentType[]>([]);
+    const [blogHtml, setBlogHtml] = useState<MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>>();
 
     const [post, setPost] = useState<BlogPostType>({
         _id: "",
@@ -75,7 +81,17 @@ export default function PostProvider({ children } : {
             {method: 'GET'}).then(async (resp) => {
                 let blog = await resp.json();
                 setPost(blog);
+                serialize(blog?.body, {mdxOptions: {
+                    development: process.env.NODE_ENV === 'development',
+                    rehypePlugins: [
+                      rehypeCodeTitles,
+                      rehypePrism
+                    ]
+                }}).then((html) => {
+                    setBlogHtml(html);
+                })
             });
+
         } 
     }, [blogUrl])
 
@@ -162,7 +178,8 @@ export default function PostProvider({ children } : {
                                         createLocalComment: createLocalComment,
                                         updateLocalComment: updateLocalComment,
                                         deleteLocalComment: deleteLocalComment,
-                                        toggleLocalCommentLike: toggleLocalCommentLike}}>
+                                        toggleLocalCommentLike: toggleLocalCommentLike,
+                                        blogHtml: blogHtml}}>
             {children}
         </PostContext.Provider>
     )

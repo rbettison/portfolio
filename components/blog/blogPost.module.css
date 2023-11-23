@@ -17,18 +17,6 @@
   text-decoration: underline;
 }
 
-.article code {
-  margin-top: 1rem;
-  display: block;
-  background-color: var(--button-colour);
-  color: var(--button-text);
-  /* word-wrap: break-word; */
-  box-decoration-break: clone;
-  padding: .1rem .3rem .2rem;
-  border-radius: .2rem;
-  white-space: pre-wrap;
-}
-
 .article p:first-child {
     margin-top: 0px;
     font-style: italic;

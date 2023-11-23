@@ -1,13 +1,21 @@
+'use client'
 import styles from './blogPost.module.css';
-import { parse } from 'node-html-parser';
 import Link from "next/link";
 import Carousel from '../animation/Carousel';
+import { MDXRemote } from 'next-mdx-remote';
+import { usePost } from '@/contexts/PostProvider';
 
-export default function BlogServerComponent({blog} : {blog: string}) {
-    let blogJson = JSON.parse(blog);
+
+export default function BlogServerComponent() {
+
+    const {blog, blogHtml} = usePost();
+
+    let blogJson = blog;
+    
+
     return (
       <>
-        <div className="flex flex-col gap-8 mt-16 relative mb-16 border-b border-currentTextColor">
+        <div className="flex flex-col gap-8 mt-16 relative mb-16 border-b border-currentTextColor line-numbers">
             <Link href="/blog" className="absolute md:-left-12 left-1 -top-12 md:top-4 hover:text-highlighttext">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
                   className="w-6 h-6">
@@ -20,10 +28,9 @@ export default function BlogServerComponent({blog} : {blog: string}) {
           <p className="text-md">Authored by {blogJson?.author}</p>
           <p className="text-xs">{new Date(blogJson?.created).toLocaleString('default', { day:'2-digit', month: 'long', year:'numeric' })}</p>
         </div>
-
         {blogJson.images != undefined && blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
-
-        <div className={styles.article} dangerouslySetInnerHTML={{__html: parse(blogJson?.body).toString()}}>
+        <div className={styles.article}>
+          {blogHtml && <MDXRemote {...blogHtml} />}
         </div>
 
 

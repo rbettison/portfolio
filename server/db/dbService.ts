@@ -123,7 +123,7 @@ export async function getAll() {
     try {
         await connectToDatabase();
         // without .lean() we face stack overflow errors - lean populates with plain JSON objects rather than mongoose objects
-        blogs = await BlogPost.find();
+        blogs = await BlogPost.find().sort({created: -1});
     } catch (err) {
         console.log(err);
     }

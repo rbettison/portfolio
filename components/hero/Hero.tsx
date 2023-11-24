@@ -1,11 +1,12 @@
 'use client';
-import { animated, useSpring } from '@react-spring/web';
 import Link from 'next/link';
 import ButtonBouncePrompt from '../animation/ButtonBouncePrompt';
+import { useContext } from 'react';
+import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
 
 export default function Hero() {
 
-    
+    const {theme} = useContext(ThemeContext) as ThemeContextType;
 
     return (
 
@@ -15,7 +16,8 @@ export default function Hero() {
                         <img className="h-12" src="/socials/twitter.png" />
                     </Link>
                     <Link href="https://medium.com/@rob.bettison94" target="_blank" className='w-auto h-full flex items-end'>
-                        <img className="h-12" src='/socials/Medium-Symbol-Black-RGB@1x.png'/>
+                        {theme === "light" ? <img className="h-12" src='/socials/Medium-Symbol-Black-RGB@1x.png'/> : 
+                            <img className="h-12" src='/socials/Medium-Symbol-White-RGB@1x.png'/>}
                     </Link>
                 </div>
                 <p className="md:row-start-2 md:col-start-2 md:col-span-3 text-4xl row-start-1 col-span-3 self-end">

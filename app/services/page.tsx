@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
-import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
+import { MotionValue, motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 export default function Services() {
 
@@ -10,6 +10,13 @@ export default function Services() {
     function useParallax(value: MotionValue<number>, distance: number, offset: number) {
         return useTransform(value, [0,1], [-distance + offset, distance + offset]);
     }
+
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     const Page = ({ title, 
                     description, 
@@ -123,6 +130,9 @@ export default function Services() {
                             </svg>}
                     prevService="technology consulting"
                 />
+                <motion.div style={{scaleX}} className="fixed left-0 right-0 bottom-12 h-4 bg-currentTextColor">
+
+                </motion.div>
 
             </>
     )

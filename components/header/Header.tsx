@@ -34,7 +34,7 @@ export default function Header() {
 
     return (
 
-        <div className="col-span-2 md:text-right md:fixed md:left-16 p-4 z-40" id="navbar"> 
+        <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 z-40" id="navbar"> 
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center'>
         <Link href="/">
@@ -83,7 +83,7 @@ export default function Header() {
             </Trail>
         </ul>
         </div>
-      </div>
+      </section>
 
     )
 

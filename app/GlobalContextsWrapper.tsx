@@ -27,7 +27,7 @@ export default function GlobalContextsWrapper({
             <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-darkbg" : "text-darkbg bg-gray-200"}`} id={theme}>
             <div className="md:grid grid-cols-12 grid-rows-2 w-full flex flex-col h-screen relative">
             <Header></Header>
-            <div className="col-start-4 col-span-5 pl-4 pr-4">
+            <div className="col-start-4 col-span-5 row-start-1 row-span-2 pl-4 pr-4">
                 {children}
                 </div>
                 </div>

@@ -1,101 +1,129 @@
 'use client'
 import Link from "next/link";
-import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
-import { useRef } from "react";
-import { off } from "process";
+import React, { useEffect, useRef } from "react";
+import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 
 export default function Services() {
 
-    const parallax = useRef<IParallax>(null)
+    const totalServices = 3;
 
-    const scroll = (to: number) => {
-        if (parallax.current) {
-          parallax.current.scrollTo(to)
-        }
+    function useParallax(value: MotionValue<number>, distance: number, offset: number) {
+        return useTransform(value, [0,1], [-distance + offset, distance + offset]);
     }
 
-    const Page = ({offset, title, description} : {offset: number, title: string, description: React.ReactNode}) => {
+    const Page = ({ title, 
+                    description, 
+                    serviceNumber, 
+                    nextService, 
+                    prevService,
+                    svgIcon } : 
+                    {offset: number, 
+                        title: string, 
+                        description: React.ReactNode,
+                        nextService?: string,
+                        prevService?: string,
+                        serviceNumber: number,
+                        svgIcon: React.ReactNode}) => {
+        const ref = useRef(null);
+        const {scrollYProgress} = useScroll({target: ref});
+        const y = useParallax(scrollYProgress, 300, -250);
+        useEffect(() => {
+
+        }, [y])
+
         return (
-            <>
-            <ParallaxLayer offset={offset} speed={0.2} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <div className="w-64 m-auto font-bold text-4xl relative sm:col-start-3 sm:row-start-2 row-start-2">
-                    <p className="md:absolute md:-left-16 md:top-0">{offset + 1}</p>
-                    <p>{title}</p>
-                </div>
-            </ParallaxLayer>
-            <ParallaxLayer offset={offset} speed={0.2} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <div className="sm:col-start-3 sm:col-span-2 sm:row-start-3 row-start-3 p-8">
-                    {description}
-                </div>
-            </ParallaxLayer>
-            </>
-        )
-    }
-
-    return(
-        <>
-        <Parallax pages={3} className="left-0 top-0" ref={parallax}>
-            <ParallaxLayer offset={0} speed={0.4} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="sm:col-start-3 sm:row-start-1 align-center self-end ml-16 sm:ml-auto w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                </svg>
-            </ParallaxLayer>
-            <Page offset={0} title="website builds" description={<p>Solidly built and sumptuously designed websites. My background in technology consulting drives me to gain an understanding of the why behind your need for a website to deliver something bespoke to the hilt.</p>}/>
-            <ParallaxLayer offset={0} speed={1} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <div onClick={()=>scroll(1)} className="sm:col-start-3 sm:row-start-4 row-start-1 self-end ml-8 sm:ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-            </ParallaxLayer>
-
-
-            <ParallaxLayer offset={1} speed={0.4} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="sm:col-start-3 sm:row-start-1 align-center self-end ml-16 sm:ml-auto w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
-                </svg>
-            </ParallaxLayer>
-            <Page offset={1} title="technology consulting" description={<p>I have 6 years of experience in the technology consulting industry, working as a software engineer, solution architect and scrum lead. I&apos;ve learnt the hard way that a problem shared is a problem halved. If you&apos;ve got a particular nut that&apos;s proving difficult to crack, I can lend a helping hand.</p>} />
-            <ParallaxLayer offset={1} speed={1} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <div className="sm:col-start-3 sm:row-start-4 row-start-1 self-end ml-8 sm:ml-auto">
-                    <div onClick={()=>scroll(0)} className="col-start-3 row-start-1">
+            <section className="h-screen flex flex-col">
+            <div className="sm:h-[600px] h-[500px] grid grid-cols-5 grid-rows-5" id={title}>
+                {serviceNumber > 1 && serviceNumber < totalServices && (
+                    <div className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
+                    <Link href={`/services/#${prevService}`} className="col-start-3 row-start-5">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" strokeWidth="1.5"
                             stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
                         </svg>
-                    </div>
-                    <div onClick={()=>scroll(2)} className="col-start-3 row-start-4">
+                    </Link>
+                    <Link href={`/services/#${nextService}`} className="col-start-3 row-start-5">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
                         </svg>
-                    </div>
+                    </Link>
                 </div>
-                
-            </ParallaxLayer>
-
-
-            <ParallaxLayer offset={2} speed={0.4} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="sm:col-start-3 sm:row-start-1 align-center self-end ml-16 sm:ml-auto w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                </svg>
-            </ParallaxLayer>
-            <Page offset={2} title={"professional writing"} description={<p>Let me help realise your article ideas or requirements for copy. I write blog posts for this site which you can see <Link href="/blog" className="hover:text-highlighttext underline">here</Link>.</p>} />
-            <ParallaxLayer offset={2} speed={1} className="grid sm:grid-cols-7 sm:grid-rows-5 grid-cols-1 grid-rows-4">
-                <div onClick={()=>scroll(1)} className="sm:col-start-3 sm:row-start-4 row-start-1 self-end ml-8 sm:ml-auto">
+                )}
+                {serviceNumber === 1 && (
+                    <Link href={`/services/#${nextService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                    </Link>
+                )}
+                {serviceNumber === totalServices && (
+                    <Link href={`/services/#${prevService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" strokeWidth="1.5"
                         stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
                     </svg>
-                </div>
-            </ParallaxLayer>
+                    </Link>
+                )}
+                
 
-            </Parallax>
+                <div ref={ref} className="w-64 m-auto font-bold sm:text-4xl text-xl relative sm:col-start-2 sm:row-start-2 row-start-2">
+                    <p className="md:absolute md:-left-16 md:top-0">{serviceNumber}</p>
+                    <p>{title}</p>
+                </div>
+
+                <div className="sm:text-md text-lg sm:col-start-2 sm:col-span-3 sm:row-start-3 row-start-3 col-span-5">
+                    {description}
+                </div>
+            </div>
+            <motion.div style={{y}} className="relative">
+                {svgIcon}
+            </motion.div>
+            </section>
+        )
+    }
+
+    return(
+        <>
+
+            {/* scroll snap doesn't work here in tailwind css --> have added to globals.css for now instead */}
+                <Page 
+                    offset={0} 
+                    title="website builds" 
+                    description={<p>Solidly built and sumptuously designed websites. My background in technology consulting drives me to gain an understanding of the why behind your need for a website to deliver something bespoke to the hilt.</p>}
+                    serviceNumber={1}
+                    svgIcon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 right-4 absolute">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                            </svg>}
+                    nextService="technology consulting"
+                />
+                <Page 
+                    offset={1} 
+                    title="technology consulting" 
+                    description={<p>I have 6 years of experience in the technology consulting industry, working as a software engineer, solution architect and scrum lead. I&apos;ve learnt the hard way that a problem shared is a problem halved. If you&apos;ve got a particular nut that&apos;s proving difficult to crack, I can lend a helping hand.</p>} 
+                    serviceNumber={2}
+                    svgIcon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 right-4 absolute">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                            </svg>}
+                    nextService="professional writing"
+                    prevService="website builds"
+                />
+                <Page 
+                    offset={2} 
+                    title={"professional writing"} 
+                    description={<p>Let me help realise your article ideas or requirements for copy. I write blog posts for this site which you can see <Link href="/blog" className="hover:text-highlighttext underline">here</Link>.</p>} 
+                    serviceNumber={3}
+                    svgIcon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 right-4 absolute">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>}
+                    prevService="technology consulting"
+                />
+
             </>
     )
 }

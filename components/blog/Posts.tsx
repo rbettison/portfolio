@@ -72,7 +72,7 @@ export default function Posts(props: {posts: any[] }) {
 
         {posts?.map((entry: any) => {
                 return (
-                    <div key={entry._id}>
+                    <section key={entry._id}>
                     <Link href={`/blog/${entry.url}`} >
                     <div className={styles.posts}>
                         <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
@@ -90,7 +90,7 @@ export default function Posts(props: {posts: any[] }) {
                         </div>
                     </div>
                     </Link>
-                    </div>
+                    </section>
                 )
             })
         }

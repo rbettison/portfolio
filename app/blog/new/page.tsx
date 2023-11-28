@@ -7,12 +7,12 @@ export default function NewBlog() {
 
     return (
 
-        <>
+        <section>
             <p>New Blog</p>
             <PostProvider>
                 <BlogForm/>
             </PostProvider>
-        </>
+        </section>
 
     )
 }

@@ -7,12 +7,12 @@ import Portfolio from '@/components/portfolio/Portfolio'
 export default function Home() {
   return (
     // <main className={styles.main}>
-    <>
+    <section>
 
       <Hero />
       <Experience />
     
-      </>
+      </section>
     // </main>
   )
 }

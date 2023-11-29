@@ -2,6 +2,7 @@ import styles from './blogPost.module.css';
 import Link from "next/link";
 import Carousel from '../animation/Carousel';
 import ArticleBody from './ArticleBody';
+import Socials from './Socials';
 
 
 export default function BlogServerComponent({blog} : {blog: string}) {
@@ -26,11 +27,12 @@ export default function BlogServerComponent({blog} : {blog: string}) {
         </div>
         {blogJson.images != undefined && blogJson.images.length > 0 && <Carousel IMAGES={blogJson.images} />}
         <div className={styles.article}>
-          <ArticleBody />
+            <ArticleBody />
         </div>
 
 
         <div>
+        <Socials />
         <p className='font-bold text-lg'>
           @robbettison
         </p>

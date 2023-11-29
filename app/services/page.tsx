@@ -34,9 +34,7 @@ export default function Services() {
         const ref = useRef(null);
         const {scrollYProgress} = useScroll({target: ref});
         const y = useParallax(scrollYProgress, 300, -250);
-        useEffect(() => {
-
-        }, [y])
+                        
 
         return (
             <section className="h-screen flex flex-col">

@@ -113,6 +113,7 @@ export default function Header() {
     }
 
     function closeMenu(event: MouseEvent) {
+      setMenuOpen(false);
       document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('hidden');
     }
   }

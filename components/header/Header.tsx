@@ -1,6 +1,5 @@
 "use client";
 import '../../app/globals.css'
-import styles from './header.module.css';
 import Link from 'next/link';
 import { MouseEvent, useContext, useEffect, useState } from 'react';
 import { ThemeContext, ThemeContextType } from '@/contexts/ThemeContext';
@@ -12,10 +11,27 @@ import Trail from '../animation/Trail';
 export default function Header() {
 
     const { toggleTheme, setTheme, theme } = useContext(ThemeContext) as ThemeContextType;
+    const[menuOpen,setMenuOpen] = useState(false);
 
     const {data: session} = useSession()
 
     console.log('session: ' + session);
+
+    useEffect(() => {
+      // listening on window width to set menu open/closed respectively
+      if (typeof window != 'undefined') {
+        if(window.innerWidth > 600) setMenuOpen(true);
+        window.addEventListener('resize', windowWidth);
+      }
+      function windowWidth() {
+        if (window.innerWidth > 600) {
+          setMenuOpen(true);
+        } else {
+          setMenuOpen(false);
+        }
+      }
+      return () => window.removeEventListener('resize', windowWidth);
+    });
 
     useEffect(() => {
       const userTheme = localStorage.getItem('theme');
@@ -51,8 +67,8 @@ export default function Header() {
       
         <ul className={`md:flex flex-col gap-4 text-md font-bold text-right md:text-left hidden 
                         fixed md:left-auto md:top-auto md:static left-1/3 top-0 w-2/3 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 
-                        ${theme === "light" ? "bg-gray-300" : "bg-purple-700"} md:bg-inherit pt-24 md:pt-0`} id="navbar">
-                          <Trail open={true}>
+                        ${theme === "light" ? "bg-gray-300" : "bg-purple-700"}  md:bg-inherit pt-24 md:pt-0`} id="navbar">
+          <Trail open={menuOpen}>
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
             </li>
@@ -82,7 +98,7 @@ export default function Header() {
                             <button onClick={() => signIn()} className="hover:text-highlighttext">log in</button>
                 }
             </li>
-            </Trail>
+          </Trail>
         </ul>
         </div>
       </section>
@@ -90,6 +106,7 @@ export default function Header() {
     )
 
     function toggleMenu(event: MouseEvent) {
+      setMenuOpen(prev => !prev);
       console.log('toggle menu');
       console.log(document.getElementById("navbar"));
         document.getElementById("navbar")?.getElementsByTagName("ul")[0]?.classList.toggle('hidden');

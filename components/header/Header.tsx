@@ -26,8 +26,8 @@ export default function Header() {
       api.start({ x: 0, immediate: false, config: canceled ? config.wobbly : config.stiff })
 
     }
-    const close = (velocity = 0.1) => {
-      api.start({ x: width, immediate: false, config: config.stiff })
+    const close = (velocity = 0) => {
+      api.start({ x: width, immediate: false, config: { ...config.stiff, velocity} })
 
     }
 
@@ -50,7 +50,7 @@ export default function Header() {
           // console.log('ox: ' + ox);
           if(ox > width * 0.5 || (vx > 0.5 && dx > 0)) {
             setMenuOpen(false);
-            close()
+            close(vx)
           } else {
             setMenuOpen(true)
             open({ canceled })
@@ -84,12 +84,12 @@ export default function Header() {
     useEffect(() => {
       // listening on window width to set menu open/closed respectively
       if (typeof window != 'undefined') {
-        // if(window.innerWidth > 300) setMenuOpen(true);
+        if(window.innerWidth > 600) setMenuOpen(true);
         window.addEventListener('resize', windowWidth);
       }
       function windowWidth() {
-        if (window.innerWidth > 300) {
-          // setMenuOpen(true);
+        if (window.innerWidth > 600) {
+          setMenuOpen(true);
         } else {
           setMenuOpen(false);
         }
@@ -133,7 +133,7 @@ export default function Header() {
                 {...bind()} className={`absolute md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
                          md:fixed md:left-auto md:top-auto top-0 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 w-[300px]
                         ${theme === "light" ? "bg-gray-300" : "bg-purple-700"}  md:bg-inherit pt-24 md:pt-0`} id="navbar">
-          <ul className='hidden'>
+          <ul className=''>
           <Trail open={menuOpen}>
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
@@ -187,7 +187,7 @@ export default function Header() {
     }
 
     function closeMenu(event: MouseEvent) {
-
+      setMenuOpen(false);
       close();
     }
   }

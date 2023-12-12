@@ -121,19 +121,19 @@ export default function Header() {
           <ul className='filter-none'>
           <Trail open={menuOpen}>
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
+                <Link href='/' onClick={closeMenu}>home</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/contact' onClick={(e) => closeMenu(e)}>contact</Link>
+                <Link href='/contact' onClick={closeMenu}>contact</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/services' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/services' onClick={(e) => closeMenu(e)}>services</Link>
+                <Link href='/services' onClick={closeMenu}>services</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/portfolio' onClick={(e) => closeMenu(e)}>portfolio (coming soon)</Link>
+                <Link href='/portfolio' onClick={closeMenu}>portfolio (coming soon)</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
+                <Link href='/blog' onClick={closeMenu}>blog</Link>
             </li>
             <li className='cursor-pointer'>
               <p onClick={toggleThemeFn}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>

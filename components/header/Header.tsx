@@ -45,9 +45,11 @@ export default function Header() {
           if(ox > width * 0.5 || (vx > 0.5 && dx > 0)) {
             setMenuOpen(false);
             close(vx)
+            enableBg();
           } else {
             setMenuOpen(true)
             open({ canceled })
+            disableBg();
           }
         }
         // when the user keeps dragging, we just move the sheet according to
@@ -90,13 +92,18 @@ export default function Header() {
 
     const pathname = usePathname();
 
+    const toggleThemeFn = () => {
+      toggleTheme();
+      closeMenu();
+    }
+
     return (
 <>
         <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 z-40"> 
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center'>
           <Link href="/">
-            <div className="text-4xl font-bold">
+            <div className={`text-4xl font-bold ${menuOpen ? "blur-md" : "blur-none"}`}>
               @robbettison
             </div>
           </Link>
@@ -108,10 +115,10 @@ export default function Header() {
         </div>
       
         <a.div style={{ right: -width + x.get(), x }} 
-                {...bind()} className={`fixed md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
+                {...bind()} className={`backdrop-blur-none blur-none touch-none fixed md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
                          md:fixed md:left-auto md:top-auto top-0 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 w-[300px]
                         ${theme === "light" ? "bg-gray-300" : "bg-purple-700"}  md:bg-inherit pt-24 md:pt-0`} id="navbar">
-          <ul className=''>
+          <ul className='filter-none'>
           <Trail open={menuOpen}>
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/' onClick={(e) => closeMenu(e)}>home</Link>
@@ -129,7 +136,7 @@ export default function Header() {
                 <Link href='/blog' onClick={(e) => closeMenu(e)}>blog</Link>
             </li>
             <li className='cursor-pointer'>
-              <p onClick={toggleTheme}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
+              <p onClick={toggleThemeFn}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
             </li>
             <li className='relative'>
                 {
@@ -157,12 +164,11 @@ export default function Header() {
       if(!menuOpen) {
         console.log('opening menu ')
         open({canceled: false});
-        if (typeof window != 'undefined' && window.document) {
-          document.body.style.overflow = 'hidden';
-        }
+        disableBg();
       } else {
         console.log('closing menu');
         close()
+        enableBg();
       }
       console.log(document.getElementById("navbar"));
     }
@@ -170,6 +176,18 @@ export default function Header() {
     function closeMenu(event: MouseEvent) {
       setMenuOpen(false);
       close();
+      enableBg();
     }
+
+    function disableBg() {
+      const element = document.querySelector("body");
+      element?.classList.add("noscroll");
+    }
+
+    function enableBg() {
+      const element = document.querySelector("body");
+      element?.classList.remove("noscroll");
+    }
+    
   }
 

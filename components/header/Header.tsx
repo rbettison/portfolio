@@ -16,6 +16,7 @@ export default function Header() {
 
     const { toggleTheme, setTheme, theme } = useContext(ThemeContext) as ThemeContextType;
     const[menuOpen,setMenuOpen] = useState(false);
+    const[mobDevice,setMobDevice] = useState(false);
 
 
     const [{ x }, api] = useSpring(() => ({ x: width }))
@@ -69,9 +70,9 @@ export default function Header() {
       }
       function windowWidth() {
         if (window.innerWidth > 600) {
-          setMenuOpen(true);
+          setMobDevice(false);
         } else {
-          setMenuOpen(false);
+          setMobDevice(true);
         }
       }
       return () => window.removeEventListener('resize', windowWidth);
@@ -103,22 +104,23 @@ export default function Header() {
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center'>
           <Link href="/">
-            <div className={`text-4xl font-bold ${menuOpen ? "blur-md" : "blur-none"}`}>
+            <div className={`text-4xl font-bold ${mobDevice && menuOpen  ? "blur-md" : "blur-none"}`}>
               @robbettison
             </div>
           </Link>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-              stroke-width="1.5" stroke="currentColor" className="w-6 h-6 sm:h-0 z-50"
+              strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 sm:h-0 z-50"
               onClick={(e) => toggleMenu(e)}>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
           </svg>
         </div>
       
+        {mobDevice ? 
         <a.div style={{ right: -width + x.get(), x }} 
                 {...bind()} className={`backdrop-blur-none blur-none touch-none fixed md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
                          md:fixed md:left-auto md:top-auto top-0 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 w-[300px]
                         ${theme === "light" ? "bg-gray-300" : "bg-purple-700"}  md:bg-inherit pt-24 md:pt-0`} id="navbar">
-          <ul className='filter-none'>
+          <ul>
           <Trail open={menuOpen}>
             <li className={`hover:text-highlighttext ${pathname === '/' ? 'sm:border-l-4 border-r-4 sm:border-r-0 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/' onClick={closeMenu}>home</Link>
@@ -152,6 +154,43 @@ export default function Header() {
           </Trail>
           </ul>
         </a.div>
+        :
+        <div className='text-md font-bold'>
+        <ul>
+          <Trail open={menuOpen}>
+            <li className={`hover:text-highlighttext ${pathname === '/' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+                <Link href='/'>home</Link>
+            </li>
+            <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+                <Link href='/contact'>contact</Link>
+            </li>
+            <li className={`hover:text-highlighttext ${pathname === '/services' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+                <Link href='/services'>services</Link>
+            </li>
+            <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+                <Link href='/portfolio'>portfolio (coming soon)</Link>
+            </li>
+            <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+                <Link href='/blog'>blog</Link>
+            </li>
+            <li className='cursor-pointer'>
+              <p onClick={toggleThemeFn}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
+            </li>
+            <li className='relative'>
+                {
+                  session ? <>
+                              <p>Hi, {session.user?.name}</p>
+                              {session.user.image ? <img className="absolute sm:left-20 right-20" src={session.user.image} /> : <></>}
+                              <button onClick={() => signOut()} className="hover:text-highlighttext">sign out</button>
+                            </> 
+                          :
+                            <button onClick={() => signIn()} className="hover:text-highlighttext">log in</button>
+                }
+            </li>
+          </Trail>
+          </ul>
+          </div>
+              }
         </div>
       </section>
       </>

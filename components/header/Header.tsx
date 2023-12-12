@@ -33,12 +33,6 @@ export default function Header() {
 
     const bind = useDrag(
       ({ last, velocity: [vx, ], direction: [dx, ], offset: [ox, ], cancel, canceled }) => {
-        console.log('dragging');
-        console.log('ox: ' + ox);
-        console.log('vx: ' + vx);
-        console.log('dx: ' + dx);
-        console.log('last: ' + last);
-        console.log('canceled: ' + canceled);
 
         // if the user drags up passed a threshold, then we cancel
         // the drag so that the sheet resets to its open position
@@ -62,22 +56,6 @@ export default function Header() {
       },
       { from: () => [0, x.get()], filterTaps: true, bounds: { top: 0 }, rubberband: true }
     );
-
-    // const display = x.to((px) => { 
-    //   console.log('px: ' + px);
-
-    //   if(px === width) {
-    //     console.log('none')
-    //   } else {
-    //     console.log('abs')
-    //   }
-
-    //   console.log('x.get: ' + x.get());
-
-    //   return "";
-      
-    //   // return px === width ? 'none' : 'absolute'
-    // })
 
     const {data: session} = useSession()
 
@@ -130,7 +108,7 @@ export default function Header() {
         </div>
       
         <a.div style={{ right: -width + x.get(), x }} 
-                {...bind()} className={`absolute md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
+                {...bind()} className={`fixed md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
                          md:fixed md:left-auto md:top-auto top-0 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 w-[300px]
                         ${theme === "light" ? "bg-gray-300" : "bg-purple-700"}  md:bg-inherit pt-24 md:pt-0`} id="navbar">
           <ul className=''>
@@ -179,6 +157,9 @@ export default function Header() {
       if(!menuOpen) {
         console.log('opening menu ')
         open({canceled: false});
+        if (typeof window != 'undefined' && window.document) {
+          document.body.style.overflow = 'hidden';
+        }
       } else {
         console.log('closing menu');
         close()

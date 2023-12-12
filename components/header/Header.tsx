@@ -173,7 +173,7 @@ export default function Header() {
       console.log(document.getElementById("navbar"));
     }
 
-    function closeMenu(event: MouseEvent) {
+    function closeMenu() {
       setMenuOpen(false);
       close();
       enableBg();

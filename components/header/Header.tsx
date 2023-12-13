@@ -102,7 +102,7 @@ export default function Header() {
 <>
         <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 z-40"> 
         <div className="flex flex-col md:gap-16 gap-4">
-        <div className='flex flex-row justify-between items-center'>
+        <div className='flex flex-row justify-between items-center' id="topHeader">
           <Link href="/">
             <div className={`text-4xl font-bold ${mobDevice && menuOpen  ? "blur-md" : "blur-none"}`}>
               @robbettison
@@ -214,7 +214,7 @@ export default function Header() {
 
     function closeMenu() {
       setMenuOpen(false);
-      close();
+      close(1);
       enableBg();
     }
 

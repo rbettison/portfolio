@@ -6,7 +6,7 @@ export default function Experience() {
     return (
         <div id="experience" className="h-screen md:grid md:gapy-0 grid-cols-25 grid-rows-9 place-content-center flex flex-col gap-4 items-center">
 
-            <Link href="/#navbar" className="row-start-2 col-start-13 self-top">
+            <Link href="/#topHeader" className="row-start-2 col-start-13 self-top">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                     viewBox="0 0 24 24" strokeWidth="1.5" 
                     stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">

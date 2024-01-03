@@ -115,7 +115,6 @@ export default function Header() {
           </svg>
         </div>
       
-        {/* {mobDevice ?  */}
         <a.div style={{ right: -width + x.get(), x }} 
                 {...bind()} className={`sm:hidden backdrop-blur-none blur-none touch-none fixed md:flex flex-col gap-4 text-md font-bold text-left md:text-left 
                          md:fixed md:left-auto md:top-auto top-0 h-screen md:h-auto md:w-auto p-4 md:p-0 z-40 w-[300px]
@@ -132,7 +131,7 @@ export default function Header() {
                 <Link href='/services' onClick={closeMenu}>services</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/portfolio' onClick={closeMenu}>portfolio (coming soon)</Link>
+                <Link href='/portfolio' onClick={closeMenu}>portfolio</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/blog' onClick={closeMenu}>blog</Link>
@@ -154,7 +153,7 @@ export default function Header() {
           </Trail>
           </ul>
         </a.div>
-        {/* : */}
+
         <div className='text-md font-bold hidden sm:block'>
         <ul>
           <Trail open={menuOpen}>
@@ -168,7 +167,7 @@ export default function Header() {
                 <Link href='/services'>services</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/portfolio'>portfolio (coming soon)</Link>
+                <Link href='/portfolio'>portfolio</Link>
             </li>
             <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/blog'>blog</Link>
@@ -190,7 +189,7 @@ export default function Header() {
           </Trail>
           </ul>
           </div>
-              {/* } */}
+
         </div>
       </section>
       </>

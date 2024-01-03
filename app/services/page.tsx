@@ -1,15 +1,94 @@
 'use client'
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { MotionValue, motion, useScroll, useSpring, useTransform } from "framer-motion";
+
+const Page = ({ title, 
+    description, 
+    serviceNumber, 
+    totalServices,
+    nextService, 
+    prevService,
+    svgIcon,
+    page } : 
+    {   title: string, 
+        description: React.ReactNode,
+        totalServices: number,
+        nextService?: string,
+        prevService?: string,
+        serviceNumber: number,
+        svgIcon: React.ReactNode,
+        page: String}) => {
+
+function useParallax(value: MotionValue<number>, distance: number, offset: number) {
+    return useTransform(value, [0,1], [-distance + offset, distance + offset]);
+}            
+const ref = useRef(null);
+const {scrollYProgress} = useScroll({target: ref});
+const y = useParallax(scrollYProgress, 300, -250);
+        
+
+return (
+<section className="h-screen flex flex-col">
+<div className="sm:h-[600px] h-[500px] grid grid-cols-5 grid-rows-5" id={title}>
+{serviceNumber > 1 && serviceNumber < totalServices && (
+    <div className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
+    <Link href={`/${page}/#${prevService}`} className="col-start-3 row-start-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" strokeWidth="1.5"
+            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+        </svg>
+    </Link>
+    <Link href={`/${page}/#${nextService}`} className="col-start-3 row-start-5">
+        <svg xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+        </svg>
+    </Link>
+</div>
+)}
+{serviceNumber === 1 && (
+    <Link href={`/${page}/#${nextService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
+    <svg xmlns="http://www.w3.org/2000/svg"
+        fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+    </svg>
+    </Link>
+)}
+{serviceNumber === totalServices && (
+    <Link href={`/${page}/#${prevService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24" strokeWidth="1.5"
+        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+    </svg>
+    </Link>
+)}
+
+
+<div ref={ref} className="w-64 m-auto font-bold sm:text-4xl text-xl relative sm:col-start-2 sm:row-start-2 row-start-2">
+    <p className="md:absolute md:-left-16 md:top-0">{serviceNumber}</p>
+    <p>{title}</p>
+</div>
+
+<div className="sm:text-md text-lg sm:col-start-2 sm:col-span-3 sm:row-start-3 row-start-3 col-span-5">
+    {description}
+</div>
+</div>
+<motion.div style={{y}} className="relative">
+{svgIcon}
+</motion.div>
+</section>
+)
+}
 
 export default function Services() {
 
     const totalServices = 3;
-
-    function useParallax(value: MotionValue<number>, distance: number, offset: number) {
-        return useTransform(value, [0,1], [-distance + offset, distance + offset]);
-    }
+    const page = "services";
 
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
@@ -18,87 +97,13 @@ export default function Services() {
         restDelta: 0.001
     });
 
-    const Page = ({ title, 
-                    description, 
-                    serviceNumber, 
-                    nextService, 
-                    prevService,
-                    svgIcon } : 
-                    {offset: number, 
-                        title: string, 
-                        description: React.ReactNode,
-                        nextService?: string,
-                        prevService?: string,
-                        serviceNumber: number,
-                        svgIcon: React.ReactNode}) => {
-        const ref = useRef(null);
-        const {scrollYProgress} = useScroll({target: ref});
-        const y = useParallax(scrollYProgress, 300, -250);
-                        
-
-        return (
-            <section className="h-screen flex flex-col">
-            <div className="sm:h-[600px] h-[500px] grid grid-cols-5 grid-rows-5" id={title}>
-                {serviceNumber > 1 && serviceNumber < totalServices && (
-                    <div className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-                    <Link href={`/services/#${prevService}`} className="col-start-3 row-start-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" strokeWidth="1.5"
-                            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
-                        </svg>
-                    </Link>
-                    <Link href={`/services/#${nextService}`} className="col-start-3 row-start-5">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </Link>
-                </div>
-                )}
-                {serviceNumber === 1 && (
-                    <Link href={`/services/#${nextService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                    </Link>
-                )}
-                {serviceNumber === totalServices && (
-                    <Link href={`/services/#${prevService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" strokeWidth="1.5"
-                        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
-                    </svg>
-                    </Link>
-                )}
-                
-
-                <div ref={ref} className="w-64 m-auto font-bold sm:text-4xl text-xl relative sm:col-start-2 sm:row-start-2 row-start-2">
-                    <p className="md:absolute md:-left-16 md:top-0">{serviceNumber}</p>
-                    <p>{title}</p>
-                </div>
-
-                <div className="sm:text-md text-lg sm:col-start-2 sm:col-span-3 sm:row-start-3 row-start-3 col-span-5">
-                    {description}
-                </div>
-            </div>
-            <motion.div style={{y}} className="relative">
-                {svgIcon}
-            </motion.div>
-            </section>
-        )
-    }
-
     return(
         <>
 
             {/* scroll snap doesn't work here in tailwind css --> have added to globals.css for now instead */}
                 <Page 
-                    offset={0} 
+                page={page}
+                    totalServices={totalServices}
                     title="website builds" 
                     description={<p>Solidly built and sumptuously designed websites. My background in technology consulting drives me to gain an understanding of the why behind your need for a website to deliver something bespoke to the hilt.</p>}
                     serviceNumber={1}
@@ -108,7 +113,9 @@ export default function Services() {
                     nextService="technology consulting"
                 />
                 <Page 
-                    offset={1} 
+                                page={page}
+
+                    totalServices={totalServices}
                     title="technology consulting" 
                     description={<p>I have 6 years of experience in the technology consulting industry, working as a software engineer, solution architect and scrum lead. I&apos;ve learnt the hard way that a problem shared is a problem halved. If you&apos;ve got a particular nut that&apos;s proving difficult to crack, I can lend a helping hand.</p>} 
                     serviceNumber={2}
@@ -119,7 +126,9 @@ export default function Services() {
                     prevService="website builds"
                 />
                 <Page 
-                    offset={2} 
+                                page={page}
+
+                    totalServices={totalServices}
                     title={"professional writing"} 
                     description={<p>Let me help realise your article ideas or requirements for copy. I write blog posts for this site which you can see <Link href="/blog" className="hover:text-highlighttext underline">here</Link>.</p>} 
                     serviceNumber={3}
@@ -135,3 +144,5 @@ export default function Services() {
             </>
     )
 }
+
+export {Page}

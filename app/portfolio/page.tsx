@@ -10,7 +10,7 @@ export default function Portfolio() {
                     page = {page}
                     totalServices={totalServices}
                     title="nextJS portfolio" 
-                    description={<><p className="border-b border-currentTextColor pb-4 mb-4">Built with NextJS and deployed on Vercel, this portfolio site is designed for optimal use on both mobile and desktop browsers. It features user roles and authentication via Twitter, Reddit-style comments, and a blog with an integrated editor. The site also incorporates animations using the Framer Motion library for a modern touch.</p>
+                    description={<><p className="border-b border-currentTextColor pb-4 mb-4">a portfolio site built using the NextJS framework and deployed on Vercel is designed for optimal use on both mobile and desktop browsers. It features user roles and authentication via Twitter, Reddit-style comments, and a blog with an integrated editor. The site also incorporates animations using the Framer Motion library for a modern touch.</p>
                                 <p>See the source code <a className="underline" href="https://github.com/rbettison/portfolio">here</a>.</p></>}
                     serviceNumber={1}
                     svgIcon={<svg className="absolute right-4 h-10 w-10" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
@@ -25,7 +25,7 @@ export default function Portfolio() {
                                     page = {page}
                 totalServices={totalServices}
                     title="shopify integration" 
-                    description={<><p className="border-b border-currentTextColor pb-4 mb-4">This headless Shopify integration, constructed with the NextJS framework and hosted on Vercel, seamlessly connects to Shopify using the storefront API. It efficiently queries and displays products while offering a smooth integration with the native Shopify online checkout.</p>
+                    description={<><p className="border-b border-currentTextColor pb-4 mb-4">a NextJS-powered headless Shopify integration, deployed on Vercel. Leveraging the Shopify Storefront API, it adeptly queries and presents products, seamlessly integrating with the native Shopify online checkout for a streamlined user experience.</p>
                     <p>See the source code <a href="https://github.com/rbettison/cleverkitchen" className="underline">here</a> and the site <a href="https://www.thecleverkitchen.co.uk/" className="underline">here</a>.</p>
                     </>} 
                     serviceNumber={2}

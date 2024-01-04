@@ -70,7 +70,7 @@ export default function Carousel({IMAGES} : {IMAGES: string[]}) {
         <div className='overflow-hidden flex flex-row justify-center items-center w-7/8 h-full'>
             {transitions((springs, item) => (
                 <animated.div className="overflow-hidden h-full" style={springs}>
-                    <img className="w-auto h-full" src={IMAGES[item]}/>
+                    <img className="w-full h-auto" src={IMAGES[item]}/>
                 </animated.div>
             ))}
         </div>

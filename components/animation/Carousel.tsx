@@ -95,7 +95,7 @@ export default function Carousel({IMAGES} : {IMAGES: string[]}) {
 
         return (
             <div key={img} className="h-16 w-16">
-                <img src={img}/>
+                <img className="h-full w-auto" src={img}/>
             </div>
         )
     }

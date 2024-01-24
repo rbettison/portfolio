@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import styles from './posts.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 export default function Posts(props: {posts: any[] }) {
@@ -18,7 +18,10 @@ export default function Posts(props: {posts: any[] }) {
             allTags.add(tag);
         })
     })
-    const [posts, setPosts] = useState(props.posts);
+    const [page, setPage] = useState(1);
+    const [filters, setFilters] = useState(false);
+    const [limit, setLimit] = useState(4);
+    const [posts, setPosts] = useState(props.posts.filter((post, index) => index >= ((page - 1) * limit) && index < (page * limit)));
     const [selectedChips, setSelectedChips] = useState<Set<string>>(new Set([]));
 
     const toggleFilter = (event: any) => {
@@ -43,7 +46,7 @@ export default function Posts(props: {posts: any[] }) {
         let postsFiltered = allPosts.filter((post) => {
             return post.tags.some((x: string) => selectedChips.has(x))
         })
-
+        setFilters(true);
         setPosts(postsFiltered);
     }
 
@@ -54,10 +57,46 @@ export default function Posts(props: {posts: any[] }) {
         }
     })
 
+    function setPostsOnPage(page: number) {
+        setPage(page);
+        setPosts(allPosts.filter((post, index) => index >= ((page - 1) * limit) && index < (page * limit)))
+    }
+
+    const handlePreviousPage = () => {
+        if(page != 1) setPostsOnPage(page - 1);
+    }
+
+    const handleNextPage = () => {
+        if(page != Math.ceil(allPosts.length / limit)) setPostsOnPage(page + 1)
+    }
+
+    const resetFilters = () => {
+        setSelectedChips(new Set([]));
+        setFilters(false);
+        setPostsOnPage(page);
+    }
+
     return (
     <>
         {session && session.user.role ==="admin" ? <Link href="/blog/new" className="font-bold text-highlighttext">new blog</Link> : <></>}
         <div className="p-4 flex flex-col gap-8 mt-8 min-w-full items-start justify-start">
+        <div className="flex flex-row gap-4 flex-wrap">
+        {!filters ? 
+            <>
+                <p>page {page} of {Math.ceil(allPosts.length / limit)}</p>
+                <button onClick={handlePreviousPage}  
+                    className={`${page === 1 && "opacity-50"}`}>
+                    Previous
+                </button>
+                <button onClick={handleNextPage} 
+                    className={`${page === Math.ceil(allPosts.length / limit) && "opacity-50"}`}>
+                    Next
+                </button> 
+            </>    
+             : <button onClick={resetFilters}>Reset filters</button>
+        }
+        </div>
+
         <div className="flex flex-row gap-4 flex-wrap">
         {tagData.map((entry: {tagName: string, id: number}) => 
                                 <p key={entry.id} 

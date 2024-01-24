@@ -131,3 +131,36 @@ export async function getAll() {
     return blogs;
 }
 
+export async function getNumberOfBlogPosts() {
+    console.log('getting total number of blog posts...');
+
+    let numberBlogs;
+    try {
+        await connectToDatabase();
+        // without .lean() we face stack overflow errors - lean populates with plain JSON objects rather than mongoose objects
+        numberBlogs = (await BlogPost.find()).length;
+    } catch (err) {
+        console.log(err);
+    }
+
+    return numberBlogs;
+}
+
+export async function getOnePage(page: number, limit: number) {
+    console.log('getting blogs on page: ' + page + '...');
+
+    let blogs;
+
+    let skip = limit * (page - 1);
+
+    try {
+        await connectToDatabase();
+        // without .lean() we face stack overflow errors - lean populates with plain JSON objects rather than mongoose objects
+        blogs = await BlogPost.find().sort({created: -1}).skip(skip).limit(limit);
+    } catch (err) {
+        console.log(err);
+    }
+
+    return blogs;
+}
+

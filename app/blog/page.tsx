@@ -11,16 +11,18 @@ const Blog = async (props: any) => {
           <div className="container">
             <Posts posts={posts ? posts : []}/>  
           </div>
-          
-
         </section>
     )
   }
 
   async function getBlogPosts() {
+    console.log('getting blog posts...')
     try {
+      // let posts = await getOnePage(page, limit);
       let posts = await getAll();
       return posts?.map((post) => {
+        console.log('here');
+        console.log(post.title);
         post['_id'] = post._id.toString();
         return post;
       })
@@ -32,14 +34,8 @@ const Blog = async (props: any) => {
 
   export async function generateMetadata() : Promise<Metadata> {
   
-    console.log('process.env.env :'  + process.env.env);
-    console.log('process.env.base_url: ' + process.env.BASE_URL);
-  
     const baseUrlString = process.env.env === "local" ? process.env.BASE_URL : 'https://' + process.env.VERCEL_URL;
     const imageUrlString = baseUrlString + "/blogPreview.png";
-  
-    console.log('baseUrlString: ' + baseUrlString);
-    console.log('baseImageString: ' + imageUrlString);
   
     return {
       title: "Blog",

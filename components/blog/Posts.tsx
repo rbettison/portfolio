@@ -3,13 +3,11 @@ import Link from 'next/link';
 import styles from './posts.module.css';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { animate } from 'framer-motion';
 
 export default function Posts(props: {posts: any[] }) {
 
     const {data: session} = useSession();
-    console.log('IN POSTS')
-
-    console.log('user session: ' + JSON.stringify(session));
 
     const allPosts = props.posts;
     const allTags = new Set<string>(['all']);
@@ -23,8 +21,12 @@ export default function Posts(props: {posts: any[] }) {
     const [limit, setLimit] = useState(4);
     const [posts, setPosts] = useState(props.posts.filter((post, index) => index >= ((page - 1) * limit) && index < (page * limit)));
     const [selectedChips, setSelectedChips] = useState<Set<string>>(new Set([]));
+    const [searchTerm, setSearchTerm] = useState("");
 
     const toggleFilter = (event: any) => {
+        if(selectedChips.size === 0) {
+            hideSearchAndSlideAll();
+        }
         if(event.target.innerText === 'all') {
             console.log('here');
             if(selectedChips.has('all')) {
@@ -74,6 +76,65 @@ export default function Posts(props: {posts: any[] }) {
         setSelectedChips(new Set([]));
         setFilters(false);
         setPostsOnPage(page);
+        setSearchTerm("");
+        resetTagsAndPosts();
+    }
+
+    const handleSearch = (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        console.log('here!');
+        const searchTerm = event.target.value;
+        setSearchTerm(searchTerm);
+        const searchLowerCase = searchTerm.toLowerCase()
+        const filteredPosts = 
+            allPosts.filter((post) => post.title.toLowerCase().includes(searchLowerCase));
+
+        console.log('filteredPosts: ' + JSON.stringify(filteredPosts));
+        setFilters(true);
+        setPosts(filteredPosts);
+        hideTagsAndSlidePosts();
+    }
+
+    const resetTagsAndPosts = () => {
+        const search: HTMLElement | null = document.getElementById("search");
+        const posts: HTMLElement | null = document.getElementById("posts");
+        const tags: HTMLElement | null = document.getElementById("tags");
+
+        if(search!=null) {
+            animate(search, {opacity: 1, y: 0}, {duration: 0.5})
+        }
+        if(tags!=null) {
+            animate(tags, {opacity: 1, y: 0}, {duration: 0.5})
+        }
+        if(posts!=null) {
+            animate(posts, {opacity: 1, y: 0}, {duration: 0.5})
+        }
+    }
+
+    const hideSearchAndSlideAll = () => {
+        const search: HTMLElement | null = document.getElementById("search");
+        const posts: HTMLElement | null = document.getElementById("posts");
+        const tags: HTMLElement | null = document.getElementById("tags");
+
+        if(search!=null) {
+            animate(search, {opacity: 0}, {duration: 0.5})
+        }
+        if(posts!=null) {
+            animate(posts, {y: -50}, {duration: 0.5})
+        }
+        if(tags!=null) {
+            animate(tags, {y: -50}, {duration: 0.5})
+        }
+    }
+
+    const hideTagsAndSlidePosts = () => {
+        const tags: HTMLElement | null = document.getElementById("tags");
+        const posts: HTMLElement | null = document.getElementById("posts");
+        if(tags!=null) {
+            animate([[tags, {opacity: 0}, {duration: 0.5}],[tags, {display: "none"}, {delay: 0.5}]])
+        }
+        if(posts!=null) {
+            animate(posts, {y: -150}, {duration: 0.5})
+        }
     }
 
     return (
@@ -97,7 +158,11 @@ export default function Posts(props: {posts: any[] }) {
         }
         </div>
 
-        <div className="flex flex-row gap-4 flex-wrap">
+        <div className='flex sm:flex-row flex-col gap-2' id="search">
+            <p className='text-lg font-bold'>search blogs: </p>
+            <input onChange={handleSearch} value={searchTerm} type='text' placeholder='search for blog titles or content' className='text-darkbg w-56 sm:w-96'></input>
+        </div>
+        <div className="flex flex-row gap-4 flex-wrap" id="tags">
         {tagData.map((entry: {tagName: string, id: number}) => 
                                 <p key={entry.id} 
                                     className={`text-md font-bold ${selectedChips.has(entry.tagName) ? 'text-highlighttext' : ''} cursor-pointer`}
@@ -107,7 +172,7 @@ export default function Posts(props: {posts: any[] }) {
                                     {entry.tagName}
                                 </p>)}
         </div>
-        <div className="min-w-full">
+        <div className="min-w-full" id="posts">
 
         {posts?.map((entry: any) => {
                 return (

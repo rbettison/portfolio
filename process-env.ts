@@ -9,7 +9,11 @@ declare global {
         admin_id: string,
         TWITTER_CLIENT_SECRET: string,
         TWITTER_CLIENT_ID: string,
-        MONGODB_URI: string
+        MONGODB_URI: string,
+        GCP_PROJECT_ID: string,
+        AGENT_ID_CX: string,
+        CLIENT_EMAIL_CX: string,
+        PRIVATE_KEY_CX: string
       }
     }
   }

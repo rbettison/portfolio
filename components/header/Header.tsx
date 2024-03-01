@@ -127,6 +127,9 @@ export default function Header() {
             <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/contact' onClick={closeMenu}>contact</Link>
             </li>
+            <li className={`hover:text-highlighttext ${pathname === '/bot' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
+              <Link href="/bot" onClick={closeMenu}>chatbot assist</Link>
+            </li>
             {/* <li className={`hover:text-highlighttext ${pathname === '/services' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/services' onClick={closeMenu}>services</Link>
             </li> */}
@@ -163,9 +166,9 @@ export default function Header() {
             <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/contact'>contact</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname === '/services' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+            {/* <li className={`hover:text-highlighttext ${pathname === '/services' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/services'>services</Link>
-            </li>
+            </li> */}
             <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/portfolio'>portfolio</Link>
             </li>

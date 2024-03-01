@@ -5,6 +5,7 @@ import {ThemeContext} from '../contexts/ThemeContext';
 import AuthProvider from '@/contexts/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
 import { EdgeStoreProvider } from '@/contexts/EdgeStore';
+import Bot from '@/components/chatbot/Bot';
 
 export default function GlobalContextsWrapper({
     children,
@@ -25,11 +26,14 @@ export default function GlobalContextsWrapper({
         <EdgeStoreProvider>
         <html lang="en">
             <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-background-dark" : "text-darkbg bg-gray-200"}`} id={theme}>
-            <div className="md:grid grid-cols-12 grid-rows-2 w-full flex flex-col h-screen relative">
-            <Header></Header>
-            <div className="col-start-4 col-span-5 row-start-1 row-span-2 pl-4 pr-4">
-                {children}
-                </div>
+                <div className="md:grid grid-cols-12 grid-rows-2 w-full flex flex-col h-screen relative">
+                    <Header></Header>
+                    <div className="col-start-4 col-span-5 row-start-1 row-span-2 pl-4 pr-4">
+                        {children}
+                    </div>
+                    <div className='col-start-9 col-span-2 row-start-1 row-span-2 hidden sm:inline'>
+                        <Bot />
+                    </div>
                 </div>
                 <Analytics />
             </body>

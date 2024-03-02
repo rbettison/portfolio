@@ -1,9 +1,15 @@
+import { ThemeContext, ThemeContextType } from "@/contexts/ThemeContext";
+import { useContext } from "react";
+
+
 export type MessageType = {
     text: string,
     botMessage: boolean
 }
 
 export default function Message({message}: {message: MessageType}) {
+
+    const { theme } = useContext(ThemeContext) as ThemeContextType;
 
     return (
         <div className={`flex flex-row gap-2 ${message.botMessage ? "justify-start" : "justify-end"}`}>
@@ -17,9 +23,10 @@ export default function Message({message}: {message: MessageType}) {
                 <path d="m12 3.75 0 -3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
 		    </svg>}
             <div className={`p-2 border-2 rounded-lg w-4/5 
-                ${message.botMessage ? "bg-blue-300 self-start" : "bg-green-300 self-start"}`}>
+                ${message.botMessage  ? theme === "light" ? "bg-blue-300 self-end" : "bg-blue-500 self-end" 
+                    : theme === "light" ? "bg-green-300 self-start" : "bg-purple-700 self-start"}`}>
                     
-                
+
                 {message.text}
                 
             </div>

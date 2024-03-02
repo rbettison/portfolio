@@ -1,9 +1,15 @@
+'use client'
+import { useContext } from "react";
 import Message, { MessageType } from "./Message";
+import { ThemeContext, ThemeContextType } from "@/contexts/ThemeContext";
 
 export default function Messages({messages, waitingForBot} : {messages: MessageType[], waitingForBot: boolean}) {
+    
+    const { theme } = useContext(ThemeContext) as ThemeContextType;
+
     return (
-        <div className="bg-white bg-opacity-80 p-5 rounded-lg flex flex-col-reverse gap-1 sm:w-full h-[350px]
-            overflow-y-auto">
+        <div className={`${theme === "light" ? "bg-opacity-80" : "bg-opacity-10"} bg-white p-5 rounded-lg flex flex-col-reverse gap-1 sm:w-full h-[350px]
+            overflow-y-auto`}>
                 
                 <div className={`${!waitingForBot && "hidden" }`}>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`self-start w-6 h-6`}>

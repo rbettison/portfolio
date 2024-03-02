@@ -1,12 +1,15 @@
 'use client'
 
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { MessageType } from "./Message";
 import Messages from "./Messages";
 import { motion } from "framer-motion";
+import { ThemeContext, ThemeContextType } from "@/contexts/ThemeContext";
 
 export default function Bot() {
+
+    const { theme } = useContext(ThemeContext) as ThemeContextType;
 
     const [messageToSend, setMessageToSend] = useState("");
     const [loading, setLoading] = useState(false);
@@ -78,23 +81,15 @@ export default function Bot() {
 			<path d="M18 19.026a3.006 3.006 0 0 0 1.5 -2.6V11.25a7.5 7.5 0 0 0 -15 0v5.176a3 3 0 0 0 1.5 2.6 12.01 12.01 0 0 0 12 0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path d="m9 9 0 1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path d="m15 9 0 1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
 			<path d="m12 3.75 0 -3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
 		</motion.svg>
-        {/* <motion.svg xmlns="http://www.w3.org/2000/svg" 
-            whileHover={{rotate: 360}}
-            transition={{duration: 1}}
-            onClick={() => setchatbotOpen(prev => !prev)}
-            fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
-            stroke="currentColor" className="w-16 h-16 cursor-pointer">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
-        </motion.svg> */}
         </div>
 
         <div 
-            className={`p-5 bg-white bg-opacity-60 rounded-xl w-screen sm:w-[400px]`}>
+            className={`p-5 ${theme === "light" ? "bg-opacity-60" : "bg-opacity-5"} bg-white rounded-xl w-screen sm:w-[400px]`}>
             <div>
                 <Messages messages={messages} waitingForBot={loading}/>
                 <form onSubmit={submit} className="flex flex-row justify-end">
                     <textarea 
-                        className="p-1 bg-white w-[300px] rounded-lg min-h-[50px] max-h-[50px] h-[50px]"
+                        className={`p-1 text-darkbg bg-white  w-[300px] rounded-lg min-h-[50px] max-h-[50px] h-[50px]`}
                         value={messageToSend} 
                         onChange={(event) => setMessageToSend(event.currentTarget.value)} />
                     <button

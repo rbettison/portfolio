@@ -100,7 +100,7 @@ export default function Header() {
 
     return (
 <>
-        <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 z-40"> 
+        <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 "> 
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center' id="topHeader">
           <Link href="/">
@@ -126,9 +126,6 @@ export default function Header() {
             </li>
             <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/contact' onClick={closeMenu}>contact</Link>
-            </li>
-            <li className={`hover:text-highlighttext ${pathname === '/bot' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
-              <Link href="/bot" onClick={closeMenu}>chatbot assist</Link>
             </li>
             {/* <li className={`hover:text-highlighttext ${pathname === '/services' ? 'sm:border-l-4 sm:border-r-0 border-r-4 border-current sm:pl-2 pr-2':""}`}>
                 <Link href='/services' onClick={closeMenu}>services</Link>

@@ -31,7 +31,7 @@ export default function GlobalContextsWrapper({
                     <div className="col-start-4 col-span-5 row-start-1 row-span-2 pl-4 pr-4">
                         {children}
                     </div>
-                    <div className='col-start-9 col-span-2 row-start-1 row-span-2 hidden sm:inline'>
+                    <div className='col-start-9 col-span-2 row-start-1 row-span-2'>
                         <Bot />
                     </div>
                 </div>

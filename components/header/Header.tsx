@@ -100,7 +100,7 @@ export default function Header() {
 
     return (
 <>
-        <section className="col-span-2 md:text-right md:fixed md:left-16 p-4 "> 
+        <div className="col-span-2 md:text-right md:fixed md:left-16 p-4 "> 
         <div className="flex flex-col md:gap-16 gap-4">
         <div className='flex flex-row justify-between items-center' id="topHeader">
           <Link href="/">
@@ -191,7 +191,7 @@ export default function Header() {
           </div>
 
         </div>
-      </section>
+      </div>
       </>
 
     )

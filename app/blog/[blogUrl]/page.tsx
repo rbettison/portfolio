@@ -11,12 +11,12 @@ const Page = async({ params }: Props) => {
     console.log('blog: ' + blog);
 
     return (
-      <section>
+      <div>
       <BlogClientComponent>
         <BlogServerComponent blog={JSON.stringify(blog)}/>
         <BlogComments />
       </BlogClientComponent>
-      </section>
+      </div>
     )
 }
 

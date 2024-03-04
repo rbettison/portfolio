@@ -176,7 +176,7 @@ export default function Posts(props: {posts: any[] }) {
 
         {posts?.map((entry: any) => {
                 return (
-                    <section key={entry._id}>
+                    <div key={entry._id}>
                     <Link href={`/blog/${entry.url}`} >
                     <div className={styles.posts}>
                         <h2 className="text-3xl mb-4 font-bold">{entry.title}</h2>
@@ -194,9 +194,25 @@ export default function Posts(props: {posts: any[] }) {
                         </div>
                     </div>
                     </Link>
-                    </section>
+                    </div>
                 )
             })
+        }
+        </div>
+        <div className="flex flex-row gap-4 flex-wrap">
+        {!filters ? 
+            <>
+                <p>page {page} of {Math.ceil(allPosts.length / limit)}</p>
+                <button onClick={handlePreviousPage}  
+                    className={`${page === 1 && "opacity-50"}`}>
+                    Previous
+                </button>
+                <button onClick={handleNextPage} 
+                    className={`${page === Math.ceil(allPosts.length / limit) && "opacity-50"}`}>
+                    Next
+                </button> 
+            </>    
+             : <button onClick={resetFilters}>Reset filters</button>
         }
         </div>
         </div>

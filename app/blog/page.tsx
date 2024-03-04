@@ -7,11 +7,11 @@ const Blog = async (props: any) => {
     const posts = await getBlogPosts();
 
     return (
-      <section>
+      <div>
           <div className="container">
             <Posts posts={posts ? posts : []}/>  
           </div>
-        </section>
+        </div>
     )
   }
 

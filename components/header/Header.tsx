@@ -9,6 +9,7 @@ import { signIn, signOut } from 'next-auth/react';
 import Trail from '../animation/Trail';
 import { a, config, useSpring } from '@react-spring/web';
 import {useDrag} from "@use-gesture/react";
+import Socials from '../blog/Socials';
 
 const width = 300;
 
@@ -16,6 +17,7 @@ export default function Header() {
 
     const { toggleTheme, setTheme, theme } = useContext(ThemeContext) as ThemeContextType;
     const[menuOpen,setMenuOpen] = useState(false);
+    const [moreOpen, setMoreOpen] = useState(false);
     const[mobDevice,setMobDevice] = useState(false);
 
 
@@ -100,19 +102,34 @@ export default function Header() {
 
     return (
 <>
-        <div className="col-span-2 md:text-right md:fixed md:left-16 p-4 "> 
-        <div className="flex flex-col md:gap-16 gap-4">
-        <div className='flex flex-row justify-between items-center' id="topHeader">
-          <Link href="/">
-            <div className={`text-4xl font-bold ${mobDevice && menuOpen  ? "blur-md" : "blur-none"}`}>
-              @robbettison
-            </div>
-          </Link>
+
+<div className='z-20'>
+        <div className='fixed top-4 left-4 flex flex-row justify-between items-center' id="topHeader">
+        <div className="dropdown mb-72">
+          <div tabIndex={0} role="button" className="btn m-1">
+            Theme
+            <svg width="12px" height="12px" className="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+          </div>
+          <ul tabIndex={0} className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52">
+            <li><input type="radio" name="theme-dropdown" className="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Default" value="default"/></li>
+            <li><input type="radio" name="theme-dropdown" className="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+            <li><input type="radio" name="theme-dropdown" className="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk" value="cyberpunk"/></li>
+            <li><input type="radio" name="theme-dropdown" className="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine"/></li>
+            <li><input type="radio" name="theme-dropdown" className="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
+          </ul>
+        </div>
+          
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
               strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 sm:h-0 z-50"
               onClick={(e) => toggleMenu(e)}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
           </svg>
+        </div>
+
+        <div className='fixed top-4 right-4 flex flex-row'>
+        <div>
+          <Socials />
+        </div>
         </div>
       
         <a.div style={{ right: -width + x.get(), x }} 
@@ -154,44 +171,41 @@ export default function Header() {
           </ul>
         </a.div>
 
-        <div className='text-md font-bold hidden sm:block'>
-        <ul>
-          <Trail open={menuOpen}>
-            <li className={`hover:text-highlighttext ${pathname === '/' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+        <ul className='fixed top-4 inset-x-0 mx-auto w-1/5 text-md font-bold hidden bg-base-200 text-base-content menu lg:menu-horizontal rounded-box justify-center'>
+            <li>
                 <Link href='/'>home</Link>
             </li>
-            <li className={`hover:text-highlighttext ${pathname === '/contact' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
+            <li>
                 <Link href='/contact'>contact</Link>
             </li>
-            {/* <li className={`hover:text-highlighttext ${pathname === '/services' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/services'>services</Link>
-            </li> */}
-            <li className={`hover:text-highlighttext ${pathname === '/portfolio' ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/portfolio'>portfolio</Link>
+
+            <li>
+              <details open={moreOpen}>
+                <summary>more</summary>
+                <ul>
+                  <li>
+                    <Link href='/portfolio'>portfolio</Link>
+                  </li>
+                  <li>
+                    <Link href='/blog'>blog</Link>
+                  </li>
+                </ul>
+              </details>
             </li>
-            <li className={`hover:text-highlighttext ${pathname?.includes('/blog') ? 'border-l-4 sm:border-l-0 sm:border-r-4 border-current sm:pl-2 pr-2':""}`}>
-                <Link href='/blog'>blog</Link>
-            </li>
-            <li className='cursor-pointer'>
-              <p onClick={toggleThemeFn}><span className="hover:text-highlighttext">theme: </span>{theme === "light" ? <span className="text-highlighttext">light</span> : <span>dark</span>}</p>
-            </li>
-            <li className='relative'>
+            <li>
                 {
-                  session ? <>
+                  session ? <button onClick={() => signOut()} className='relative'>
                               <p>Hi, {session.user?.name}</p>
                               {session.user.image ? <img className="absolute sm:left-20 right-20" src={session.user.image} /> : <></>}
-                              <button onClick={() => signOut()} className="hover:text-highlighttext">sign out</button>
-                            </> 
+                              <p>sign out</p>
+                            </button> 
                           :
                             <button onClick={() => signIn()} className="hover:text-highlighttext">log in</button>
                 }
-            </li>
-          </Trail>
+                </li>
+
           </ul>
           </div>
-
-        </div>
-      </div>
       </>
 
     )

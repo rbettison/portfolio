@@ -5,7 +5,7 @@ export default function CommentList({comments} : {comments: CommentType[]}) {
     return (
         comments.map((comment : CommentType) => {
             return(
-                <div key={comment._id.toString()} className="min-w-full">
+                <div key={comment._id.toString()} className="w-3/4">
                     <Comment comment={comment}/>
                 </div>
             )})

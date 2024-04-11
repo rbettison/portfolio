@@ -25,63 +25,28 @@ function useParallax(value: MotionValue<number>, distance: number, offset: numbe
 }            
 const ref = useRef(null);
 const {scrollYProgress} = useScroll({target: ref});
-const y = useParallax(scrollYProgress, 300, -250);
+const x = useParallax(scrollYProgress, 1000, 0);
         
 
 return (
-<section className="h-screen flex flex-col">
-<div className="sm:h-[600px] h-[500px] grid grid-cols-5 grid-rows-5" id={title}>
-{serviceNumber > 1 && serviceNumber < totalServices && (
-    <div className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-    <Link href={`/${page}/#${prevService}`} className="col-start-3 row-start-5">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24" strokeWidth="1.5"
-            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
-        </svg>
-    </Link>
-    <Link href={`/${page}/#${nextService}`} className="col-start-3 row-start-5">
-        <svg xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-            stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-        </svg>
-    </Link>
-</div>
-)}
-{serviceNumber === 1 && (
-    <Link href={`/${page}/#${nextService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-    <svg xmlns="http://www.w3.org/2000/svg"
-        fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-    </svg>
-    </Link>
-)}
-{serviceNumber === totalServices && (
-    <Link href={`/${page}/#${prevService}`} className="sm:col-start-2 sm:row-start-5 row-start-1 self-end ml-8 sm:ml-auto">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24" strokeWidth="1.5"
-        stroke="currentColor" className="w-6 h-6 hover:stroke-highlighttext">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
-    </svg>
-    </Link>
-)}
+<div className="h-screen flex flex-col justify-center items-center w-1/2 m-auto gap-4 ">
 
-
-<div ref={ref} className="w-64 m-auto font-bold sm:text-4xl text-xl relative sm:col-start-2 sm:row-start-2 row-start-2">
+<div className="my-64 h-full flex flex-col justify-center items-center p-4  shadow-lg bg-neutral text-neutral-content">
+<div ref={ref} className="w-64 font-bold sm:text-4xl text-xl relative text-left">
     <p className="md:absolute md:-left-16 md:top-0">{serviceNumber}</p>
     <p>{title}</p>
 </div>
 
-<div className="sm:text-md text-lg sm:col-start-2 sm:col-span-3 sm:row-start-3 row-start-3 col-span-5">
+<div className="sm:text-md text-3xl text-left">
     {description}
 </div>
-</div>
-<motion.div style={{y}} className="relative">
+
+
+<motion.div style={{x}} className="relative text-primary-content">
 {svgIcon}
 </motion.div>
-</section>
+</div>
+</div>
 )
 }
 

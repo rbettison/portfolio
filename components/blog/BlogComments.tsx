@@ -20,7 +20,7 @@ export default function BlogComments() {
 
     return(
         <>
-        <div className="pb-8">
+        <div className="pb-8 flex flex-col items-center">
         { session?.user ?
         <CommentForm loading={loading} error={error} onSubmit={onCommentCreate}/>
          : <p><button onClick={() => signIn()} className="hover:text-highlighttext font-bold">log in</button> to comment...</p>

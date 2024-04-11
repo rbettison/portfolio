@@ -8,9 +8,7 @@ const Blog = async (props: any) => {
 
     return (
       <div>
-          <div className="container">
             <Posts posts={posts ? posts : []}/>  
-          </div>
         </div>
     )
   }

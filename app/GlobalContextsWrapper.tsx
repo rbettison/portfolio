@@ -6,6 +6,8 @@ import AuthProvider from '@/contexts/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
 import { EdgeStoreProvider } from '@/contexts/EdgeStore';
 import Bot from '@/components/chatbot/Bot';
+import { useEffect } from 'react'
+import { themeChange } from 'theme-change'
 
 export default function GlobalContextsWrapper({
     children,
@@ -18,22 +20,25 @@ export default function GlobalContextsWrapper({
     const toggleTheme = () => {
         setTheme((curr) => (curr === "light"? "dark" :"light"));
     }
+    useEffect(() => {
+        themeChange(false)
+        // 👆 false parameter is required for react project
+      }, [])
 
     return (
 
         <AuthProvider>
         <ThemeContext.Provider value={{theme, toggleTheme, setTheme}}>
         <EdgeStoreProvider>
-        <html lang="en">
-            <body className={`font-main flex flex-col items-center ${theme === "dark" ? "text-white bg-background-dark" : "text-darkbg bg-gray-200"}`} id={theme}>
-                <div className="md:grid grid-cols-12 grid-rows-2 w-full flex flex-col h-screen relative">
-                    <Header></Header>
-                    <div className="col-start-4 col-span-5 row-start-1 row-span-2 pl-4 pr-4">
-                        {children}
-                    </div>
-                    <div className='col-start-9 col-span-2 row-start-1 row-span-2'>
-                        <Bot />
-                    </div>
+        <html lang="en" data-theme="aqua">
+        {/* ${theme === "dark" ? "text-white bg-background-dark" : "text-darkbg bg-gray-200"}`} */}
+            <body className={`font-main flex flex-col items-center bg-base-100 text-base-content`}  id={theme}>
+                <Header></Header>
+                <div>
+                    {children}
+                </div>
+                <div>
+                    <Bot />
                 </div>
                 <Analytics />
             </body>

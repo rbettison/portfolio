@@ -38,3 +38,7 @@
   display: list-item;
   margin-left: 1em;
 }
+
+.article {
+  font-size: x-large;
+}

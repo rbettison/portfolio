@@ -41,7 +41,7 @@ export default function GetInTouch() {
     }
 
     return (
-        <div className="h-screen w-full md:grid grid-cols-5 grid-rows-5 mt-8 p-8" id="getintouch">
+        <div className="h-screen w-full p-8 flex flex-col justify-center items-center" id="getintouch">
 
             <div className="md:row-start-2 col-start-2 col-span-3" >
                 <div hidden id="feedback">

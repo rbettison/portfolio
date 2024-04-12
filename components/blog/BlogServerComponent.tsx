@@ -12,7 +12,8 @@ export default function BlogServerComponent({blog} : {blog: string}) {
 
     return (
       <>
-        <div className="flex flex-col gap-8 mt-24 relative mb-16 border-b border-currentTextColor line-numbers min-w-1/2 w-1/2 m-auto">
+        <div className="flex flex-col gap-8 mt-24 relative mb-16 border-b border-currentTextColor line-numbers 
+            w-full px-4 sm:min-w-1/2 sm:w-1/2 sm:mx-auto">
             <Link href="/blog" className="absolute md:-left-12 left-1 -top-12 md:top-4 hover:text-highlighttext">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
                   className="w-6 h-6">

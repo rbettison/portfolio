@@ -7,8 +7,8 @@ const Blog = async (props: any) => {
     const posts = await getBlogPosts();
 
     return (
-      <div>
-            <Posts posts={posts ? posts : []}/>  
+        <div>
+            <Posts posts={posts ? posts : ""}/>  
         </div>
     )
   }
@@ -18,12 +18,7 @@ const Blog = async (props: any) => {
     try {
       // let posts = await getOnePage(page, limit);
       let posts = await getAll();
-      return posts?.map((post) => {
-        console.log('here');
-        console.log(post.title);
-        post['_id'] = post._id.toString();
-        return post;
-      })
+      return JSON.stringify(posts);
     } catch (err) {
       console.log(err);
     }

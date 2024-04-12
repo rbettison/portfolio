@@ -32,11 +32,9 @@ export default function GlobalContextsWrapper({
         <EdgeStoreProvider>
         <html lang="en" data-theme="aqua">
         {/* ${theme === "dark" ? "text-white bg-background-dark" : "text-darkbg bg-gray-200"}`} */}
-            <body className={`font-main flex flex-col items-center bg-base-100 text-base-content`}  id={theme}>
+            <body className={`font-main items-center bg-base-100 text-base-content w-full`}  id={theme}>
                 <Header></Header>
-                <div>
                     {children}
-                </div>
                 <div>
                     <Bot />
                 </div>

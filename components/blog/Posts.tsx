@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { animate } from 'framer-motion';
 
-export default function Posts(props: {posts: any[] }) {
+export default function Posts(props: {posts: string }) {
 
     const {data: session} = useSession();
 
-    const allPosts = props.posts;
+    const allPosts = JSON.parse(props.posts);
     const allTags = new Set<string>(['all']);
-    allPosts.forEach((post) => {
+    allPosts.forEach((post: any) => {
         post.tags.forEach((tag: string) => {
             allTags.add(tag);
         })
@@ -20,7 +20,9 @@ export default function Posts(props: {posts: any[] }) {
     const [filters, setFilters] = useState(false);
     const [limit, setLimit] = useState(4);
     const paginationArr = new Array(Number(Math.ceil(allPosts.length / limit))).fill(0);
-    const [posts, setPosts] = useState(props.posts.filter((post, index) => index >= ((page - 1) * limit) && index < (page * limit)));
+    const [posts, setPosts] = useState(allPosts.filter((post: any, index: number) => {
+        return index >= ((page - 1) * limit) && index < (page * limit)
+    }));
     const [selectedChips, setSelectedChips] = useState<Set<string>>(new Set([]));
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -46,7 +48,7 @@ export default function Posts(props: {posts: any[] }) {
             if(selectedChips.size === allTags.size - 1) selectedChips.add('all');
         }
 
-        let postsFiltered = allPosts.filter((post) => {
+        let postsFiltered = allPosts.filter((post: any) => {
             return post.tags.some((x: string) => selectedChips.has(x))
         })
         setFilters(true);
@@ -62,7 +64,7 @@ export default function Posts(props: {posts: any[] }) {
 
     function setPostsOnPage(page: number) {
         setPage(page);
-        setPosts(allPosts.filter((post, index) => index >= ((page - 1) * limit) && index < (page * limit)))
+        setPosts(allPosts.filter((post: any, index: number) => index >= ((page - 1) * limit) && index < (page * limit)))
     }
 
     const handleChangePage = (page: number) => {
@@ -84,7 +86,7 @@ export default function Posts(props: {posts: any[] }) {
         setSearchTerm(searchTerm);
         const searchLowerCase = searchTerm.toLowerCase()
         const filteredPosts = 
-            allPosts.filter((post) => post.title.toLowerCase().includes(searchLowerCase));
+            allPosts.filter((post: any) => post.title.toLowerCase().includes(searchLowerCase));
 
         console.log('filteredPosts: ' + JSON.stringify(filteredPosts));
         setPosts(filteredPosts);
@@ -137,7 +139,7 @@ export default function Posts(props: {posts: any[] }) {
     return (
     <>
         {session && session.user.role ==="admin" ? <Link href="/blog/new" className="font-bold text-highlighttext">new blog</Link> : <></>}
-        <div className="max-h-screen flex flex-col gap-2 pt-20 w-1/2 min-w-1/2 m-auto items-start justify-start ">
+        <div className="max-h-screen flex flex-col gap-2 pt-20 sm:w-1/2 sm:min-w-1/2 w-full sm:m-auto px-4 items-start justify-start ">
 
         
                 <div className='min-w-full flex justify-between items-center mb-8'>
@@ -148,7 +150,7 @@ export default function Posts(props: {posts: any[] }) {
                     <div className='join'>
                     {paginationArr.map((i, index) => {
                         return (
-                            <button value={index + 1} onClick={(event) => handleChangePage(Number(event.currentTarget.value))} 
+                            <button key={-index-1} value={index + 1} onClick={(event) => handleChangePage(Number(event.currentTarget.value))} 
                                 className={`${page === index + 1 && "btn-active"} join-item btn`}>
                                 {index + 1}
                             </button>
@@ -204,7 +206,7 @@ export default function Posts(props: {posts: any[] }) {
         <div className='join '>
                     {paginationArr.map((i, index) => {
                         return (
-                            <button value={index + 1} onClick={(event) => handleChangePage(Number(event.currentTarget.value))} 
+                            <button key={index + 1} value={index + 1} onClick={(event) => handleChangePage(Number(event.currentTarget.value))} 
                                 className={`${page === index + 1 && "btn-active"} join-item btn`}>
                                 {index + 1}
                             </button>

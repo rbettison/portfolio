@@ -31,13 +31,13 @@ const x = useParallax(scrollYProgress, 1000, 0);
 return (
 <div className="h-screen flex flex-col justify-center items-center w-1/2 m-auto gap-4 ">
 
-<div className="my-64 h-full flex flex-col justify-center items-center p-4  shadow-lg bg-neutral text-neutral-content">
+<div className="sm:my-64 my-32 h-full flex flex-col justify-center items-center p-4  shadow-lg bg-neutral text-neutral-content">
 <div ref={ref} className="w-64 font-bold sm:text-4xl text-xl relative text-left">
     <p className="md:absolute md:-left-16 md:top-0">{serviceNumber}</p>
     <p>{title}</p>
 </div>
 
-<div className="sm:text-md text-3xl text-left">
+<div className="sm:text-md sm:text-3xl text-sm text-left">
     {description}
 </div>
 

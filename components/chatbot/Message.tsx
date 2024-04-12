@@ -8,6 +8,7 @@ export default function Message({message}: {message: MessageType}) {
     const getTime = () => {
         let date = Date.now();
         const options = { hour: 'numeric', minute: 'numeric' };
+        //@ts-ignore
         const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
         return formattedDate;
     }

@@ -14,7 +14,7 @@ export default function Hero() {
                     </div>
                 </div>
 
-                    <div className='flex flex-col items-center'>
+                    <div className='flex flex-col sm:items-end items-center text-right'>
                     <p className='text-4xl font-bold underline'>
                         Hi, I&apos;m Rob.
                     </p>
